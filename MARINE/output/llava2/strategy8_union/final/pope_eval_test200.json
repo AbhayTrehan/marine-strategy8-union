@@ -1,0 +1,17 @@
+{
+  "answer_file": "./output/llava2/strategy8_union/final/pope_answers_test200.jsonl",
+  "questions_num": 1200,
+  "length_response": 17.47,
+  "overall_metrics": {
+    "Accuracy": 0.7842,
+    "Yes_ratio": 0.5908,
+    "TP": 525,
+    "FP": 184,
+    "FN": 75,
+    "TN": 416,
+    "Precision": 0.7405,
+    "Recall": 0.875,
+    "Specificity": 0.6933,
+    "F1": 0.8021
+  }
+}
