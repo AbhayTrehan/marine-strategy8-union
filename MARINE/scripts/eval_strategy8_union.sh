@@ -7,15 +7,23 @@
 # for the externally-cloned LLaVA repo) so it slots into the same workflow.
 #
 # Usage:
-#   # Step 1: one-time hyperparameter search (item #5), then full eval
+#   # Step 1: one-time hyperparameter search (item #5)
+#   bash scripts/eval_strategy8_union.sh --stage tune_only --tune
+#
+#   # Step 2: run only CHAIR (or only POPE, or only the report) once tuned
+#   bash scripts/eval_strategy8_union.sh --stage chair
+#   bash scripts/eval_strategy8_union.sh --stage pope
+#   bash scripts/eval_strategy8_union.sh --stage report   # no LVLM needed
+#
+#   # Or do everything in one go (tune + CHAIR + POPE + report)
 #   bash scripts/eval_strategy8_union.sh --tune
 #
-#   # Subsequent runs: reuse the already-tuned hyperparameters
+#   # Subsequent full runs: reuse the already-tuned hyperparameters
 #   bash scripts/eval_strategy8_union.sh
 #
 # All flags after the script name are forwarded as-is to run_pipeline.py,
-# so e.g. `bash scripts/eval_strategy8_union.sh --tune --max_trials 20` or
-# `bash scripts/eval_strategy8_union.sh --skip_pope` both work.
+# so e.g. `bash scripts/eval_strategy8_union.sh --tune --max_trials 8` or
+# `bash scripts/eval_strategy8_union.sh --stage pope` both work.
 
 set -e
 

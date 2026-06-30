@@ -9,29 +9,35 @@ the spec). End-to-end flow:
       build O_init = O_det u O_vlm and extract real x_i = [s_det, s_clip,
       s_area] for every candidate, for every image in the dataset.
 
-  [optional, toggled by --tune] Hyperparameter search (item #5):
-      a small, bounded grid over (GMM-fit preset, tau, alpha)
-      (hyperparam_grid.py) is evaluated on the 300-image TUNING split
-      (splits.py): for each trial, fit the global GMM (Step B, fit_gmm.py,
-      cheap/numpy-only) on the tuning images, classify their candidates
-      into O_pos/O_neg (Step C, build_question_file.py, also cheap),
-      generate captions (Step D, generate.py, the expensive GPU step), and
-      score with CHAIR's own metrics -> F1 = 2PR/(P+R), P = 1 - CHAIRi,
-      R = CHAIR Recall (exactly as specified). The winning trial's frozen
-      GMM parameters + tau + alpha are saved to --best_hyperparams_file.
+  [optional, toggled by --tune] Hyperparameter search (item #5), now in
+  TWO decoupled phases:
+      B'. GMM PRESET SELECTION (gmm_selection.py): every candidate GMM
+          preset (init strategy / means / covariance, + optionally
+          learning_rate if --tune_learning_rate) is fit on the pooled
+          tuning-image features and scored with an INTRINSIC, label-free
+          cluster-quality metric (silhouette score) -- no LVLM generation
+          at all. The best one is frozen and used for every trial below.
+      C+D. (tau, alpha) GRID, using that ONE fixed GMM: each distinct
+          (tau, alpha) combination requires a real generation pass over
+          the tuning images, scored by CHAIR -> F1 = 2PR/(P+R),
+          P = 1 - CHAIRi, R = CHAIR Recall. Every trial's result is
+          persisted to disk under a name derived purely from (tau, alpha)
+          (not run-order), so re-running --tune skips any trial whose
+          result is already on disk instead of recomputing it.
 
   Final evaluation (item #7), using the (just-tuned, or previously-tuned-
-  and-now-loaded) winning hyperparameters, run separately for CHAIR and
-  POPE:
-      - on the 200 held-out TEST images (never used for tuning) -- this is
-        the run the HTML report (report.py) is built from, since 100 of
-        these 200 are exactly the report's --report_images.
-      - again on the FULL 500 images, stored separately, per the explicit
-        "I also want to store the results after evaluating on all 500
-        images too" instruction. This is a fresh generation run (not a
-        splice of the tuning-phase + test-phase answers) -- deliberately
-        simpler and more robust than reusing partial results, at the cost
-        of some recomputation.
+  and-now-loaded) winning hyperparameters: CHAIR and POPE, each on the
+  200 held-out TEST images and again on the FULL 500 (stored separately).
+
+  Report (item #6): built entirely from the CHAIR test-200 run's already-
+  produced artifacts -- no model calls needed at all.
+
+--stage controls which of the above actually run in a given invocation
+(see build_arg_parser): 'all' (default, everything), 'tune_only' (just
+the hyperparameter search), 'chair' (just the CHAIR final eval), 'pope'
+(just the POPE final eval), 'report' (just the report -- and uniquely,
+this path never loads the LVLM at all, since it only reads already-
+generated files).
 
 Nothing in this file modifies any file outside marine/strategy8-union/; it
 only ever *calls* the original codebase's untouched modules
@@ -45,7 +51,7 @@ import argparse
 import json
 import os
 import sys
-from typing import Dict, List
+from typing import Dict, List, Optional
 
 _THIS_DIR = os.path.dirname(os.path.abspath(__file__))
 if _THIS_DIR not in sys.path:
@@ -60,11 +66,15 @@ if _EVAL_DIR not in sys.path:
 from splits import ImageSplit, make_split  # noqa: E402
 from hyperparam_grid import TrialConfig, TrialResult, build_grid, chair_f1, pick_best, select_gmm_presets  # noqa: E402
 from gmm import GlobalGMM, GMMParams  # noqa: E402
+from gmm_selection import GMMSelectionResult, select_best_gmm_preset  # noqa: E402
 from fit_gmm import fit_global_gmm  # noqa: E402
 from build_question_file import build_question_file  # noqa: E402
 from candidate_pool import build_candidate_pool_cache, load_candidate_pool_cache  # noqa: E402
 from pope_labels import build_pope_label_file  # noqa: E402
 import generate  # noqa: E402
+
+
+STAGE_CHOICES = ["all", "tune_only", "chair", "pope", "report"]
 
 
 # ---------------------------------------------------------------------------
@@ -103,8 +113,8 @@ def ensure_candidate_pool_cache(
 
 
 # ---------------------------------------------------------------------------
-# A single (gmm_preset, tau, alpha) trial: fit (Step B), classify+prompt
-# (Step C), generate (Step D), evaluate.
+# A single (tau, alpha) trial against a FIXED, already-chosen GMM: classify
+# + prompt (Step C), generate (Step D), evaluate.
 # ---------------------------------------------------------------------------
 def run_one_chair_trial(
     trial: TrialConfig,
@@ -115,10 +125,11 @@ def run_one_chair_trial(
     chair_evaluator,
     work_dir: str,
     gen_args_template,
+    prefit_gmm: Optional[GlobalGMM] = None,
 ):
     os.makedirs(work_dir, exist_ok=True)
 
-    gmm = fit_global_gmm(cache, images, trial.gmm_preset)
+    gmm = prefit_gmm if prefit_gmm is not None else fit_global_gmm(cache, images, trial.gmm_preset)
     gmm_params_path = os.path.join(work_dir, "gmm_params.json")
     gmm.params.save(gmm_params_path)
 
@@ -178,41 +189,81 @@ def _gen_args_template(args) -> _Args:
     )
 
 
+def _sanitize_trial_id(trial_id: str) -> str:
+    return trial_id.replace("/", "_")
+
+
 # ---------------------------------------------------------------------------
-# Hyperparameter search (item #5)
+# Hyperparameter search (item #5): GMM preset selection (cheap, decoupled,
+# cached) followed by a (tau, alpha) grid (expensive, per-trial cached).
 # ---------------------------------------------------------------------------
 def run_hyperparameter_search(
     args, cache, split: ImageSplit, model, tokenizer, processor, model_name, chair_evaluator,
 ) -> dict:
-    trials = build_grid(
-        gmm_presets=select_gmm_presets(args.tune_learning_rate),
-        max_trials=args.max_trials, seed=args.grid_seed,
-    )
-    print(f"[Strategy8-U][Tune] Evaluating {len(trials)} hyperparameter trials "
-          f"on {len(split.tune_images)} tuning images...")
-
-    gen_args_template = _gen_args_template(args)
     tune_root = os.path.join(args.output_dir, "tuning")
     os.makedirs(tune_root, exist_ok=True)
 
+    # ---- Phase B': GMM preset selection -- intrinsic quality, NO generation ----
+    gmm_selection_path = os.path.join(tune_root, "gmm_selection.json")
+    candidate_presets = select_gmm_presets(args.tune_learning_rate)
+    if os.path.exists(gmm_selection_path) and not args.force_recompute_trials:
+        selection = GMMSelectionResult.load(gmm_selection_path)
+        print(f"[Strategy8-U][Tune] Reusing cached GMM preset selection: '{selection.chosen_preset_name}' "
+              f"(delete {gmm_selection_path} or pass --force_recompute_trials to redo this).")
+    else:
+        print(f"[Strategy8-U][Tune] Selecting GMM preset among {[p['name'] for p in candidate_presets]} "
+              f"via intrinsic fit quality (silhouette score) on {len(split.tune_images)} tuning images "
+              f"-- no LVLM generation involved in this step.")
+        selection = select_best_gmm_preset(cache, split.tune_images, candidate_presets)
+        selection.save(gmm_selection_path)
+        for name, q in selection.quality_by_preset.items():
+            marker = " <= CHOSEN" if name == selection.chosen_preset_name else ""
+            print(f"    {name}: silhouette={q['silhouette']:.4f} separation={q['mean_separation']:.4f} "
+                  f"loglik={q['log_likelihood']:.2f}{marker}")
+
+    chosen_preset = selection.chosen_preset
+    chosen_gmm = GlobalGMM.from_params(selection.chosen_gmm_params)
+
+    # ---- Phase C+D: (tau, alpha) grid against the FIXED chosen GMM ----
+    preferred_first = None
+    if args.first_tau is not None or args.first_alpha is not None:
+        preferred_first = {"tau": args.first_tau, "alpha": args.first_alpha}
+
+    trials = build_grid(
+        gmm_presets=[chosen_preset],
+        taus=args.taus, alphas=args.alphas,
+        max_trials=args.max_trials, seed=args.grid_seed,
+        preferred_first=preferred_first,
+    )
+    print(f"[Strategy8-U][Tune] Evaluating {len(trials)} (tau, alpha) trials on "
+          f"{len(split.tune_images)} tuning images (GMM preset fixed to '{chosen_preset['name']}')...")
+
+    gen_args_template = _gen_args_template(args)
     results: List[TrialResult] = []
-    gmm_params_by_trial: Dict[str, GMMParams] = {}
 
     for i, trial in enumerate(trials):
-        print(f"[Strategy8-U][Tune] Trial {i + 1}/{len(trials)}: {trial.trial_id}")
-        work_dir = os.path.join(tune_root, f"trial_{i:03d}_{trial.trial_id}")
-        result, gmm_params = run_one_chair_trial(
-            trial, cache, split.tune_images, args.chair_question_file,
-            model, tokenizer, processor, model_name, chair_evaluator,
-            work_dir, gen_args_template,
-        )
+        work_dir = os.path.join(tune_root, f"trial__{_sanitize_trial_id(trial.trial_id)}")
+        cached_result_path = os.path.join(work_dir, "trial_result.json")
+
+        if os.path.exists(cached_result_path) and not args.force_recompute_trials:
+            with open(cached_result_path) as f:
+                result = TrialResult.from_dict(json.load(f))
+            print(f"[Strategy8-U][Tune] Trial {i + 1}/{len(trials)}: {trial.trial_id} "
+                  f"-- REUSING cached result (F1={result.f1:.4f}); pass --force_recompute_trials to redo.")
+        else:
+            print(f"[Strategy8-U][Tune] Trial {i + 1}/{len(trials)}: {trial.trial_id}")
+            result, _ = run_one_chair_trial(
+                trial, cache, split.tune_images, args.chair_question_file,
+                model, tokenizer, processor, model_name, chair_evaluator,
+                work_dir, gen_args_template, prefit_gmm=chosen_gmm,
+            )
+            with open(cached_result_path, "w") as f:
+                json.dump(result.to_dict(), f, indent=2)
+            print(f"[Strategy8-U][Tune]   CHAIRs={result.chair_s:.4f} CHAIRi={result.chair_i:.4f} "
+                  f"Recall={result.recall:.4f} F1={result.f1:.4f}")
         results.append(result)
-        gmm_params_by_trial[trial.trial_id] = gmm_params
-        print(f"[Strategy8-U][Tune]   CHAIRs={result.chair_s:.4f} CHAIRi={result.chair_i:.4f} "
-              f"Recall={result.recall:.4f} F1={result.f1:.4f}")
 
     best = pick_best(results)
-    best_gmm_params = gmm_params_by_trial[best.trial.trial_id]
 
     all_trials_path = os.path.join(tune_root, "all_trials.json")
     with open(all_trials_path, "w") as f:
@@ -220,8 +271,9 @@ def run_hyperparameter_search(
 
     best_hyperparams = {
         "trial": best.trial.to_dict(),
-        "gmm_params": best_gmm_params.to_dict(),
+        "gmm_params": selection.chosen_gmm_params.to_dict(),
         "tuning_result": best.to_dict(),
+        "gmm_selection_quality": selection.quality_by_preset,
     }
     with open(args.best_hyperparams_file, "w") as f:
         json.dump(best_hyperparams, f, indent=2)
@@ -297,7 +349,7 @@ def run_final_pope_eval(
         json.dump(questions, f)
 
     label_path = os.path.join(out_dir, f"pope_labels_{tag}.json")
-    n_labels = build_pope_label_file(args.pope_question_file, label_path, image_filter=images)
+    build_pope_label_file(args.pope_question_file, label_path, image_filter=images)
 
     answers_path = os.path.join(out_dir, f"pope_answers_{tag}.jsonl")
     gen_args = _clone_args(_gen_args_template(args), question_file=qfile_path, answers_file=answers_path, alpha=alpha)
@@ -328,8 +380,83 @@ def run_final_pope_eval(
 
 
 # ---------------------------------------------------------------------------
+# summary.json: accumulated across separate --stage invocations, never
+# wholesale-overwritten, so e.g. a later `--stage pope` run doesn't erase
+# what an earlier `--stage chair` run already recorded.
+# ---------------------------------------------------------------------------
+def update_summary(output_dir: str, **updates) -> dict:
+    summary_path = os.path.join(output_dir, "summary.json")
+    summary = {}
+    if os.path.exists(summary_path):
+        with open(summary_path) as f:
+            summary = json.load(f)
+    summary.update({k: v for k, v in updates.items() if v is not None})
+    with open(summary_path, "w") as f:
+        json.dump(summary, f, indent=2)
+    return summary
+
+
+# ---------------------------------------------------------------------------
+# --stage report: lightweight, reads already-generated files only, never
+# loads the LVLM/CHAIR-evaluator/feature-extractors at all.
+# ---------------------------------------------------------------------------
+def run_report_stage(args) -> None:
+    out_dir = os.path.join(args.output_dir, "final")
+    qfile_path = os.path.join(out_dir, "chair_question_file_test200.json")
+    classification_path = os.path.join(out_dir, "chair_classification_test200.json")
+    answers_path = os.path.join(out_dir, "chair_answers_test200.jsonl")
+    missing = [p for p in [qfile_path, classification_path, answers_path] if not os.path.exists(p)]
+    if missing:
+        raise FileNotFoundError(
+            "--stage report needs the CHAIR test200 run's artifacts, which don't exist yet: "
+            f"{missing}. Run `--stage chair` (or `--stage all`) first."
+        )
+
+    split_path = os.path.join(args.output_dir, "split.json")
+    if not os.path.exists(split_path):
+        raise FileNotFoundError(f"--stage report needs {split_path} (created by any earlier stage).")
+    split = ImageSplit.load(split_path)
+
+    cache_path = os.path.join(args.output_dir, "candidate_pool_cache.jsonl")
+    if not os.path.exists(cache_path):
+        raise FileNotFoundError(f"--stage report needs {cache_path} (created by Step A in any earlier stage).")
+    cache = load_candidate_pool_cache(cache_path)
+
+    config_info = {}
+    if os.path.exists(args.best_hyperparams_file):
+        best_hyperparams = load_best_hyperparams(args.best_hyperparams_file)
+        config_info = {
+            "gmm_preset": best_hyperparams["trial"]["gmm_preset"]["name"],
+            "tau": best_hyperparams["trial"]["tau"],
+            "alpha": best_hyperparams["trial"]["alpha"],
+            "model": args.model_path,
+        }
+
+    from report import generate_report
+
+    report_path = os.path.join(args.output_dir, "report", "report.html")
+    os.makedirs(os.path.dirname(report_path), exist_ok=True)
+    generate_report(
+        report_images=split.report_images,
+        candidate_pool_cache=cache,
+        classification_file=classification_path,
+        question_file=qfile_path,
+        answers_file=answers_path,
+        image_dir=args.image_folder,
+        output_path=report_path,
+        config_info=config_info,
+    )
+    update_summary(args.output_dir, report_html=report_path)
+    print(f"[Strategy8-U] HTML report written to {report_path} (no LVLM was loaded for this stage).")
+
+
+# ---------------------------------------------------------------------------
 # main
 # ---------------------------------------------------------------------------
+def _csv_floats(s: str) -> List[float]:
+    return [float(x.strip()) for x in s.split(",") if x.strip()]
+
+
 def build_arg_parser() -> argparse.ArgumentParser:
     p = argparse.ArgumentParser(description="Strategy 8-U end-to-end pipeline")
 
@@ -349,22 +476,44 @@ def build_arg_parser() -> argparse.ArgumentParser:
     p.add_argument("--n_report_images", type=int, default=100)
     p.add_argument("--split_seed", type=int, default=8)
 
+    p.add_argument("--stage", type=str, default="all", choices=STAGE_CHOICES,
+                    help="Which part of the pipeline to run this invocation: "
+                         "'all' (default: tune-if-requested + CHAIR + POPE + report), "
+                         "'tune_only' (just the hyperparameter search), "
+                         "'chair' (just the CHAIR final eval, needs best_hyperparams.json), "
+                         "'pope' (just the POPE final eval, needs best_hyperparams.json), "
+                         "'report' (just the report -- needs the CHAIR test200 run to already "
+                         "exist; does NOT load the LVLM).")
+
     p.add_argument("--tune", action="store_true",
                     help="Toggle: run the hyperparameter grid search (item #5). "
-                         "If not set, --best_hyperparams_file must already exist.")
-    p.add_argument("--max_trials", type=int, default=12)
+                         "If not set, --best_hyperparams_file must already exist "
+                         "(except for --stage report).")
+    p.add_argument("--max_trials", type=int, default=16)
     p.add_argument("--grid_seed", type=int, default=0)
+    p.add_argument("--taus", type=_csv_floats, default=None,
+                    help="Comma-separated tau values to search, e.g. '0.2,0.3,0.4,0.5'. "
+                         "Defaults to hyperparam_grid.DEFAULT_TAUS.")
+    p.add_argument("--alphas", type=_csv_floats, default=None,
+                    help="Comma-separated alpha values to search, e.g. '0.5,0.6,0.7,0.8'. "
+                         "Defaults to hyperparam_grid.DEFAULT_ALPHAS.")
+    p.add_argument("--first_tau", type=float, default=0.3,
+                    help="tau value of the trial guaranteed to be evaluated first (if present "
+                         "in the searched tau/alpha values). Set to a value outside --taus, or "
+                         "pass --first_tau -1 together with --first_alpha -1, to disable forcing.")
+    p.add_argument("--first_alpha", type=float, default=0.7,
+                    help="alpha value of the trial guaranteed to be evaluated first.")
     p.add_argument("--tune_learning_rate", action="store_true",
-                    help="Also search damped (lr<1.0) GMM M-step variants. Off by default: "
-                         "the grid only fits the GMM with standard, undamped EM (lr=1.0).")
+                    help="Also consider damped (lr<1.0) GMM M-step variants during GMM preset "
+                         "selection. Off by default: only standard, undamped EM (lr=1.0) presets "
+                         "are considered.")
+    p.add_argument("--force_recompute_trials", action="store_true",
+                    help="Re-run GMM preset selection and every (tau, alpha) trial even if a "
+                         "cached result already exists on disk. Off by default: any trial (or "
+                         "the GMM selection step) whose result is already saved is REUSED, not "
+                         "re-evaluated.")
     p.add_argument("--best_hyperparams_file", type=str, default=None,
                     help="Defaults to <output_dir>/best_hyperparams.json")
-
-    p.add_argument("--skip_final_eval", action="store_true",
-                    help="Stop after tuning (useful for iterating on the grid alone)")
-    p.add_argument("--skip_pope", action="store_true")
-    p.add_argument("--skip_chair", action="store_true")
-    p.add_argument("--skip_report", action="store_true")
 
     p.add_argument("--conv_mode", type=str, default="vicuna_v1")
     p.add_argument("--batch_size", type=int, default=1)
@@ -383,17 +532,28 @@ def main():
     args = build_arg_parser().parse_args()
     if args.best_hyperparams_file is None:
         args.best_hyperparams_file = os.path.join(args.output_dir, "best_hyperparams.json")
+    if args.first_tau is not None and args.first_tau < 0:
+        args.first_tau = None
+    if args.first_alpha is not None and args.first_alpha < 0:
+        args.first_alpha = None
 
     os.makedirs(args.output_dir, exist_ok=True)
 
     from transformers import set_seed
     set_seed(args.seed)
 
-    if not args.tune and not os.path.exists(args.best_hyperparams_file):
+    # ---- --stage report is lightweight: no LVLM, no CHAIR evaluator, no
+    # feature extractors -- handle it first and return early. ----
+    if args.stage == "report":
+        run_report_stage(args)
+        return
+
+    if args.stage == "tune_only" and not args.tune:
+        raise ValueError("--stage tune_only without --tune does nothing useful; pass --tune too.")
+    if args.stage in ("chair", "pope", "all") and not args.tune and not os.path.exists(args.best_hyperparams_file):
         raise FileNotFoundError(
-            f"--tune was not set and {args.best_hyperparams_file} does not exist. "
-            f"Either pass --tune to run the hyperparameter search, or point "
-            f"--best_hyperparams_file at a previously-tuned result."
+            f"--stage {args.stage} needs {args.best_hyperparams_file} to already exist "
+            f"(or pass --tune to create it first)."
         )
 
     # ---- image universe + deterministic split ----
@@ -422,17 +582,16 @@ def main():
 
     cache = ensure_candidate_pool_cache(args, model, tokenizer, processor, _feature_extractor_factory, all_images)
 
-    # ---- CHAIR evaluator (loads COCO ground-truth annotations once, reused everywhere) ----
+    # ---- CHAIR evaluator: only needed for tuning and the 'chair'/'all' stages ----
+    need_chair_evaluator = args.tune or args.stage in ("chair", "all")
     chair_evaluator = None
-    if not args.skip_chair:
+    if need_chair_evaluator:
         from eval_chair import CHAIR
         print("[Strategy8-U] Building CHAIR evaluator (loading COCO ground-truth annotations)...")
         chair_evaluator = CHAIR(args.coco_annotations_path)
 
     # ---- hyperparameter search (item #5 toggle) ----
     if args.tune:
-        if chair_evaluator is None:
-            raise ValueError("--tune requires CHAIR (do not pass --skip_chair together with --tune)")
         best_hyperparams = run_hyperparameter_search(
             args, cache, split, model, tokenizer, processor, model_name, chair_evaluator,
         )
@@ -441,8 +600,7 @@ def main():
         print(f"[Strategy8-U] Loaded previously-tuned hyperparameters from {args.best_hyperparams_file}: "
               f"{best_hyperparams['trial']}")
 
-    if args.skip_final_eval:
-        print("[Strategy8-U] --skip_final_eval set, stopping after hyperparameter selection.")
+    if args.stage == "tune_only":
         return
 
     gmm_params = GMMParams.from_dict(best_hyperparams["gmm_params"])
@@ -450,9 +608,8 @@ def main():
     tau = best_hyperparams["trial"]["tau"]
     alpha = best_hyperparams["trial"]["alpha"]
 
-    # ---- final evaluation: held-out 200 + full 500, CHAIR and POPE ----
-    chair_test, chair_full = None, None
-    if not args.skip_chair:
+    # ---- final evaluation: held-out 200 + full 500 ----
+    if args.stage in ("chair", "all"):
         chair_test = run_final_chair_eval(
             args, cache, split.test_images, "test200", gmm, tau, alpha,
             model, tokenizer, processor, model_name, chair_evaluator,
@@ -461,9 +618,15 @@ def main():
             args, cache, split.all_images, "full500", gmm, tau, alpha,
             model, tokenizer, processor, model_name, chair_evaluator,
         )
+        update_summary(
+            args.output_dir,
+            best_hyperparams=best_hyperparams,
+            split_file=split_path,
+            chair_test200=chair_test["eval_file"],
+            chair_full500=chair_full["eval_file"],
+        )
 
-    pope_test, pope_full = None, None
-    if not args.skip_pope:
+    if args.stage in ("pope", "all"):
         pope_test = run_final_pope_eval(
             args, cache, split.test_images, "test200", gmm, tau, alpha,
             model, tokenizer, processor, model_name,
@@ -472,22 +635,21 @@ def main():
             args, cache, split.all_images, "full500", gmm, tau, alpha,
             model, tokenizer, processor, model_name,
         )
+        update_summary(
+            args.output_dir,
+            best_hyperparams=best_hyperparams,
+            split_file=split_path,
+            pope_test200=pope_test["eval_file"],
+            pope_full500=pope_full["eval_file"],
+        )
 
-    summary = {
-        "best_hyperparams": best_hyperparams,
-        "split_file": split_path,
-        "chair_test200": chair_test["eval_file"] if chair_test else None,
-        "chair_full500": chair_full["eval_file"] if chair_full else None,
-        "pope_test200": pope_test["eval_file"] if pope_test else None,
-        "pope_full500": pope_full["eval_file"] if pope_full else None,
-    }
-    with open(os.path.join(args.output_dir, "summary.json"), "w") as f:
-        json.dump(summary, f, indent=2)
     print(f"[Strategy8-U] Done. Summary written to {os.path.join(args.output_dir, 'summary.json')}")
 
-    # ---- HTML report (item #6), built from the CHAIR test-200 run's already-
-    # generated artifacts -- no additional generation needed. ----
-    if not args.skip_report and chair_test is not None:
+    # ---- HTML report (item #6), built from the CHAIR test-200 run's
+    # artifacts -- only happens automatically as part of --stage all (which
+    # just produced them above); for a standalone report from a PRIOR
+    # chair run, use --stage report instead. ----
+    if args.stage == "all":
         from report import generate_report
 
         report_path = os.path.join(args.output_dir, "report", "report.html")
@@ -507,6 +669,7 @@ def main():
                 "model": args.model_path,
             },
         )
+        update_summary(args.output_dir, report_html=report_path)
         print(f"[Strategy8-U] HTML report written to {report_path}")
 
 

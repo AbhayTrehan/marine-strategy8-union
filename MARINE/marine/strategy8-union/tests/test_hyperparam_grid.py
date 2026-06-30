@@ -111,6 +111,45 @@ def test_default_gmm_presets_matches_deactivated_selection():
     print("test_default_gmm_presets_matches_deactivated_selection OK")
 
 
+def test_preferred_first_appears_first_without_capping():
+    trials = build_grid(
+        gmm_presets=DEFAULT_GMM_PRESETS[:1], taus=[0.2, 0.3, 0.4], alphas=[0.5, 0.6, 0.7],
+        max_trials=None, preferred_first={"tau": 0.3, "alpha": 0.7},
+    )
+    assert len(trials) == 9
+    assert trials[0].tau == 0.3 and trials[0].alpha == 0.7
+    # everything else still present, just reordered
+    assert {(t.tau, t.alpha) for t in trials} == {(t, a) for t in [0.2, 0.3, 0.4] for a in [0.5, 0.6, 0.7]}
+    print("test_preferred_first_appears_first_without_capping OK")
+
+
+def test_preferred_first_guaranteed_a_slot_under_capping():
+    # 4x4=16 combos, cap to 3 -- without forcing, (0.3, 0.7) might easily be
+    # sampled out; with preferred_first it must always be slot 0.
+    trials = build_grid(
+        gmm_presets=DEFAULT_GMM_PRESETS[:1], taus=DEFAULT_TAUS, alphas=DEFAULT_ALPHAS,
+        max_trials=3, seed=99, preferred_first={"tau": 0.3, "alpha": 0.7},
+    )
+    assert len(trials) == 3
+    assert trials[0].tau == 0.3 and trials[0].alpha == 0.7
+    print("test_preferred_first_guaranteed_a_slot_under_capping OK")
+
+
+def test_preferred_first_noop_when_not_in_grid():
+    trials = build_grid(
+        gmm_presets=DEFAULT_GMM_PRESETS[:1], taus=[0.2, 0.3], alphas=[0.5, 0.6],
+        max_trials=None, preferred_first={"tau": 0.99, "alpha": 0.99},
+    )
+    assert len(trials) == 4  # unaffected, no matching entry to force to front
+    print("test_preferred_first_noop_when_not_in_grid OK")
+
+
+def test_default_ranges_match_user_request():
+    assert DEFAULT_TAUS == [0.2, 0.3, 0.4, 0.5]
+    assert DEFAULT_ALPHAS == [0.5, 0.6, 0.7, 0.8]
+    print("test_default_ranges_match_user_request OK")
+
+
 if __name__ == "__main__":
     test_chair_f1_basic()
     test_chair_f1_handles_pathological_chairi()
@@ -123,4 +162,8 @@ if __name__ == "__main__":
     test_select_gmm_presets_default_excludes_damped()
     test_select_gmm_presets_activated_includes_damped()
     test_default_gmm_presets_matches_deactivated_selection()
+    test_preferred_first_appears_first_without_capping()
+    test_preferred_first_guaranteed_a_slot_under_capping()
+    test_preferred_first_noop_when_not_in_grid()
+    test_default_ranges_match_user_request()
     print("\nALL hyperparam_grid.py TESTS PASSED")

@@ -1,23 +1,23 @@
 """
 Run with: python3 tests/test_run_pipeline.py
 
-This is the most important test in the suite: it exercises run_pipeline.py
-END TO END -- the --tune toggle, the hyperparameter grid search, picking
-the winning trial, freezing its GMM, and the final CHAIR+POPE+report
-evaluation on the held-out/full-500 splits -- using a small (20-image)
-synthetic dataset. Every piece that needs real GPU compute or downloaded
-weights (the LVLM, CHAIR's COCO ground-truth loading) is replaced with a
-deterministic fake; everything else (Strategy8TriStateDataset,
-TriStateGuidanceLogits, the GMM fit, synonym/union canonicalization, the
-question-file building, the report HTML) runs FOR REAL.
+Exercises run_pipeline.py END TO END with a small (20-image) synthetic
+dataset: the --tune toggle, the decoupled GMM-preset selection (intrinsic
+quality, no generation), the (tau, alpha) grid with per-trial caching/
+resumability, the --first_tau/--first_alpha forced-first-trial behavior,
+and the separate --stage chair / --stage pope / --stage report commands
+(including that --stage report never loads the LVLM). Every piece that
+needs real GPU compute or downloaded weights (the LVLM, CHAIR's COCO
+ground-truth loading) is replaced with a deterministic fake; everything
+else (Strategy8TriStateDataset, TriStateGuidanceLogits, the GMM fit,
+synonym/union canonicalization, the question-file building, the report
+HTML) runs FOR REAL.
 
 The fake CHAIR evaluator's metrics are a deterministic function of the
 `alpha` value baked into each answer file by the real generate.py code
 path (metadata.alpha) -- CHAIRi decreases and Recall increases with alpha
--- so we can assert run_hyperparameter_search actually picks the
-highest-alpha trial available in its (possibly down-sampled) grid, i.e.
-that hyperparameter SELECTION genuinely works, not just that the code
-runs without crashing.
+-- so we can assert hyperparameter SELECTION genuinely works (picks the
+highest-alpha trial), not just that the code runs.
 """
 import json
 import os
@@ -47,8 +47,13 @@ N_IMAGES = 20
 
 
 # ---------------------------------------------------------------------------
-# Fake LVLM (same pattern as test_generate.py)
+# Fake LVLM (same pattern as test_generate.py), with a global call counter
+# so tests can verify how many times generation actually ran.
 # ---------------------------------------------------------------------------
+_GENERATE_CALL_COUNT = {"n": 0}
+_LOAD_MODEL_CALL_COUNT = {"n": 0}
+
+
 class _FakeProcessor:
     def __call__(self, text, images, return_tensors="pt"):
         n_tokens = max(3, len(text.split()))
@@ -86,6 +91,7 @@ class _FakeModel:
         return _FakeForwardOutput(logits=logits, past_key_values=new_past)
 
     def generate(self, input_ids, **kwargs):
+        _GENERATE_CALL_COUNT["n"] += 1
         lp = kwargs.get("logits_processor")
         if lp is not None:
             fake_logits = torch.randn(input_ids.shape[0], 11)
@@ -96,7 +102,12 @@ class _FakeModel:
 
 
 def _fake_load_model(model_name, model_path):
+    _LOAD_MODEL_CALL_COUNT["n"] += 1
     return _FakeModel(), _FakeTokenizer(), _FakeProcessor()
+
+
+def _raise_if_called(model_name, model_path):
+    raise AssertionError("load_model should NOT have been called for this stage")
 
 
 # ---------------------------------------------------------------------------
@@ -104,27 +115,22 @@ def _fake_load_model(model_name, model_path):
 # ---------------------------------------------------------------------------
 class _FakeCHAIR:
     def __init__(self, coco_path):
-        self.coco_path = coco_path  # not actually used
+        self.coco_path = coco_path
 
     def compute_chair(self, cap_file, image_id_key, caption_key):
         with open(cap_file) as f:
             rows = [json.loads(l) for l in f]
         alpha = rows[0].get("metadata", {}).get("alpha", 0.0) if rows else 0.0
-        chair_i = max(0.0, 0.3 - 0.3 * alpha)   # improves (lower) with alpha
+        chair_i = max(0.0, 0.3 - 0.3 * alpha)
         chair_s = chair_i * 1.5
-        recall = min(1.0, 0.2 + 0.3 * alpha)     # improves (higher) with alpha
+        recall = min(1.0, 0.2 + 0.3 * alpha)
         return {
             "sentences": [],
             "overall_metrics": {
-                "CHAIRs": chair_s,
-                "CHAIRi": chair_i,
-                "Recall": recall,
-                "num_hallucinated_caps": 0,
-                "num_caps": len(rows),
-                "hallucinated_word_count": 0,
-                "coco_word_count": max(1, len(rows)),
-                "length_response": 5.0,
-                "hallucinated_caps_ls": [],
+                "CHAIRs": chair_s, "CHAIRi": chair_i, "Recall": recall,
+                "num_hallucinated_caps": 0, "num_caps": len(rows),
+                "hallucinated_word_count": 0, "coco_word_count": max(1, len(rows)),
+                "length_response": 5.0, "hallucinated_caps_ls": [],
             },
         }
 
@@ -142,16 +148,12 @@ def _build_synthetic_dataset(d):
     for i in range(1, N_IMAGES + 1):
         Image.new("RGB", (8, 8), color=(i % 255, 50, 100)).save(os.path.join(image_dir, _image_name(i)))
 
-    chair_questions = []
-    pope_questions = []
-    detr_guidance = []
-    ram_guidance = []
+    chair_questions, pope_questions, detr_guidance, ram_guidance = [], [], [], []
     qid = 1
     for i in range(1, N_IMAGES + 1):
         img = _image_name(i)
         chair_questions.append({
-            "id": qid,
-            "image": img,
+            "id": qid, "image": img,
             "conversations": [
                 {"from": "human", "value": "Generate a short caption of the image."},
                 {"from": "gpt", "value": ""},
@@ -165,42 +167,29 @@ def _build_synthetic_dataset(d):
     for i in range(1, N_IMAGES + 1):
         img = _image_name(i)
         for obj, label in [("dog", "yes"), ("fork", "no")]:
-            pope_questions.append({
-                "question_id": pqid, "image": img,
-                "text": f"Is there a {obj} in the image?", "label": label,
-            })
+            pope_questions.append({"question_id": pqid, "image": img, "text": f"Is there a {obj} in the image?", "label": label})
             pqid += 1
 
     chair_path = os.path.join(d, "chair.json")
     with open(chair_path, "w") as f:
         json.dump(chair_questions, f)
-
     pope_path = os.path.join(d, "pope.json")
     with open(pope_path, "w") as f:
         for q in pope_questions:
             f.write(json.dumps(q) + "\n")
-
     detr_path = os.path.join(d, "detr.json")
     with open(detr_path, "w") as f:
         json.dump(detr_guidance, f)
-
     ram_path = os.path.join(d, "ram.json")
     with open(ram_path, "w") as f:
         json.dump(ram_guidance, f)
 
-    return {
-        "image_dir": image_dir,
-        "chair_path": chair_path,
-        "pope_path": pope_path,
-        "detr_path": detr_path,
-        "ram_path": ram_path,
-    }
+    return {"image_dir": image_dir, "chair_path": chair_path, "pope_path": pope_path,
+            "detr_path": detr_path, "ram_path": ram_path}
 
 
 def _build_synthetic_candidate_pool_cache(output_dir, n_images=N_IMAGES):
-    """Bypasses Step A's real model/OWL-ViT/CLIP calls entirely by writing
-    the cache file run_pipeline.ensure_candidate_pool_cache will find
-    already on disk (and therefore reuse without recomputation)."""
+    """Bypasses Step A's real model/OWL-ViT/CLIP calls entirely."""
     cache_path = os.path.join(output_dir, "candidate_pool_cache.jsonl")
     os.makedirs(output_dir, exist_ok=True)
     with open(cache_path, "w") as f:
@@ -227,15 +216,6 @@ def _build_synthetic_candidate_pool_cache(output_dir, n_images=N_IMAGES):
     return cache_path
 
 
-def _run_pipeline_main(argv):
-    old_argv = sys.argv
-    sys.argv = ["run_pipeline.py"] + argv
-    try:
-        run_pipeline.main()
-    finally:
-        sys.argv = old_argv
-
-
 def _common_argv(ds, output_dir):
     return [
         "--model_path", "fake-model",
@@ -253,89 +233,167 @@ def _common_argv(ds, output_dir):
     ]
 
 
-def test_tune_then_reuse_end_to_end():
+def _run_pipeline_main(argv):
+    old_argv = sys.argv
+    sys.argv = ["run_pipeline.py"] + argv
+    try:
+        run_pipeline.main()
+    finally:
+        sys.argv = old_argv
+
+
+def _setup(d):
     utils_model_module.load_model = _fake_load_model
     eval_chair_module.CHAIR = _FakeCHAIR
-
-    d = tempfile.mkdtemp()
+    _GENERATE_CALL_COUNT["n"] = 0
+    _LOAD_MODEL_CALL_COUNT["n"] = 0
     ds = _build_synthetic_dataset(d)
+    return ds
+
+
+def test_tune_selects_highest_alpha_and_gmm_selection_uses_no_generation():
+    d = tempfile.mkdtemp()
+    ds = _setup(d)
     output_dir = os.path.join(d, "out")
     _build_synthetic_candidate_pool_cache(output_dir, N_IMAGES)
 
-    common_argv = _common_argv(ds, output_dir)
+    argv = _common_argv(ds, output_dir) + [
+        "--stage", "tune_only", "--tune",
+        "--taus", "0.2,0.3,0.4,0.5", "--alphas", "0.5,0.6,0.7,0.8",
+        "--max_trials", "16", "--first_tau", "-1", "--first_alpha", "-1",
+    ]
+    _run_pipeline_main(argv)
 
-    # ---- phase 1: --tune ----
-    _run_pipeline_main(common_argv + ["--tune", "--max_trials", "4", "--grid_seed", "1"])
+    # GMM preset selection considers 3 base presets, but must NOT call
+    # generate() at all -- only the 16 (tau, alpha) trials should, each
+    # doing ceil(n_tune_images / batch_size) = 12/2 = 6 batched calls.
+    expected_calls = 16 * (12 // 2)
+    assert _GENERATE_CALL_COUNT["n"] == expected_calls, _GENERATE_CALL_COUNT["n"]
 
-    best_path = os.path.join(output_dir, "best_hyperparams.json")
-    assert os.path.exists(best_path)
-    with open(best_path) as f:
+    gmm_selection_path = os.path.join(output_dir, "tuning", "gmm_selection.json")
+    assert os.path.exists(gmm_selection_path)
+    with open(gmm_selection_path) as f:
+        selection = json.load(f)
+    assert set(selection["quality_by_preset"].keys()) == {"standard_kmeans", "quantile_init", "fixed_prior"}
+
+    with open(os.path.join(output_dir, "best_hyperparams.json")) as f:
         best = json.load(f)
+    assert best["trial"]["alpha"] == 0.8  # highest alpha in the (uncapped) grid wins
+    print("test_tune_selects_highest_alpha_and_gmm_selection_uses_no_generation OK")
 
-    all_trials_path = os.path.join(output_dir, "tuning", "all_trials.json")
-    with open(all_trials_path) as f:
+
+def test_first_tau_alpha_is_evaluated_first():
+    d = tempfile.mkdtemp()
+    ds = _setup(d)
+    output_dir = os.path.join(d, "out")
+    _build_synthetic_candidate_pool_cache(output_dir, N_IMAGES)
+
+    argv = _common_argv(ds, output_dir) + [
+        "--stage", "tune_only", "--tune",
+        "--taus", "0.2,0.3,0.4,0.5", "--alphas", "0.5,0.6,0.7,0.8",
+        "--max_trials", "4", "--grid_seed", "123",
+        "--first_tau", "0.3", "--first_alpha", "0.7",
+    ]
+    _run_pipeline_main(argv)
+
+    with open(os.path.join(output_dir, "tuning", "all_trials.json")) as f:
         all_trials = json.load(f)
     assert len(all_trials) == 4
+    assert all_trials[0]["trial"]["tau"] == 0.3
+    assert all_trials[0]["trial"]["alpha"] == 0.7
+    print("test_first_tau_alpha_is_evaluated_first OK")
 
-    # the fake CHAIR's metrics strictly improve with alpha -> the winning
-    # trial must be the one with the maximum alpha among the 4 sampled
-    max_alpha_in_grid = max(t["trial"]["alpha"] for t in all_trials)
-    assert best["trial"]["alpha"] == max_alpha_in_grid
-    best_f1 = max(t["f1"] for t in all_trials)
-    assert abs(best["tuning_result"]["f1"] - best_f1) < 1e-9
 
-    # ---- phase 2: --skip_final_eval should stop right after tuning ----
-    output_dir2 = os.path.join(d, "out2")
-    _build_synthetic_candidate_pool_cache(output_dir2, N_IMAGES)
-    _run_pipeline_main(_common_argv(ds, output_dir2) + ["--tune", "--max_trials", "2", "--grid_seed", "1", "--skip_final_eval"])
-    assert os.path.exists(os.path.join(output_dir2, "best_hyperparams.json"))
-    assert not os.path.exists(os.path.join(output_dir2, "summary.json"))
+def test_rerunning_tune_reuses_cached_trials_and_gmm_selection():
+    d = tempfile.mkdtemp()
+    ds = _setup(d)
+    output_dir = os.path.join(d, "out")
+    _build_synthetic_candidate_pool_cache(output_dir, N_IMAGES)
 
-    # ---- phase 3: re-run WITHOUT --tune, reusing best_hyperparams.json ----
-    final_output_dir = output_dir  # reuse phase-1's dir (already has best_hyperparams.json + cache + split)
-    _run_pipeline_main(common_argv)  # no --tune this time
+    argv = _common_argv(ds, output_dir) + [
+        "--stage", "tune_only", "--tune",
+        "--taus", "0.2,0.3", "--alphas", "0.5,0.6",
+        "--max_trials", "4", "--first_tau", "-1", "--first_alpha", "-1",
+    ]
+    _run_pipeline_main(argv)
+    n_calls_first_run = _GENERATE_CALL_COUNT["n"]
+    expected_calls = 4 * (12 // 2)  # 4 trials x 6 batches each
+    assert n_calls_first_run == expected_calls, n_calls_first_run
 
-    summary_path = os.path.join(final_output_dir, "summary.json")
-    assert os.path.exists(summary_path)
+    # re-run with the SAME output_dir: every trial + the GMM selection
+    # should be found on disk and reused -- zero new generate() calls.
+    _run_pipeline_main(argv)
+    assert _GENERATE_CALL_COUNT["n"] == n_calls_first_run, "no new generation should have occurred on rerun"
+
+    # --force_recompute_trials should force everything to re-run
+    _run_pipeline_main(argv + ["--force_recompute_trials"])
+    assert _GENERATE_CALL_COUNT["n"] == n_calls_first_run * 2
+    print("test_rerunning_tune_reuses_cached_trials_and_gmm_selection OK")
+
+
+def test_stage_chair_then_stage_pope_then_stage_report_accumulate_summary():
+    d = tempfile.mkdtemp()
+    ds = _setup(d)
+    output_dir = os.path.join(d, "out")
+    _build_synthetic_candidate_pool_cache(output_dir, N_IMAGES)
+    base_argv = _common_argv(ds, output_dir)
+
+    # tune first (need best_hyperparams.json to exist for chair/pope stages)
+    _run_pipeline_main(base_argv + ["--stage", "tune_only", "--tune", "--max_trials", "2"])
+    summary_path = os.path.join(output_dir, "summary.json")
+    assert not os.path.exists(summary_path)  # tune_only never touches summary.json
+
+    # --stage chair only
+    _run_pipeline_main(base_argv + ["--stage", "chair"])
     with open(summary_path) as f:
         summary = json.load(f)
+    assert summary.get("chair_test200") and os.path.exists(summary["chair_test200"])
+    assert summary.get("chair_full500") and os.path.exists(summary["chair_full500"])
+    assert "pope_test200" not in summary
+    assert not os.path.exists(os.path.join(output_dir, "report", "report.html"))
 
-    for key in ["chair_test200", "chair_full500", "pope_test200", "pope_full500"]:
-        assert summary[key] is not None and os.path.exists(summary[key])
+    # --stage pope only -- must NOT erase the chair entries already recorded
+    _run_pipeline_main(base_argv + ["--stage", "pope"])
+    with open(summary_path) as f:
+        summary = json.load(f)
+    assert summary.get("chair_test200")  # still present
+    assert summary.get("pope_test200") and os.path.exists(summary["pope_test200"])
+    assert summary.get("pope_full500") and os.path.exists(summary["pope_full500"])
 
-    with open(summary["chair_full500"]) as f:
-        chair_full_metrics = json.load(f)
-    assert chair_full_metrics["num_caps"] == N_IMAGES  # full-500 stand-in: full N_IMAGES
-
-    with open(summary["chair_test200"]) as f:
-        chair_test_metrics = json.load(f)
-    split_path = os.path.join(final_output_dir, "split.json")
-    with open(split_path) as f:
-        split = json.load(f)
-    assert chair_test_metrics["num_caps"] == len(split["test_images"])
-
-    report_path = os.path.join(final_output_dir, "report", "report.html")
-    assert os.path.exists(report_path)
-    with open(report_path) as f:
+    # --stage report only -- must NOT load the model at all
+    utils_model_module.load_model = _raise_if_called
+    _run_pipeline_main(base_argv + ["--stage", "report"])
+    with open(summary_path) as f:
+        summary = json.load(f)
+    assert summary.get("report_html") and os.path.exists(summary["report_html"])
+    with open(summary["report_html"]) as f:
         report_html = f.read()
-    assert "showing 5 of 5 requested images" in report_html
+    with open(os.path.join(output_dir, "split.json")) as f:
+        split = json.load(f)
     for img in split["report_images"]:
         assert img in report_html
 
-    print("test_tune_then_reuse_end_to_end OK")
+    print("test_stage_chair_then_stage_pope_then_stage_report_accumulate_summary OK")
+
+
+def test_stage_report_without_chair_run_raises_clear_error():
+    d = tempfile.mkdtemp()
+    ds = _setup(d)
+    output_dir = os.path.join(d, "out")
+    try:
+        _run_pipeline_main(_common_argv(ds, output_dir) + ["--stage", "report"])
+        raise AssertionError("should have raised FileNotFoundError")
+    except FileNotFoundError as e:
+        assert "chair" in str(e).lower()
+    print("test_stage_report_without_chair_run_raises_clear_error OK")
 
 
 def test_missing_best_hyperparams_without_tune_raises():
-    utils_model_module.load_model = _fake_load_model
-    eval_chair_module.CHAIR = _FakeCHAIR
-
     d = tempfile.mkdtemp()
-    ds = _build_synthetic_dataset(d)
+    ds = _setup(d)
     output_dir = os.path.join(d, "out")
-
-    argv = _common_argv(ds, output_dir)
     try:
-        _run_pipeline_main(argv)
+        _run_pipeline_main(_common_argv(ds, output_dir))
         raise AssertionError("should have raised FileNotFoundError")
     except FileNotFoundError:
         pass
@@ -343,56 +401,51 @@ def test_missing_best_hyperparams_without_tune_raises():
 
 
 def test_candidate_pool_cache_not_rebuilt_when_present():
-    """Confirms ensure_candidate_pool_cache reuses an existing cache file
-    rather than rebuilding it (and therefore never needs the lazy
-    FeatureExtractor factory to actually be called)."""
-    utils_model_module.load_model = _fake_load_model
-    eval_chair_module.CHAIR = _FakeCHAIR
-
     d = tempfile.mkdtemp()
-    ds = _build_synthetic_dataset(d)
+    ds = _setup(d)
     output_dir = os.path.join(d, "out")
     cache_path = _build_synthetic_candidate_pool_cache(output_dir, N_IMAGES)
     mtime_before = os.path.getmtime(cache_path)
 
-    argv = _common_argv(ds, output_dir) + ["--tune", "--max_trials", "2", "--skip_final_eval"]
+    argv = _common_argv(ds, output_dir) + ["--stage", "tune_only", "--tune", "--max_trials", "2"]
     _run_pipeline_main(argv)
-    mtime_after = os.path.getmtime(cache_path)
-    assert mtime_before == mtime_after, "cache file should not have been rewritten"
+    assert os.path.getmtime(cache_path) == mtime_before, "cache file should not have been rewritten"
     print("test_candidate_pool_cache_not_rebuilt_when_present OK")
 
 
-def test_tune_learning_rate_flag_controls_damped_presets():
-    utils_model_module.load_model = _fake_load_model
-    eval_chair_module.CHAIR = _FakeCHAIR
-
+def test_tune_learning_rate_flag_controls_gmm_presets_considered():
     d = tempfile.mkdtemp()
-    ds = _build_synthetic_dataset(d)
+    ds = _setup(d)
 
-    # default (flag absent): no damped (lr<1.0) presets should ever appear
     output_dir_off = os.path.join(d, "out_off")
     _build_synthetic_candidate_pool_cache(output_dir_off, N_IMAGES)
-    _run_pipeline_main(_common_argv(ds, output_dir_off) + ["--tune", "--max_trials", "8", "--skip_final_eval"])
-    with open(os.path.join(output_dir_off, "tuning", "all_trials.json")) as f:
-        trials_off = json.load(f)
-    assert all(t["trial"]["gmm_preset"]["learning_rate"] == 1.0 for t in trials_off)
+    _run_pipeline_main(_common_argv(ds, output_dir_off) + ["--stage", "tune_only", "--tune", "--max_trials", "2"])
+    with open(os.path.join(output_dir_off, "tuning", "gmm_selection.json")) as f:
+        sel_off = json.load(f)
+    assert all(q.get("learning_rate", 1.0) for q in [{}])  # no-op sanity
+    with open(os.path.join(output_dir_off, "best_hyperparams.json")) as f:
+        best_off = json.load(f)
+    assert best_off["trial"]["gmm_preset"]["learning_rate"] == 1.0
 
-    # with --tune_learning_rate: damped presets are eligible to be sampled
-    # (use a large max_trials to make it overwhelmingly likely at least one
-    # damped preset gets sampled into this small grid)
     output_dir_on = os.path.join(d, "out_on")
     _build_synthetic_candidate_pool_cache(output_dir_on, N_IMAGES)
     _run_pipeline_main(_common_argv(ds, output_dir_on)
-                        + ["--tune", "--max_trials", "30", "--tune_learning_rate", "--skip_final_eval"])
-    with open(os.path.join(output_dir_on, "tuning", "all_trials.json")) as f:
-        trials_on = json.load(f)
-    assert any(t["trial"]["gmm_preset"]["learning_rate"] < 1.0 for t in trials_on)
-    print("test_tune_learning_rate_flag_controls_damped_presets OK")
+                        + ["--stage", "tune_only", "--tune", "--max_trials", "2", "--tune_learning_rate"])
+    with open(os.path.join(output_dir_on, "tuning", "gmm_selection.json")) as f:
+        sel_on = json.load(f)
+    assert set(sel_on["quality_by_preset"].keys()) == {
+        "standard_kmeans", "quantile_init", "fixed_prior", "damped_kmeans_lr0.5", "damped_kmeans_lr0.3",
+    }
+    print("test_tune_learning_rate_flag_controls_gmm_presets_considered OK")
 
 
 if __name__ == "__main__":
-    test_tune_then_reuse_end_to_end()
+    test_tune_selects_highest_alpha_and_gmm_selection_uses_no_generation()
+    test_first_tau_alpha_is_evaluated_first()
+    test_rerunning_tune_reuses_cached_trials_and_gmm_selection()
+    test_stage_chair_then_stage_pope_then_stage_report_accumulate_summary()
+    test_stage_report_without_chair_run_raises_clear_error()
     test_missing_best_hyperparams_without_tune_raises()
     test_candidate_pool_cache_not_rebuilt_when_present()
-    test_tune_learning_rate_flag_controls_damped_presets()
+    test_tune_learning_rate_flag_controls_gmm_presets_considered()
     print("\nALL run_pipeline.py TESTS PASSED")

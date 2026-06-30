@@ -9,26 +9,33 @@ F1 criterion used to pick a winner, per the user's spec:
      choose the one that gives the best f1 score ... Be smart in creating
      the grid as it can't run forever."
 
-Two families of hyperparameters are involved:
+Two families of hyperparameters are involved, and they are deliberately
+decoupled (see gmm_selection.py and run_pipeline.py's
+run_hyperparameter_search):
 
-  * GMM-fit hyperparameters (learning_rate, max_iters, tol, init_strategy
-    [+ init_means/init_covariances for 'fixed_prior']) -- these only affect
-    the *global* GMM fit (gmm.py), which is pure numpy over cached feature
-    vectors. Trying many of these is CHEAP (no GPU, no LVLM calls).
+  * GMM-fit hyperparameters (init_strategy [+ init_means/init_covariances
+    for 'fixed_prior'], and learning_rate/max_iters/tol if
+    --tune_learning_rate is set) -- these are selected ONCE via an
+    intrinsic fit-quality metric (silhouette score / cluster separation)
+    computed directly on the pooled tuning-image features, with NO LVLM
+    generation involved at all (gmm_selection.py). This is what makes it
+    safe to consider several GMM presets without each one multiplying the
+    cost of the expensive grid below.
   * Decoding hyperparameters (tau: the Eq. 15/16 responsibility threshold
     that splits O_pos/O_neg, and alpha: the Eq. 20 guidance strength) --
     changing EITHER one changes the text actually fed to the LVLM, so each
-    distinct (GMM-fit, tau, alpha) combination requires a fresh, real
-    generation run over the tuning images. This is the EXPENSIVE part.
+    distinct (tau, alpha) combination requires a fresh, real generation
+    run over the tuning images. This is the EXPENSIVE part, and the only
+    dimension build_grid() below actually searches over (gmm_presets is
+    accepted for generality/testability but run_pipeline.py always passes
+    a single, already-chosen preset).
 
-Because of that asymmetry, we deliberately keep this a small, curated
-search rather than a dense cross product: a handful of named GMM-fit
-"presets" (each a sensible, internally-consistent combination of
-learning_rate/max_iters/tol/init_strategy) crossed with a handful of tau
-and alpha values. If the full cross product exceeds `max_trials`, we
-sample without replacement with a fixed seed for reproducibility, rather
-than silently truncating the grid -- so a smaller `max_trials` still
-explores the *whole* hyperparameter space, just more sparsely.
+DEFAULT_TAUS / DEFAULT_ALPHAS are intentionally a small, curated set
+within the ranges that tend to matter (see the comments next to them)
+rather than a dense sweep; if the cross product still exceeds
+`max_trials`, build_grid() samples without replacement with a fixed seed
+(reproducible), optionally forcing one specific combination to be
+evaluated first via `preferred_first`.
 """
 
 from __future__ import annotations
@@ -124,8 +131,13 @@ def select_gmm_presets(tune_learning_rate: bool = False) -> List[Dict]:
 
 DEFAULT_GMM_PRESETS: List[Dict] = select_gmm_presets(tune_learning_rate=False)
 
-DEFAULT_TAUS: List[float] = [0.4, 0.5, 0.6]
-DEFAULT_ALPHAS: List[float] = [0.3, 0.5, 0.7]
+# Per explicit guidance: alpha in [0.5, 0.8] (higher guidance strength
+# tends to help more, per the original MARINE paper's own ablation), tau
+# in [0.2, 0.5] (lower decision threshold than the textbook 0.5 default,
+# since this pipeline's candidate pool also includes open-vocabulary VLM/
+# RAM++ mentions that may sit at moderate-but-real responsibility values).
+DEFAULT_TAUS: List[float] = [0.2, 0.3, 0.4, 0.5]
+DEFAULT_ALPHAS: List[float] = [0.5, 0.6, 0.7, 0.8]
 
 
 @dataclass
@@ -149,23 +161,56 @@ def build_grid(
     alphas: Optional[Sequence[float]] = None,
     max_trials: Optional[int] = 12,
     seed: int = 0,
+    preferred_first: Optional[Dict[str, float]] = None,
 ) -> List[TrialConfig]:
     """Builds the (possibly down-sampled) list of TrialConfig to actually
     evaluate. If the full cross product of presets x taus x alphas is
     larger than max_trials, sample max_trials of them without replacement
     (seeded, so the grid is reproducible) rather than only ever trying the
-    first N in iteration order."""
+    first N in iteration order.
+
+    preferred_first: optional {"tau": ..., "alpha": ...} (and optionally
+    "gmm_preset_name") identifying one specific combination that should be
+    evaluated FIRST, regardless of sampling order -- and, if max_trials
+    capping would otherwise drop it, it is guaranteed a slot rather than
+    left to chance. If no matching combination exists in the (gmm_presets x
+    taus x alphas) space, this is a no-op (grid is built normally).
+    """
     gmm_presets = list(gmm_presets) if gmm_presets is not None else DEFAULT_GMM_PRESETS
     taus = list(taus) if taus is not None else DEFAULT_TAUS
     alphas = list(alphas) if alphas is not None else DEFAULT_ALPHAS
 
     full = list(itertools.product(gmm_presets, taus, alphas))
+
+    preferred_entry = None
+    if preferred_first is not None:
+        want_tau = preferred_first.get("tau")
+        want_alpha = preferred_first.get("alpha")
+        want_preset_name = preferred_first.get("gmm_preset_name")
+        for entry in full:
+            preset, tau, alpha = entry
+            if want_tau is not None and abs(tau - want_tau) > 1e-9:
+                continue
+            if want_alpha is not None and abs(alpha - want_alpha) > 1e-9:
+                continue
+            if want_preset_name is not None and preset["name"] != want_preset_name:
+                continue
+            preferred_entry = entry
+            break
+
     if max_trials is not None and len(full) > max_trials:
         rng = random.Random(seed)
-        full = rng.sample(full, max_trials)
+        if preferred_entry is not None:
+            remaining = [e for e in full if e != preferred_entry]
+            sampled_rest = rng.sample(remaining, max_trials - 1)
+            full = [preferred_entry] + sampled_rest
+        else:
+            full = rng.sample(full, max_trials)
+    elif preferred_entry is not None:
+        full = [preferred_entry] + [e for e in full if e != preferred_entry]
 
     trials: List[TrialConfig] = []
-    for i, (preset, tau, alpha) in enumerate(full):
+    for preset, tau, alpha in full:
         trial_id = f"{preset['name']}__tau{tau}__alpha{alpha}"
         trials.append(TrialConfig(trial_id=trial_id, gmm_preset=preset, tau=tau, alpha=alpha))
     return trials
