@@ -63,9 +63,6 @@ from nltk.corpus import wordnet as wn
 
 # ---------------------------------------------------------------------------
 # Reuse the existing curated synonym table from the original codebase.
-# We add the repo's `eval/` directory to sys.path (read-only import, no
-# modification to that file) so we get the *exact* same table CHAIR uses,
-# with zero risk of the two tables drifting apart over time.
 # ---------------------------------------------------------------------------
 _THIS_DIR = os.path.dirname(os.path.abspath(__file__))
 _EVAL_DIR = os.path.normpath(os.path.join(_THIS_DIR, "..", "..", "eval"))
@@ -74,6 +71,47 @@ if _EVAL_DIR not in sys.path:
 
 from find_intersection import synonyms_txt as _COCO_SYNONYMS_TXT  # noqa: E402
 from find_intersection import parse_synonyms as _parse_coco_synonyms  # noqa: E402
+
+
+# ---------------------------------------------------------------------------
+# Physical-object filter for RAM++ / VLM tags
+# ---------------------------------------------------------------------------
+# Words that pass the WordNet physical-entity check but are noise in RAM++
+# output: "photo"/"picture" are meta-references to the image medium itself
+# (not objects in the scene); "comfort"/"fill" have an obscure physical noun
+# sense in WordNet (quilt; filling material) that RAM++ never uses.
+_NON_OBJECT_BLOCKLIST: frozenset = frozenset({
+    "photo", "picture", "selfie", "image", "shot",   # meta-image references
+    "comfort", "fill",                                 # WordNet edge cases
+})
+
+_PHYSICAL_ENTITY_MARKER = "physical_entity.n.01"
+
+
+@lru_cache(maxsize=4096)
+def _has_physical_noun_synset(word: str) -> bool:
+    """Returns True if `word` has at least one WordNet noun synset whose
+    hypernym closure contains 'physical_entity.n.01'. This distinguishes
+    discrete physical objects (bed, cat, blanket) from abstract states
+    (sleep, comfort, relax) and pure verbs (sew, lay, take)."""
+    key = word.replace(" ", "_")
+    for syn in wn.synsets(key, pos=wn.NOUN):
+        for hyper in syn.closure(lambda s: s.hypernyms()):
+            if hyper.name() == _PHYSICAL_ENTITY_MARKER:
+                return True
+    return False
+
+
+def is_likely_physical_object(word: str) -> bool:
+    """Combined check used to filter RAM++/VLM tags:
+    1. Not in the explicit noise blocklist.
+    2. Has at least one WordNet noun synset under physical_entity.n.01.
+    COCO-canonical words are always kept before this check is reached
+    (since every COCO category is a physical object by definition)."""
+    cleaned = word.lower().strip()
+    if cleaned in _NON_OBJECT_BLOCKLIST:
+        return False
+    return _has_physical_noun_synset(cleaned)
 
 
 _ARTICLE_RE = re.compile(r"^(a|an|the)\s+", re.IGNORECASE)
@@ -228,16 +266,21 @@ class UnionCanonicalizer:
             return coco, True
         return singularize(cleaned), False
 
-    def canonicalize_pool(self, raw_items: Sequence[RawMention]) -> List[CandidateObject]:
+    def canonicalize_pool(self, raw_items: Sequence[RawMention], filter_non_objects: bool = True) -> List[CandidateObject]:
         """Union-merge raw mentions into canonical CandidateObject entries.
+
+        filter_non_objects (default True): drop RAM++ and VLM mentions that
+        don't represent discrete physical objects visible in images (e.g.
+        "relax", "sleep", "comfort", "photo"). Applied ONLY to RAM and VLM
+        sources -- DETR detections are always kept since they come from a
+        detection model with a constrained physical-object vocabulary.
+        COCO-canonical words (mapped via the curated synonym table) are also
+        always kept since every COCO category is a physical object by definition.
 
         Merge rules (any one is sufficient to join two raw mentions into the
         same cluster):
           (a) identical label after curated-COCO-synonym canonicalization
-              (or identical singularized string, for non-COCO words)
-          (b) WordNet noun-synonym overlap (non-COCO words only -- COCO
-              categories are already authoritative/disjoint, so we never let
-              a noisy WordNet match fuse two distinct COCO categories)
+          (b) WordNet noun-synonym overlap (non-COCO words only)
           (c) head-noun match: a single-word label equals the last token of
               a multi-word label (e.g. "vase" <-> "glass vase")
         """
@@ -247,6 +290,13 @@ class UnionCanonicalizer:
             if norm is None:
                 continue
             label, is_coco = norm
+
+            # Physical-object filter: only for RAM/VLM sources, not DETR,
+            # and only for non-COCO words (COCO canonicals are always objects)
+            if filter_non_objects and not is_coco and item.source in ("ram", "vlm"):
+                if not is_likely_physical_object(label) and not is_likely_physical_object(item.text):
+                    continue
+
             entries.append(
                 {"raw": item.text, "source": item.source, "label": label, "is_coco": is_coco}
             )

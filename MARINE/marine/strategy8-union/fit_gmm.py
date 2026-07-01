@@ -2,48 +2,100 @@
 fit_gmm.py
 ==========
 
-Step B of the Strategy 8-U pipeline: pool the feature vectors of every
-candidate object across a set of "fitting" images (the tuning split from
-splits.py) and fit ONE global 2-component GMM (gmm.py) on the pooled set,
-per Eq. 7-14 -- this is the "fit-on-train" half of the global fit/freeze/
-apply design confirmed with the user. Pure numpy over candidate_pool.py's
-cache; no LVLM/vision-model calls, so this (and applying the frozen result
-in build_question_file.py) is the CHEAP part of a hyperparameter trial.
+Step B of the Strategy 8-U pipeline: pool feature vectors from the tuning
+images, fit one global 2-component GMM, and return it alongside a fitted
+FeatureScaler.
 
-Feature dimensions: by default only [s_det, s_clip] are used (2D). s_area
-is excluded by default because it conflates "small object" with "hallucinated
-object" -- a tiny but genuinely present object (a spoon in the background,
-a distant bird) has near-zero s_area and gets pulled into the negative cluster
-even when s_det and s_clip are reasonable. Pass use_area=True to restore the
-original 3D [s_det, s_clip, s_area] behaviour; s_area is always stored in
-the pool cache regardless, so this can be changed without rebuilding the cache.
+Feature vector (default, use_area=True): x_i = [s_det, s_clip, s_area]
+  Before feeding to the GMM, two transforms are applied:
+    1. sqrt(s_area) -- reduces the dominance of large objects and spreads
+       the near-zero region so that small-but-real objects (s_area≈0.005)
+       are no longer indistinguishable from hallucinated objects (s_area=0).
+    2. z-score normalize ALL dimensions -- brings s_clip's narrow 0.15-0.30
+       range to the same influence as s_det's wider 0-0.9+ range. Stats are
+       fitted ONCE on the tuning pool and saved alongside the GMM so that
+       exactly the same transform is applied at inference time.
+
+Feature vector (use_area=False, via --no_area_feature):
+    x_i = [s_det, s_clip] -- 2D, same z-score normalization.
 """
 
 from __future__ import annotations
 
-import argparse
 import json
-from typing import Dict, List, Sequence
+from dataclasses import dataclass
+from typing import Dict, List, Optional, Sequence
 
 import numpy as np
 
 from gmm import GlobalGMM, GMMParams
 
-FEATURE_DIMS_NO_AREA = ["s_det", "s_clip"]
-FEATURE_DIMS_WITH_AREA = ["s_det", "s_clip", "s_area"]
+
+# ---------------------------------------------------------------------------
+# FeatureScaler: sqrt(area) transform + z-score normalization
+# ---------------------------------------------------------------------------
+@dataclass
+class FeatureScaler:
+    """Encapsulates the sqrt(s_area) + z-score normalization fitted on the
+    tuning pool. Stored alongside the GMM params so inference applies the
+    EXACT same transform the GMM was trained on."""
+    mean: np.ndarray   # (D,)
+    std: np.ndarray    # (D,)  -- protected from near-zero division
+    use_area: bool
+
+    def transform(self, X_raw: np.ndarray) -> np.ndarray:
+        """Apply sqrt(area) then z-score to a raw (N, D) feature matrix.
+        Safe for single-row arrays (i.e. one candidate at a time)."""
+        X = np.array(X_raw, dtype=float)
+        if X.ndim == 1:
+            X = X[np.newaxis, :]
+        if self.use_area and X.shape[1] >= 3:
+            X = X.copy()
+            X[:, 2] = np.sqrt(np.maximum(X[:, 2], 0.0))
+        return (X - self.mean) / self.std
+
+    @classmethod
+    def fit(cls, X_raw: np.ndarray, use_area: bool = True) -> "FeatureScaler":
+        """Fit from a raw (N, D) feature matrix (applies sqrt to area dim
+        first, then computes mean/std so they reflect the final distribution
+        the GMM will actually see)."""
+        X = np.array(X_raw, dtype=float)
+        if use_area and X.shape[1] >= 3:
+            X = X.copy()
+            X[:, 2] = np.sqrt(np.maximum(X[:, 2], 0.0))
+        mean = X.mean(axis=0)
+        std = X.std(axis=0)
+        std[std < 1e-8] = 1.0   # constant dimension: keep original scale
+        return cls(mean=mean, std=std, use_area=use_area)
+
+    def to_dict(self) -> dict:
+        return {
+            "mean": self.mean.tolist(),
+            "std": self.std.tolist(),
+            "use_area": self.use_area,
+        }
+
+    @classmethod
+    def from_dict(cls, d: dict) -> "FeatureScaler":
+        return cls(
+            mean=np.array(d["mean"], dtype=float),
+            std=np.array(d["std"], dtype=float),
+            use_area=bool(d["use_area"]),
+        )
 
 
-def pool_features(
+# ---------------------------------------------------------------------------
+# Raw feature pooling (no transforms -- scaler not yet applied)
+# ---------------------------------------------------------------------------
+def pool_raw_features(
     candidate_pool_cache: Dict[str, dict],
     fitting_images: Sequence[str],
-    use_area: bool = False,
+    use_area: bool = True,
 ) -> np.ndarray:
-    """Stacks x_i for every candidate object of every image in
-    `fitting_images` into one (N, D) array.
-    use_area=False (default): D=2, x_i = [s_det, s_clip]
-    use_area=True:            D=3, x_i = [s_det, s_clip, s_area]
-    """
-    dims = FEATURE_DIMS_WITH_AREA if use_area else FEATURE_DIMS_NO_AREA
+    """Returns an (N, D) array of RAW (untransformed) feature vectors for
+    every candidate from every image in `fitting_images`.
+    D=3 ([s_det, s_clip, s_area]) when use_area=True, D=2 otherwise."""
+    dims = ["s_det", "s_clip", "s_area"] if use_area else ["s_det", "s_clip"]
     D = len(dims)
     rows: List[List[float]] = []
     for img in fitting_images:
@@ -57,66 +109,73 @@ def pool_features(
     return np.array(rows, dtype=float)
 
 
+def pool_and_normalize(
+    candidate_pool_cache: Dict[str, dict],
+    fitting_images: Sequence[str],
+    use_area: bool = True,
+    scaler: Optional[FeatureScaler] = None,
+):
+    """Pools raw features and applies (or fits) the scaler.
+
+    Returns (X_normalized, scaler):
+      - If scaler is None, fits a new one from the pooled data (training mode).
+      - If scaler is provided, applies it as-is (inference mode, e.g. when
+        evaluating the same scaler on a different image subset).
+    """
+    X_raw = pool_raw_features(candidate_pool_cache, fitting_images, use_area=use_area)
+    if scaler is None:
+        scaler = FeatureScaler.fit(X_raw, use_area=use_area)
+    X_norm = scaler.transform(X_raw)
+    return X_norm, scaler
+
+
+# legacy alias so existing callers of pool_features still work
+def pool_features(
+    candidate_pool_cache: Dict[str, dict],
+    fitting_images: Sequence[str],
+    use_area: bool = True,
+    scaler: Optional[FeatureScaler] = None,
+):
+    return pool_and_normalize(candidate_pool_cache, fitting_images, use_area=use_area, scaler=scaler)
+
+
+# ---------------------------------------------------------------------------
+# GMM fitting
+# ---------------------------------------------------------------------------
 def fit_global_gmm(
     candidate_pool_cache: Dict[str, dict],
     fitting_images: Sequence[str],
     gmm_preset: dict,
-    use_area: bool = False,
-) -> GlobalGMM:
-    """`gmm_preset` is one of hyperparam_grid.py's preset dicts: must
-    contain learning_rate, max_iters, tol, init_strategy, and (for
-    init_strategy == 'fixed_prior') init_means / init_covariances.
-    use_area controls whether s_area is included as a feature (default off,
-    see module docstring)."""
-    X = pool_features(candidate_pool_cache, fitting_images, use_area=use_area)
-    if X.shape[0] < 4:
+    use_area: bool = True,
+    scaler: Optional[FeatureScaler] = None,
+):
+    """Pools, normalizes, and fits one GlobalGMM per gmm_preset.
+
+    Returns (gmm, scaler). If scaler is None a new one is fitted from the
+    pooled data; otherwise the provided scaler is reused (use this when
+    all presets in a selection step should share the same normalization)."""
+    X_norm, scaler = pool_and_normalize(
+        candidate_pool_cache, fitting_images, use_area=use_area, scaler=scaler
+    )
+
+    if X_norm.shape[0] < 4:
         raise ValueError(
-            f"Only {X.shape[0]} candidate feature vectors pooled from "
-            f"{len(fitting_images)} fitting images -- need more images or "
-            f"a larger fitting set to fit a stable global GMM."
+            f"Only {X_norm.shape[0]} candidate feature vectors pooled from "
+            f"{len(list(fitting_images))} fitting images -- pool more images."
         )
 
-    kwargs = dict(
-        learning_rate=gmm_preset["learning_rate"],
-        max_iters=gmm_preset["max_iters"],
-        tol=gmm_preset["tol"],
-        init_strategy=gmm_preset["init_strategy"],
+    init_means = gmm_preset.get("init_means")
+    init_covariances = gmm_preset.get("init_covariances")
+    init_weights = gmm_preset.get("init_weights")
+
+    gmm = GlobalGMM(
+        learning_rate=gmm_preset.get("learning_rate", 1.0),
+        max_iters=gmm_preset.get("max_iters", 100),
+        tol=gmm_preset.get("tol", 1e-6),
+        init_strategy=gmm_preset.get("init_strategy", "kmeans"),
+        init_means=np.array(init_means) if init_means is not None else None,
+        init_covariances=np.array(init_covariances) if init_covariances is not None else None,
+        init_weights=np.array(init_weights) if init_weights is not None else None,
     )
-    if gmm_preset["init_strategy"] == "fixed_prior":
-        kwargs["init_means"] = np.array(gmm_preset["init_means"], dtype=float)
-        kwargs["init_covariances"] = np.array(gmm_preset["init_covariances"], dtype=float)
-        if "init_weights" in gmm_preset:
-            kwargs["init_weights"] = np.array(gmm_preset["init_weights"], dtype=float)
-
-    gmm = GlobalGMM(**kwargs)
-    gmm.fit(X)
-    return gmm
-
-
-def main():
-    from candidate_pool import load_candidate_pool_cache
-
-    parser = argparse.ArgumentParser(description="Strategy8-U Step B: fit the global GMM")
-    parser.add_argument("--candidate_pool_cache", type=str, required=True)
-    parser.add_argument("--fitting_images_file", type=str, required=True,
-                        help="JSON file: list of image filenames to pool features from")
-    parser.add_argument("--gmm_preset_file", type=str, required=True,
-                        help="JSON file containing one GMM preset dict (see hyperparam_grid.py)")
-    parser.add_argument("--output_file", type=str, required=True)
-    args = parser.parse_args()
-
-    cache = load_candidate_pool_cache(args.candidate_pool_cache)
-    with open(args.fitting_images_file) as f:
-        fitting_images = json.load(f)
-    with open(args.gmm_preset_file) as f:
-        gmm_preset = json.load(f)
-
-    gmm = fit_global_gmm(cache, fitting_images, gmm_preset)
-    gmm.params.save(args.output_file)
-    print(f"[Strategy8-U][Step B] Fit global GMM on {gmm.params.n_fit_points} candidates "
-          f"from {len(fitting_images)} images ({gmm.params.n_iter} EM iterations, "
-          f"converged={gmm.params.converged}). Saved to {args.output_file}")
-
-
-if __name__ == "__main__":
-    main()
+    gmm.fit(X_norm)
+    return gmm, scaler

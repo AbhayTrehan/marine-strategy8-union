@@ -39,26 +39,28 @@ from typing import Dict, List, Tuple
 import numpy as np
 
 from gmm import GlobalGMM, GMMParams
+from fit_gmm import FeatureScaler
 from prompts import build_tristate_prompts
 
 
 def classify_image_candidates(
     candidates: List[dict],
     gmm: GlobalGMM,
+    scaler: FeatureScaler,
     tau: float,
-    use_area: bool = False,
 ) -> Tuple[List[str], List[str], List[float]]:
     """Applies Eq. 8 (E-step, frozen params) + Eq. 15-16 (tau threshold) to
-    one image's candidate list. Returns (o_pos, o_neg, responsibilities),
-    where responsibilities[i] is gamma_i for candidates[i] (same order).
-    use_area must match what was used when the GMM was fitted (default: off)."""
+    one image's candidate list. Returns (o_pos, o_neg, responsibilities).
+    The scaler (fitted on the tuning pool) applies sqrt(area) + z-score
+    before the GMM E-step -- use_area is read from scaler.use_area."""
     if not candidates:
         return [], [], []
-    if use_area:
-        X = np.array([[c["s_det"], c["s_clip"], c["s_area"]] for c in candidates], dtype=float)
+    if scaler.use_area:
+        X_raw = np.array([[c["s_det"], c["s_clip"], c["s_area"]] for c in candidates], dtype=float)
     else:
-        X = np.array([[c["s_det"], c["s_clip"]] for c in candidates], dtype=float)
-    gamma = gmm.responsibility_positive(X)
+        X_raw = np.array([[c["s_det"], c["s_clip"]] for c in candidates], dtype=float)
+    X_norm = scaler.transform(X_raw)
+    gamma = gmm.responsibility_positive(X_norm)
 
     o_pos = [c["canonical"] for c, g in zip(candidates, gamma) if g >= tau]
     o_neg = [c["canonical"] for c, g in zip(candidates, gamma) if g < tau]
@@ -69,15 +71,12 @@ def build_question_file(
     question_path: str,
     candidate_pool_cache: Dict[str, dict],
     gmm: GlobalGMM,
+    scaler: FeatureScaler,
     tau: float,
     image_filter: List[str] = None,
-    use_area: bool = False,
 ) -> Tuple[List[dict], Dict[str, dict]]:
-    """Returns (strategy8_questions, per_image_classification) where
-    per_image_classification maps image -> {"o_pos": [...], "o_neg": [...],
-    "responsibilities": {canonical: gamma}} -- the latter is useful for the
-    HTML report (item (f)/(g) of the spec) without recomputing anything.
-    use_area must match what was used when the GMM was fitted (default: off)."""
+    """Returns (strategy8_questions, per_image_classification).
+    scaler encapsulates use_area and the sqrt+z-score transform."""
     try:
         with open(question_path) as f:
             questions = json.load(f)
@@ -98,7 +97,7 @@ def build_question_file(
         if img not in per_image_classification:
             rec = candidate_pool_cache.get(img)
             candidates = rec["candidates"] if rec is not None else []
-            o_pos, o_neg, gammas = classify_image_candidates(candidates, gmm, tau, use_area=use_area)
+            o_pos, o_neg, gammas = classify_image_candidates(candidates, gmm, scaler, tau)
             per_image_classification[img] = {
                 "o_pos": o_pos,
                 "o_neg": o_neg,

@@ -2,33 +2,16 @@
 gmm_selection.py
 =================
 
-Decouples GMM-fit hyperparameter selection (init_strategy / means /
-covariances, and optionally learning_rate if --tune_learning_rate) from
-the (tau, alpha) grid search, per explicit instruction: running LVLM
-generation for every candidate GMM configuration is far too slow, so
-instead every candidate preset is fit on the SAME pooled tuning-image
-features and scored with intrinsic, label-free cluster-quality metrics --
-no generation, no GPU, just numpy/sklearn over the already-cached
-features from candidate_pool.py.
+Decouples GMM-fit hyperparameter selection from the (tau, alpha) grid search.
+Every candidate preset is fit on the SAME pooled features (with the SAME
+scaler, fitted once) and scored with intrinsic label-free cluster-quality
+metrics (silhouette score / cluster separation) -- no LVLM generation,
+no GPU, just numpy/sklearn over the already-cached features.
 
-Metrics used (all computed on the same pooled feature matrix X, using the
-GMM's own hard cluster assignment argmax_k responsibility(x_i, k)):
-
-  * silhouette score (sklearn.metrics.silhouette_score) -- the standard
-    measure of how well-separated and internally-cohesive the two
-    clusters are; ranges roughly [-1, 1], higher is better. This is the
-    PRIMARY selection criterion: a well-separated positive/hallucinated
-    split is exactly the functional property the offline sorter needs.
-  * mean_separation -- the Euclidean distance between the two cluster
-    means in the (already comparably-scaled, all roughly [0, 1]) raw
-    feature space. A simple, directly-interpretable secondary signal.
-  * log_likelihood -- the fitted model's own EM objective (Eq. 13), for
-    reference/diagnostics. Not used as the primary criterion on its own,
-    since a higher-likelihood fit can still have poorly-separated/
-    low-confidence clusters (e.g. one huge diffuse component).
-
-The winning preset is the one with the highest silhouette score; ties
-broken by mean_separation.
+The FeatureScaler (sqrt(s_area) + z-score) is fitted ONCE from the pooled
+tuning data and stored in GMMSelectionResult alongside the best GMM params,
+so downstream code (build_question_file.py, run_pipeline.py) can apply the
+exact same transform at inference time.
 """
 
 from __future__ import annotations
@@ -40,25 +23,22 @@ from typing import Dict, List, Sequence
 import numpy as np
 from sklearn.metrics import silhouette_score
 
-from fit_gmm import fit_global_gmm, pool_features
+from fit_gmm import FeatureScaler, fit_global_gmm, pool_raw_features
 from gmm import GlobalGMM, GMMParams
 
 
-def compute_gmm_quality(gmm: GlobalGMM, X: np.ndarray) -> Dict[str, float]:
+def compute_gmm_quality(gmm: GlobalGMM, X_norm: np.ndarray) -> Dict[str, float]:
     """Intrinsic (label-free) fit-quality metrics for an already-fit
-    GlobalGMM, evaluated on feature matrix X (typically the same pool it
-    was fit on)."""
-    gamma_pos = gmm.responsibility_positive(X)
+    GlobalGMM, evaluated on NORMALIZED feature matrix X_norm."""
+    gamma_pos = gmm.responsibility_positive(X_norm)
     hard_labels = (gamma_pos >= 0.5).astype(int)
 
     n_pos = int(hard_labels.sum())
     n_neg = int(len(hard_labels) - n_pos)
     if n_pos == 0 or n_neg == 0:
-        # degenerate: the fit collapsed everything into one cluster --
-        # silhouette is undefined (sklearn would raise), report worst case
         silhouette = -1.0
     else:
-        silhouette = float(silhouette_score(X, hard_labels))
+        silhouette = float(silhouette_score(X_norm, hard_labels))
 
     pos_idx = gmm.params.pos_idx
     neg_idx = 1 - pos_idx
@@ -79,6 +59,7 @@ def compute_gmm_quality(gmm: GlobalGMM, X: np.ndarray) -> Dict[str, float]:
 class GMMSelectionResult:
     chosen_preset: Dict
     chosen_gmm_params: GMMParams
+    chosen_scaler: FeatureScaler
     quality_by_preset: Dict[str, Dict[str, float]]
     n_fit_points: int
 
@@ -94,6 +75,7 @@ class GMMSelectionResult:
         return {
             "chosen_preset": self.chosen_preset,
             "chosen_gmm_params": self.chosen_gmm_params.to_dict(),
+            "chosen_scaler": self.chosen_scaler.to_dict(),
             "quality_by_preset": self.quality_by_preset,
             "n_fit_points": self.n_fit_points,
         }
@@ -103,6 +85,7 @@ class GMMSelectionResult:
         return cls(
             chosen_preset=d["chosen_preset"],
             chosen_gmm_params=GMMParams.from_dict(d["chosen_gmm_params"]),
+            chosen_scaler=FeatureScaler.from_dict(d["chosen_scaler"]),
             quality_by_preset=d["quality_by_preset"],
             n_fit_points=d["n_fit_points"],
         )
@@ -121,27 +104,33 @@ def select_best_gmm_preset(
     candidate_pool_cache: Dict[str, dict],
     fitting_images: Sequence[str],
     candidate_presets: Sequence[Dict],
-    use_area: bool = False,
+    use_area: bool = True,
 ) -> GMMSelectionResult:
-    """Fits every preset in `candidate_presets` on the SAME pooled
-    tuning-image features and picks the one with the best intrinsic
-    cluster quality (silhouette score, ties broken by mean separation).
-    No LVLM generation is involved -- this is pure numpy/sklearn.
-    use_area controls feature dimensionality and must match what will be
-    passed to fit_global_gmm/classify_image_candidates (default: off)."""
-    X = pool_features(candidate_pool_cache, fitting_images, use_area=use_area)
-    if X.shape[0] < 4:
+    """Fits every preset on the SAME pooled tuning-image features with the
+    SAME scaler (fitted once), picks the one with the best silhouette score.
+    No LVLM generation -- pure numpy/sklearn."""
+
+    # Fit the scaler ONCE from the pooled raw features, then share it
+    # across all presets so they're evaluated on identical normalized data.
+    X_raw = pool_raw_features(candidate_pool_cache, fitting_images, use_area=use_area)
+    if X_raw.shape[0] < 4:
         raise ValueError(
-            f"Only {X.shape[0]} candidate feature vectors pooled from "
-            f"{len(fitting_images)} fitting images -- need more images."
+            f"Only {X_raw.shape[0]} candidate feature vectors pooled from "
+            f"{len(list(fitting_images))} fitting images -- need more images."
         )
+    shared_scaler = FeatureScaler.fit(X_raw, use_area=use_area)
+    X_norm = shared_scaler.transform(X_raw)
 
     quality_by_preset: Dict[str, Dict[str, float]] = {}
     gmm_by_preset: Dict[str, GlobalGMM] = {}
 
     for preset in candidate_presets:
-        gmm = fit_global_gmm(candidate_pool_cache, fitting_images, preset, use_area=use_area)
-        quality = compute_gmm_quality(gmm, X)
+        # Reuse the shared scaler (no re-fitting for each preset)
+        gmm, _ = fit_global_gmm(
+            candidate_pool_cache, fitting_images, preset,
+            use_area=use_area, scaler=shared_scaler,
+        )
+        quality = compute_gmm_quality(gmm, X_norm)
         quality_by_preset[preset["name"]] = quality
         gmm_by_preset[preset["name"]] = gmm
 
@@ -155,6 +144,7 @@ def select_best_gmm_preset(
     return GMMSelectionResult(
         chosen_preset=chosen_preset,
         chosen_gmm_params=chosen_gmm.params,
+        chosen_scaler=shared_scaler,
         quality_by_preset=quality_by_preset,
-        n_fit_points=X.shape[0],
+        n_fit_points=X_raw.shape[0],
     )

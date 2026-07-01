@@ -3,32 +3,18 @@ text_objects.py
 ================
 
 Extracts candidate object mentions O_vlm from the LVLM's unguided first-pass
-caption y^(1) (Strategy8_Union_contrastive.pdf, Section 2.2):
+caption y^(1) (Strategy8_Union_contrastive.pdf, Section 2.2).
 
-    "A set of canonical object mentions O_vlm is extracted from y^(1) by
-    re-applying the same tagging machinery used to obtain O_det, so that
-    VLM-sourced mentions are normalized into the same label space as
-    detector proposals."
-
-The "tagging machinery" already present in this codebase is CHAIR's own
-tokenization pipeline (eval/eval_chair.py::CHAIR.caption_to_words):
-tokenize -> singularize -> merge known double-words (e.g. "teddy" + "bear"
--> "teddy bear") -> drop a couple of MSCOCO-specific special cases (e.g.
-"toilet seat" should not fire "chair" via "seat"). We mirror that exact
-pipeline here (the double-word table is copied verbatim from
-eval/eval_chair.py's CHAIR.__init__ -- see `_build_double_word_dict` --
-rather than imported, because instantiating the real `CHAIR` class triggers
-loading the full COCO caption/instance annotation files from disk, which
-Phase I (this module) has no need for).
-
-Unlike CHAIR itself, we do NOT restrict the output to the 80 MSCOCO
-categories: Strategy 8-U explicitly wants to audit hallucinations the VLM
-introduces *independently* of the detectors, which may fall outside that
-vocabulary. Since we therefore can't rely on "is this token one of the 80
-classes?" as our noun filter, we instead drop closed-class function words
-(stopwords + a small supplementary set of prepositions/copulas common in
-captions) -- a filter on grammatical category, not on "object-likeness",
-so it cannot bias which objects look real vs. hallucinated.
+Key change from the original design: we now use full-sentence POS tagging
+(via nltk.pos_tag on the raw, un-singularized tokens) to keep ONLY tokens
+tagged as nouns (NN / NNS / NNP / NNPS) in context. This cleanly filters
+participial adjectives and gerunds like "sitting" (VBG), "standing" (VBG),
+"relax" (VB), etc. that appear in captions but are not physical objects.
+The POS tag is determined in the full sentence context (so "sitting" in
+"A cat is sitting on a bed" correctly gets VBG, not NN), then double-word
+compound nouns (e.g. "teddy bear", "traffic light") are merged and assigned
+NN regardless of the individual token tags, since those items only exist in
+the noun compound dict.
 """
 
 from __future__ import annotations
@@ -40,18 +26,12 @@ from textblob import TextBlob
 
 try:
     from nltk.corpus import stopwords as _nltk_stopwords
-
     _STOPWORDS = set(_nltk_stopwords.words("english"))
 except LookupError:  # pragma: no cover
     nltk.download("stopwords", quiet=True)
     from nltk.corpus import stopwords as _nltk_stopwords
-
     _STOPWORDS = set(_nltk_stopwords.words("english"))
 
-# Supplementary closed-class words that NLTK's default stopword list misses
-# but that commonly appear in image captions and are never themselves
-# physical objects (spatial prepositions, copulas/linking verbs, generic
-# quantifiers/determiners).
 _EXTRA_STOPWORDS = {
     "near", "beside", "behind", "atop", "alongside", "amid", "among", "via",
     "plus", "across", "around", "toward", "towards", "upon", "within",
@@ -63,12 +43,10 @@ _EXTRA_STOPWORDS = {
 }
 _STOPWORDS = _STOPWORDS | _EXTRA_STOPWORDS
 
+_NOUN_TAGS = {"NN", "NNS", "NNP", "NNPS"}
+
 
 def _build_double_word_dict() -> Dict[str, str]:
-    """Verbatim copy of the static table built in
-    eval/eval_chair.py::CHAIR.__init__ (kept here as plain data so we do not
-    need to instantiate the full CHAIR evaluator, which loads COCO
-    annotation files from disk that Phase I has no need for)."""
     coco_double_words = [
         "motor bike", "motor cycle", "air plane", "traffic light", "street light",
         "traffic signal", "stop light", "fire hydrant", "stop sign", "parking meter",
@@ -110,29 +88,8 @@ def _singularize_token(token: str) -> str:
     return token
 
 
-def _tokenize_and_singularize(caption: str) -> List[str]:
-    tokens = nltk.word_tokenize(caption.lower())
-    return [_singularize_token(t) for t in tokens]
-
-
-def _merge_double_words(words: List[str]) -> List[str]:
-    """Identical merge logic to CHAIR.caption_to_words: scan consecutive
-    token pairs, replace any pair found in the double-word table with its
-    canonical merged form."""
-    merged: List[str] = []
-    i = 0
-    while i < len(words):
-        pair = " ".join(words[i:i + 2])
-        if pair in _DOUBLE_WORD_DICT:
-            merged.append(_DOUBLE_WORD_DICT[pair])
-            i += 2
-        else:
-            merged.append(words[i])
-            i += 1
-    return merged
-
-
 def _is_candidate_token(word: str) -> bool:
+    """Secondary filter: drop stopwords and pure-punctuation/numeric tokens."""
     if not word:
         return False
     if word in _STOPWORDS:
@@ -145,27 +102,57 @@ def _is_candidate_token(word: str) -> bool:
 
 
 def extract_candidate_nouns(caption: str) -> List[str]:
-    """Extract a list of candidate object-mention strings from a free-text
-    VLM caption, suitable for feeding into
-    `synonyms.UnionCanonicalizer.canonicalize_pool` as 'vlm'-sourced
-    RawMentions.
+    """Extract noun mentions from a VLM caption using sentence-context POS
+    tagging, then double-word merging, then stopword filtering.
 
-    Pipeline (mirrors CHAIR's tagging machinery, see module docstring):
-      1. tokenize + singularize (TextBlob, same as CHAIR)
-      2. merge known double-words (e.g. "teddy"+"bear" -> "teddy bear"),
-         using the exact table CHAIR itself uses
-      3. MSCOCO special case: drop a lone "seat" following "toilet" so it
-         doesn't separately fire the "chair" synonym group
-      4. drop closed-class function words (stopwords)
+    Pipeline:
+      1. Tokenize (raw, not singularized) and POS-tag in full sentence
+         context for accurate disambiguation (e.g. "sitting" → VBG).
+      2. Singularize tokens in parallel, preserving their POS tags.
+      3. Merge known double-word compounds (e.g. "teddy"+"bear" →
+         "teddy bear", tagged as NN regardless of individual token tags).
+      4. MSCOCO special case: drop "seat" after "toilet".
+      5. Keep only tokens tagged as NN/NNS/NNP/NNPS that pass the
+         secondary stopword filter.
     """
     if not caption or not caption.strip():
         return []
 
-    words = _tokenize_and_singularize(caption)
-    words = _merge_double_words(words)
+    # Step 1: tokenize + POS tag on the original (un-singularized) tokens
+    # for best sentence-context accuracy
+    raw_tokens = nltk.word_tokenize(caption.lower())
+    if not raw_tokens:
+        return []
+    tagged_raw: List[Tuple[str, str]] = nltk.pos_tag(raw_tokens)
 
-    if "toilet" in words and "seat" in words:
-        words = [w for w in words if w != "seat"]
+    # Step 2: singularize in parallel with POS tags
+    sing_with_pos: List[Tuple[str, str]] = [
+        (_singularize_token(w), pos) for w, pos in tagged_raw
+    ]
+    sing_words = [w for w, _ in sing_with_pos]
 
-    candidates = [w for w in words if _is_candidate_token(w)]
+    # Step 3: merge double-word compounds; assign NN to merged items since
+    # every entry in _DOUBLE_WORD_DICT is a noun compound by construction
+    merged: List[Tuple[str, str]] = []
+    i = 0
+    while i < len(sing_words):
+        if i + 1 < len(sing_words):
+            pair = f"{sing_words[i]} {sing_words[i + 1]}"
+            if pair in _DOUBLE_WORD_DICT:
+                merged.append((_DOUBLE_WORD_DICT[pair], "NN"))
+                i += 2
+                continue
+        merged.append(sing_with_pos[i])
+        i += 1
+
+    # Step 4: MSCOCO special case
+    words_list = [w for w, _ in merged]
+    if "toilet" in words_list and "seat" in words_list:
+        merged = [(w, p) for w, p in merged if w != "seat"]
+
+    # Step 5: keep noun-tagged tokens that pass stopword filter
+    candidates = [
+        word for word, pos in merged
+        if pos in _NOUN_TAGS and _is_candidate_token(word)
+    ]
     return candidates
