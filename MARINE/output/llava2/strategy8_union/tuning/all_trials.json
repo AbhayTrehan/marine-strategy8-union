@@ -1,0 +1,370 @@
+[
+  {
+    "trial": {
+      "trial_id": "standard_kmeans__tau0.3__alpha0.7",
+      "gmm_preset": {
+        "name": "standard_kmeans",
+        "learning_rate": 1.0,
+        "max_iters": 100,
+        "tol": 1e-06,
+        "init_strategy": "kmeans"
+      },
+      "tau": 0.3,
+      "alpha": 0.7
+    },
+    "chair_s": 0.18666666666666668,
+    "chair_i": 0.10060975609756098,
+    "recall": 0.4341801385681293,
+    "f1": 0.5856419516470519,
+    "n_images": 300,
+    "extra": {
+      "answers_path": "./output/llava2/strategy8_union/tuning/trial__standard_kmeans__tau0.3__alpha0.7/answers.jsonl",
+      "gmm_params_path": "./output/llava2/strategy8_union/tuning/trial__standard_kmeans__tau0.3__alpha0.7/gmm_params.json"
+    }
+  },
+  {
+    "trial": {
+      "trial_id": "standard_kmeans__tau0.2__alpha0.5",
+      "gmm_preset": {
+        "name": "standard_kmeans",
+        "learning_rate": 1.0,
+        "max_iters": 100,
+        "tol": 1e-06,
+        "init_strategy": "kmeans"
+      },
+      "tau": 0.2,
+      "alpha": 0.5
+    },
+    "chair_s": 0.10333333333333333,
+    "chair_i": 0.05237315875613748,
+    "recall": 0.4241724403387221,
+    "f1": 0.5860291591888919,
+    "n_images": 300,
+    "extra": {
+      "answers_path": "./output/llava2/strategy8_union/tuning/trial__standard_kmeans__tau0.2__alpha0.5/answers.jsonl",
+      "gmm_params_path": "./output/llava2/strategy8_union/tuning/trial__standard_kmeans__tau0.2__alpha0.5/gmm_params.json"
+    }
+  },
+  {
+    "trial": {
+      "trial_id": "standard_kmeans__tau0.2__alpha0.6",
+      "gmm_preset": {
+        "name": "standard_kmeans",
+        "learning_rate": 1.0,
+        "max_iters": 100,
+        "tol": 1e-06,
+        "init_strategy": "kmeans"
+      },
+      "tau": 0.2,
+      "alpha": 0.6
+    },
+    "chair_s": 0.14,
+    "chair_i": 0.07668231611893583,
+    "recall": 0.43187066974595845,
+    "f1": 0.5884847304934087,
+    "n_images": 300,
+    "extra": {
+      "answers_path": "./output/llava2/strategy8_union/tuning/trial__standard_kmeans__tau0.2__alpha0.6/answers.jsonl",
+      "gmm_params_path": "./output/llava2/strategy8_union/tuning/trial__standard_kmeans__tau0.2__alpha0.6/gmm_params.json"
+    }
+  },
+  {
+    "trial": {
+      "trial_id": "standard_kmeans__tau0.2__alpha0.7",
+      "gmm_preset": {
+        "name": "standard_kmeans",
+        "learning_rate": 1.0,
+        "max_iters": 100,
+        "tol": 1e-06,
+        "init_strategy": "kmeans"
+      },
+      "tau": 0.2,
+      "alpha": 0.7
+    },
+    "chair_s": 0.19,
+    "chair_i": 0.10387596899224806,
+    "recall": 0.426481909160893,
+    "f1": 0.5779207184573958,
+    "n_images": 300,
+    "extra": {
+      "answers_path": "./output/llava2/strategy8_union/tuning/trial__standard_kmeans__tau0.2__alpha0.7/answers.jsonl",
+      "gmm_params_path": "./output/llava2/strategy8_union/tuning/trial__standard_kmeans__tau0.2__alpha0.7/gmm_params.json"
+    }
+  },
+  {
+    "trial": {
+      "trial_id": "standard_kmeans__tau0.2__alpha0.8",
+      "gmm_preset": {
+        "name": "standard_kmeans",
+        "learning_rate": 1.0,
+        "max_iters": 100,
+        "tol": 1e-06,
+        "init_strategy": "kmeans"
+      },
+      "tau": 0.2,
+      "alpha": 0.8
+    },
+    "chair_s": 0.21333333333333335,
+    "chair_i": 0.11491108071135431,
+    "recall": 0.42494226327944573,
+    "f1": 0.5742026503961124,
+    "n_images": 300,
+    "extra": {
+      "answers_path": "./output/llava2/strategy8_union/tuning/trial__standard_kmeans__tau0.2__alpha0.8/answers.jsonl",
+      "gmm_params_path": "./output/llava2/strategy8_union/tuning/trial__standard_kmeans__tau0.2__alpha0.8/gmm_params.json"
+    }
+  },
+  {
+    "trial": {
+      "trial_id": "standard_kmeans__tau0.3__alpha0.5",
+      "gmm_preset": {
+        "name": "standard_kmeans",
+        "learning_rate": 1.0,
+        "max_iters": 100,
+        "tol": 1e-06,
+        "init_strategy": "kmeans"
+      },
+      "tau": 0.3,
+      "alpha": 0.5
+    },
+    "chair_s": 0.1,
+    "chair_i": 0.05065359477124183,
+    "recall": 0.42494226327944573,
+    "f1": 0.5870926819356309,
+    "n_images": 300,
+    "extra": {
+      "answers_path": "./output/llava2/strategy8_union/tuning/trial__standard_kmeans__tau0.3__alpha0.5/answers.jsonl",
+      "gmm_params_path": "./output/llava2/strategy8_union/tuning/trial__standard_kmeans__tau0.3__alpha0.5/gmm_params.json"
+    }
+  },
+  {
+    "trial": {
+      "trial_id": "standard_kmeans__tau0.3__alpha0.6",
+      "gmm_preset": {
+        "name": "standard_kmeans",
+        "learning_rate": 1.0,
+        "max_iters": 100,
+        "tol": 1e-06,
+        "init_strategy": "kmeans"
+      },
+      "tau": 0.3,
+      "alpha": 0.6
+    },
+    "chair_s": 0.13333333333333333,
+    "chair_i": 0.07309486780715396,
+    "recall": 0.43494996150885296,
+    "f1": 0.592070850172176,
+    "n_images": 300,
+    "extra": {
+      "answers_path": "./output/llava2/strategy8_union/tuning/trial__standard_kmeans__tau0.3__alpha0.6/answers.jsonl",
+      "gmm_params_path": "./output/llava2/strategy8_union/tuning/trial__standard_kmeans__tau0.3__alpha0.6/gmm_params.json"
+    }
+  },
+  {
+    "trial": {
+      "trial_id": "standard_kmeans__tau0.3__alpha0.8",
+      "gmm_preset": {
+        "name": "standard_kmeans",
+        "learning_rate": 1.0,
+        "max_iters": 100,
+        "tol": 1e-06,
+        "init_strategy": "kmeans"
+      },
+      "tau": 0.3,
+      "alpha": 0.8
+    },
+    "chair_s": 0.20333333333333334,
+    "chair_i": 0.1151685393258427,
+    "recall": 0.41647421093148573,
+    "f1": 0.5663688285273214,
+    "n_images": 300,
+    "extra": {
+      "answers_path": "./output/llava2/strategy8_union/tuning/trial__standard_kmeans__tau0.3__alpha0.8/answers.jsonl",
+      "gmm_params_path": "./output/llava2/strategy8_union/tuning/trial__standard_kmeans__tau0.3__alpha0.8/gmm_params.json"
+    }
+  },
+  {
+    "trial": {
+      "trial_id": "standard_kmeans__tau0.4__alpha0.5",
+      "gmm_preset": {
+        "name": "standard_kmeans",
+        "learning_rate": 1.0,
+        "max_iters": 100,
+        "tol": 1e-06,
+        "init_strategy": "kmeans"
+      },
+      "tau": 0.4,
+      "alpha": 0.5
+    },
+    "chair_s": 0.09666666666666666,
+    "chair_i": 0.04942339373970346,
+    "recall": 0.42340261739799845,
+    "f1": 0.5858554717534958,
+    "n_images": 300,
+    "extra": {
+      "answers_path": "./output/llava2/strategy8_union/tuning/trial__standard_kmeans__tau0.4__alpha0.5/answers.jsonl",
+      "gmm_params_path": "./output/llava2/strategy8_union/tuning/trial__standard_kmeans__tau0.4__alpha0.5/gmm_params.json"
+    }
+  },
+  {
+    "trial": {
+      "trial_id": "standard_kmeans__tau0.4__alpha0.6",
+      "gmm_preset": {
+        "name": "standard_kmeans",
+        "learning_rate": 1.0,
+        "max_iters": 100,
+        "tol": 1e-06,
+        "init_strategy": "kmeans"
+      },
+      "tau": 0.4,
+      "alpha": 0.6
+    },
+    "chair_s": 0.13666666666666666,
+    "chair_i": 0.07559055118110236,
+    "recall": 0.43033102386451116,
+    "f1": 0.587274201371302,
+    "n_images": 300,
+    "extra": {
+      "answers_path": "./output/llava2/strategy8_union/tuning/trial__standard_kmeans__tau0.4__alpha0.6/answers.jsonl",
+      "gmm_params_path": "./output/llava2/strategy8_union/tuning/trial__standard_kmeans__tau0.4__alpha0.6/gmm_params.json"
+    }
+  },
+  {
+    "trial": {
+      "trial_id": "standard_kmeans__tau0.4__alpha0.7",
+      "gmm_preset": {
+        "name": "standard_kmeans",
+        "learning_rate": 1.0,
+        "max_iters": 100,
+        "tol": 1e-06,
+        "init_strategy": "kmeans"
+      },
+      "tau": 0.4,
+      "alpha": 0.7
+    },
+    "chair_s": 0.18666666666666668,
+    "chair_i": 0.10138248847926268,
+    "recall": 0.4295612009237875,
+    "f1": 0.5812639726916513,
+    "n_images": 300,
+    "extra": {
+      "answers_path": "./output/llava2/strategy8_union/tuning/trial__standard_kmeans__tau0.4__alpha0.7/answers.jsonl",
+      "gmm_params_path": "./output/llava2/strategy8_union/tuning/trial__standard_kmeans__tau0.4__alpha0.7/gmm_params.json"
+    }
+  },
+  {
+    "trial": {
+      "trial_id": "standard_kmeans__tau0.4__alpha0.8",
+      "gmm_preset": {
+        "name": "standard_kmeans",
+        "learning_rate": 1.0,
+        "max_iters": 100,
+        "tol": 1e-06,
+        "init_strategy": "kmeans"
+      },
+      "tau": 0.4,
+      "alpha": 0.8
+    },
+    "chair_s": 0.2,
+    "chair_i": 0.11331444759206799,
+    "recall": 0.41570438799076215,
+    "f1": 0.5660348924242348,
+    "n_images": 300,
+    "extra": {
+      "answers_path": "./output/llava2/strategy8_union/tuning/trial__standard_kmeans__tau0.4__alpha0.8/answers.jsonl",
+      "gmm_params_path": "./output/llava2/strategy8_union/tuning/trial__standard_kmeans__tau0.4__alpha0.8/gmm_params.json"
+    }
+  },
+  {
+    "trial": {
+      "trial_id": "standard_kmeans__tau0.5__alpha0.5",
+      "gmm_preset": {
+        "name": "standard_kmeans",
+        "learning_rate": 1.0,
+        "max_iters": 100,
+        "tol": 1e-06,
+        "init_strategy": "kmeans"
+      },
+      "tau": 0.5,
+      "alpha": 0.5
+    },
+    "chair_s": 0.1,
+    "chair_i": 0.05065359477124183,
+    "recall": 0.426481909160893,
+    "f1": 0.5885604520889732,
+    "n_images": 300,
+    "extra": {
+      "answers_path": "./output/llava2/strategy8_union/tuning/trial__standard_kmeans__tau0.5__alpha0.5/answers.jsonl",
+      "gmm_params_path": "./output/llava2/strategy8_union/tuning/trial__standard_kmeans__tau0.5__alpha0.5/gmm_params.json"
+    }
+  },
+  {
+    "trial": {
+      "trial_id": "standard_kmeans__tau0.5__alpha0.6",
+      "gmm_preset": {
+        "name": "standard_kmeans",
+        "learning_rate": 1.0,
+        "max_iters": 100,
+        "tol": 1e-06,
+        "init_strategy": "kmeans"
+      },
+      "tau": 0.5,
+      "alpha": 0.6
+    },
+    "chair_s": 0.13,
+    "chair_i": 0.07266982622432859,
+    "recall": 0.43033102386451116,
+    "f1": 0.5878623383138055,
+    "n_images": 300,
+    "extra": {
+      "answers_path": "./output/llava2/strategy8_union/tuning/trial__standard_kmeans__tau0.5__alpha0.6/answers.jsonl",
+      "gmm_params_path": "./output/llava2/strategy8_union/tuning/trial__standard_kmeans__tau0.5__alpha0.6/gmm_params.json"
+    }
+  },
+  {
+    "trial": {
+      "trial_id": "standard_kmeans__tau0.5__alpha0.7",
+      "gmm_preset": {
+        "name": "standard_kmeans",
+        "learning_rate": 1.0,
+        "max_iters": 100,
+        "tol": 1e-06,
+        "init_strategy": "kmeans"
+      },
+      "tau": 0.5,
+      "alpha": 0.7
+    },
+    "chair_s": 0.18333333333333332,
+    "chair_i": 0.09711684370257967,
+    "recall": 0.4357197844495766,
+    "f1": 0.5877830419609407,
+    "n_images": 300,
+    "extra": {
+      "answers_path": "./output/llava2/strategy8_union/tuning/trial__standard_kmeans__tau0.5__alpha0.7/answers.jsonl",
+      "gmm_params_path": "./output/llava2/strategy8_union/tuning/trial__standard_kmeans__tau0.5__alpha0.7/gmm_params.json"
+    }
+  },
+  {
+    "trial": {
+      "trial_id": "standard_kmeans__tau0.5__alpha0.8",
+      "gmm_preset": {
+        "name": "standard_kmeans",
+        "learning_rate": 1.0,
+        "max_iters": 100,
+        "tol": 1e-06,
+        "init_strategy": "kmeans"
+      },
+      "tau": 0.5,
+      "alpha": 0.8
+    },
+    "chair_s": 0.20666666666666667,
+    "chair_i": 0.11050477489768076,
+    "recall": 0.4287913779830639,
+    "f1": 0.5786418255155036,
+    "n_images": 300,
+    "extra": {
+      "answers_path": "./output/llava2/strategy8_union/tuning/trial__standard_kmeans__tau0.5__alpha0.8/answers.jsonl",
+      "gmm_params_path": "./output/llava2/strategy8_union/tuning/trial__standard_kmeans__tau0.5__alpha0.8/gmm_params.json"
+    }
+  }
+]

@@ -1,0 +1,23 @@
+{
+  "trial": {
+    "trial_id": "standard_kmeans__tau0.4__alpha0.5",
+    "gmm_preset": {
+      "name": "standard_kmeans",
+      "learning_rate": 1.0,
+      "max_iters": 100,
+      "tol": 1e-06,
+      "init_strategy": "kmeans"
+    },
+    "tau": 0.4,
+    "alpha": 0.5
+  },
+  "chair_s": 0.09666666666666666,
+  "chair_i": 0.04942339373970346,
+  "recall": 0.42340261739799845,
+  "f1": 0.5858554717534958,
+  "n_images": 300,
+  "extra": {
+    "answers_path": "./output/llava2/strategy8_union/tuning/trial__standard_kmeans__tau0.4__alpha0.5/answers.jsonl",
+    "gmm_params_path": "./output/llava2/strategy8_union/tuning/trial__standard_kmeans__tau0.4__alpha0.5/gmm_params.json"
+  }
+}
