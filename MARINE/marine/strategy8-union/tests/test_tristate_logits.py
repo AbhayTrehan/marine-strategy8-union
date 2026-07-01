@@ -208,7 +208,7 @@ def test_two_branches_are_independent():
 
 
 def test_eq20_blending_formula():
-    """Directly checks z_final = (1-alpha)*z_ung + alpha*(z_pos - z_neg),
+    """Directly checks z_final = z_ung + alpha*(z_pos - z_neg),
     then re-normalized via log_softmax, against a manual computation from
     captured branch outputs -- exercised across TWO sequential decode
     steps through the full __call__ path (not just _step_branch), so the
@@ -245,7 +245,7 @@ def test_eq20_blending_formula():
     z_pos_0_expected = _run_from_scratch(model, pos_ids, pixel_values)
     z_neg_0_expected = _run_from_scratch(model, neg_ids, pixel_values)
     z_final_0_expected = F.log_softmax(
-        (1 - alpha) * z_ung_0_expected + alpha * (z_pos_0_expected - z_neg_0_expected), dim=-1
+        z_ung_0_expected + alpha * (z_pos_0_expected - z_neg_0_expected), dim=-1
     )
     assert torch.allclose(z_final_0, z_final_0_expected, atol=1e-5), (z_final_0, z_final_0_expected)
     assert torch.allclose(z_final_0.exp().sum(dim=-1), torch.ones(B), atol=1e-4)
@@ -264,7 +264,7 @@ def test_eq20_blending_formula():
     z_pos_1_expected = _run_from_scratch(model, full_pos_1, pixel_values)
     z_neg_1_expected = _run_from_scratch(model, full_neg_1, pixel_values)
     z_final_1_expected = F.log_softmax(
-        (1 - alpha) * z_ung_1_expected + alpha * (z_pos_1_expected - z_neg_1_expected), dim=-1
+        z_ung_1_expected + alpha * (z_pos_1_expected - z_neg_1_expected), dim=-1
     )
     assert torch.allclose(z_final_1, z_final_1_expected, atol=1e-5), (z_final_1, z_final_1_expected)
     assert torch.allclose(z_final_1.exp().sum(dim=-1), torch.ones(B), atol=1e-4)

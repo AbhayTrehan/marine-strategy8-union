@@ -14,8 +14,9 @@ from gmm import GlobalGMM
 
 def _make_fitted_gmm():
     rng = np.random.RandomState(0)
-    X_pos = rng.normal([0.7, 0.3, 0.1], 0.02, size=(200, 3))
-    X_neg = rng.normal([0.05, 0.05, 0.02], 0.02, size=(200, 3))
+    # 2D features [s_det, s_clip] -- matching use_area=False default
+    X_pos = rng.normal([0.7, 0.3], 0.02, size=(200, 2))
+    X_neg = rng.normal([0.05, 0.05], 0.02, size=(200, 2))
     X = np.clip(np.vstack([X_pos, X_neg]), 0, 1)
     gmm = GlobalGMM(learning_rate=1.0, max_iters=200, init_strategy="kmeans", random_state=0)
     gmm.fit(X)

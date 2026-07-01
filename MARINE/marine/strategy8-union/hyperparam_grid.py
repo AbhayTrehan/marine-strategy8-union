@@ -72,34 +72,51 @@ from typing import Dict, List, Optional, Sequence
 # point*; the user-facing means/covariances are exactly what gets searched
 # under 'fixed_prior' below.
 # ---------------------------------------------------------------------------
-BASE_GMM_PRESETS: List[Dict] = [
-    {
-        "name": "standard_kmeans",
-        "learning_rate": 1.0,
-        "max_iters": 100,
-        "tol": 1e-6,
-        "init_strategy": "kmeans",
-    },
-    {
-        "name": "quantile_init",
-        "learning_rate": 1.0,
-        "max_iters": 100,
-        "tol": 1e-6,
-        "init_strategy": "quantile",
-    },
-    {
-        "name": "fixed_prior",
-        "learning_rate": 1.0,
-        "max_iters": 100,
-        "tol": 1e-6,
-        "init_strategy": "fixed_prior",
-        "init_means": [[0.6, 0.28, 0.08], [0.05, 0.12, 0.02]],
-        "init_covariances": [
+def _make_base_presets(use_area: bool = False) -> List[Dict]:
+    """Returns the base (lr=1.0) GMM presets, with fixed_prior means/
+    covariances sized appropriately for the chosen feature dimensionality:
+    2D [s_det, s_clip] (default) or 3D [s_det, s_clip, s_area]."""
+    if use_area:
+        fp_means = [[0.6, 0.28, 0.08], [0.05, 0.12, 0.02]]
+        fp_covs = [
             [[0.05, 0.0, 0.0], [0.0, 0.04, 0.0], [0.0, 0.0, 0.02]],
             [[0.02, 0.0, 0.0], [0.0, 0.02, 0.0], [0.0, 0.0, 0.01]],
-        ],
-    },
-]
+        ]
+    else:
+        # 2D: only [s_det, s_clip] -- area dimension dropped
+        fp_means = [[0.6, 0.28], [0.05, 0.12]]
+        fp_covs = [
+            [[0.05, 0.0], [0.0, 0.04]],
+            [[0.02, 0.0], [0.0, 0.02]],
+        ]
+    return [
+        {
+            "name": "standard_kmeans",
+            "learning_rate": 1.0,
+            "max_iters": 100,
+            "tol": 1e-6,
+            "init_strategy": "kmeans",
+        },
+        {
+            "name": "quantile_init",
+            "learning_rate": 1.0,
+            "max_iters": 100,
+            "tol": 1e-6,
+            "init_strategy": "quantile",
+        },
+        {
+            "name": "fixed_prior",
+            "learning_rate": 1.0,
+            "max_iters": 100,
+            "tol": 1e-6,
+            "init_strategy": "fixed_prior",
+            "init_means": fp_means,
+            "init_covariances": fp_covs,
+        },
+    ]
+
+
+BASE_GMM_PRESETS: List[Dict] = _make_base_presets(use_area=False)
 
 DAMPED_GMM_PRESETS: List[Dict] = [
     {
@@ -119,14 +136,16 @@ DAMPED_GMM_PRESETS: List[Dict] = [
 ]
 
 
-def select_gmm_presets(tune_learning_rate: bool = False) -> List[Dict]:
+def select_gmm_presets(tune_learning_rate: bool = False, use_area: bool = False) -> List[Dict]:
     """tune_learning_rate=False (default): only lr=1.0 presets (standard,
-    undamped EM) are searched -- the M-step damping dimension is fixed
-    off. tune_learning_rate=True: the damped variants are ADDED to the
-    grid as well, so the search also explores lr<1.0."""
+    undamped EM) are searched -- the M-step damping dimension is fixed off.
+    tune_learning_rate=True: the damped variants are ADDED to the grid too.
+    use_area controls whether fixed_prior's init_means/covariances are sized
+    for 2D [s_det, s_clip] (default) or 3D [s_det, s_clip, s_area]."""
+    base = _make_base_presets(use_area=use_area)
     if tune_learning_rate:
-        return BASE_GMM_PRESETS + DAMPED_GMM_PRESETS
-    return list(BASE_GMM_PRESETS)
+        return base + DAMPED_GMM_PRESETS
+    return base
 
 
 DEFAULT_GMM_PRESETS: List[Dict] = select_gmm_presets(tune_learning_rate=False)

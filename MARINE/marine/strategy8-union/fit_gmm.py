@@ -2,13 +2,21 @@
 fit_gmm.py
 ==========
 
-Step B of the Strategy 8-U pipeline: pool the 3D feature vectors of every
+Step B of the Strategy 8-U pipeline: pool the feature vectors of every
 candidate object across a set of "fitting" images (the tuning split from
 splits.py) and fit ONE global 2-component GMM (gmm.py) on the pooled set,
 per Eq. 7-14 -- this is the "fit-on-train" half of the global fit/freeze/
 apply design confirmed with the user. Pure numpy over candidate_pool.py's
 cache; no LVLM/vision-model calls, so this (and applying the frozen result
 in build_question_file.py) is the CHEAP part of a hyperparameter trial.
+
+Feature dimensions: by default only [s_det, s_clip] are used (2D). s_area
+is excluded by default because it conflates "small object" with "hallucinated
+object" -- a tiny but genuinely present object (a spoon in the background,
+a distant bird) has near-zero s_area and gets pulled into the negative cluster
+even when s_det and s_clip are reasonable. Pass use_area=True to restore the
+original 3D [s_det, s_clip, s_area] behaviour; s_area is always stored in
+the pool cache regardless, so this can be changed without rebuilding the cache.
 """
 
 from __future__ import annotations
@@ -21,22 +29,31 @@ import numpy as np
 
 from gmm import GlobalGMM, GMMParams
 
+FEATURE_DIMS_NO_AREA = ["s_det", "s_clip"]
+FEATURE_DIMS_WITH_AREA = ["s_det", "s_clip", "s_area"]
+
 
 def pool_features(
     candidate_pool_cache: Dict[str, dict],
     fitting_images: Sequence[str],
+    use_area: bool = False,
 ) -> np.ndarray:
-    """Stacks x_i = [s_det, s_clip, s_area] for every candidate object of
-    every image in `fitting_images` into one (N, 3) array."""
+    """Stacks x_i for every candidate object of every image in
+    `fitting_images` into one (N, D) array.
+    use_area=False (default): D=2, x_i = [s_det, s_clip]
+    use_area=True:            D=3, x_i = [s_det, s_clip, s_area]
+    """
+    dims = FEATURE_DIMS_WITH_AREA if use_area else FEATURE_DIMS_NO_AREA
+    D = len(dims)
     rows: List[List[float]] = []
     for img in fitting_images:
         rec = candidate_pool_cache.get(img)
         if rec is None:
             continue
         for c in rec["candidates"]:
-            rows.append([c["s_det"], c["s_clip"], c["s_area"]])
+            rows.append([c[d] for d in dims])
     if not rows:
-        return np.zeros((0, 3))
+        return np.zeros((0, D))
     return np.array(rows, dtype=float)
 
 
@@ -44,11 +61,14 @@ def fit_global_gmm(
     candidate_pool_cache: Dict[str, dict],
     fitting_images: Sequence[str],
     gmm_preset: dict,
+    use_area: bool = False,
 ) -> GlobalGMM:
     """`gmm_preset` is one of hyperparam_grid.py's preset dicts: must
     contain learning_rate, max_iters, tol, init_strategy, and (for
-    init_strategy == 'fixed_prior') init_means / init_covariances."""
-    X = pool_features(candidate_pool_cache, fitting_images)
+    init_strategy == 'fixed_prior') init_means / init_covariances.
+    use_area controls whether s_area is included as a feature (default off,
+    see module docstring)."""
+    X = pool_features(candidate_pool_cache, fitting_images, use_area=use_area)
     if X.shape[0] < 4:
         raise ValueError(
             f"Only {X.shape[0]} candidate feature vectors pooled from "

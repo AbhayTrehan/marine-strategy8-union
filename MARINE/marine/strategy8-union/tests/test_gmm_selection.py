@@ -75,11 +75,11 @@ def test_select_best_gmm_preset_picks_highest_silhouette():
 
 def test_no_lvlm_generation_involved():
     """Sanity: select_best_gmm_preset only needs the cache + image list +
-    presets -- nothing resembling a model/tokenizer/processor argument."""
+    presets + use_area flag -- nothing resembling a model/tokenizer/processor argument."""
     import inspect
     sig = inspect.signature(select_best_gmm_preset)
     params = set(sig.parameters)
-    assert params == {"candidate_pool_cache", "fitting_images", "candidate_presets"}
+    assert params == {"candidate_pool_cache", "fitting_images", "candidate_presets", "use_area"}
     print("test_no_lvlm_generation_involved OK")
 
 
@@ -93,7 +93,7 @@ def test_selection_result_serialization_roundtrip(tmp_path="/tmp/_test_gmm_selec
     assert loaded.quality_by_preset.keys() == result.quality_by_preset.keys()
 
     gmm = GlobalGMM.from_params(loaded.chosen_gmm_params)
-    X = np.array([[0.7, 0.3, 0.1]])
+    X = np.array([[0.7, 0.3]])   # 2D [s_det, s_clip] matching default use_area=False
     g1 = gmm.responsibility_positive(X)
     assert g1.shape == (1,)
     os.remove(tmp_path)

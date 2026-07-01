@@ -121,12 +121,15 @@ def select_best_gmm_preset(
     candidate_pool_cache: Dict[str, dict],
     fitting_images: Sequence[str],
     candidate_presets: Sequence[Dict],
+    use_area: bool = False,
 ) -> GMMSelectionResult:
     """Fits every preset in `candidate_presets` on the SAME pooled
     tuning-image features and picks the one with the best intrinsic
     cluster quality (silhouette score, ties broken by mean separation).
-    No LVLM generation is involved -- this is pure numpy/sklearn."""
-    X = pool_features(candidate_pool_cache, fitting_images)
+    No LVLM generation is involved -- this is pure numpy/sklearn.
+    use_area controls feature dimensionality and must match what will be
+    passed to fit_global_gmm/classify_image_candidates (default: off)."""
+    X = pool_features(candidate_pool_cache, fitting_images, use_area=use_area)
     if X.shape[0] < 4:
         raise ValueError(
             f"Only {X.shape[0]} candidate feature vectors pooled from "
@@ -137,7 +140,7 @@ def select_best_gmm_preset(
     gmm_by_preset: Dict[str, GlobalGMM] = {}
 
     for preset in candidate_presets:
-        gmm = fit_global_gmm(candidate_pool_cache, fitting_images, preset)
+        gmm = fit_global_gmm(candidate_pool_cache, fitting_images, preset, use_area=use_area)
         quality = compute_gmm_quality(gmm, X)
         quality_by_preset[preset["name"]] = quality
         gmm_by_preset[preset["name"]] = gmm

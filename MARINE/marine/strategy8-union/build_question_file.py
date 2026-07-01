@@ -46,13 +46,18 @@ def classify_image_candidates(
     candidates: List[dict],
     gmm: GlobalGMM,
     tau: float,
+    use_area: bool = False,
 ) -> Tuple[List[str], List[str], List[float]]:
     """Applies Eq. 8 (E-step, frozen params) + Eq. 15-16 (tau threshold) to
     one image's candidate list. Returns (o_pos, o_neg, responsibilities),
-    where responsibilities[i] is gamma_i for candidates[i] (same order)."""
+    where responsibilities[i] is gamma_i for candidates[i] (same order).
+    use_area must match what was used when the GMM was fitted (default: off)."""
     if not candidates:
         return [], [], []
-    X = np.array([[c["s_det"], c["s_clip"], c["s_area"]] for c in candidates], dtype=float)
+    if use_area:
+        X = np.array([[c["s_det"], c["s_clip"], c["s_area"]] for c in candidates], dtype=float)
+    else:
+        X = np.array([[c["s_det"], c["s_clip"]] for c in candidates], dtype=float)
     gamma = gmm.responsibility_positive(X)
 
     o_pos = [c["canonical"] for c, g in zip(candidates, gamma) if g >= tau]
@@ -66,11 +71,13 @@ def build_question_file(
     gmm: GlobalGMM,
     tau: float,
     image_filter: List[str] = None,
+    use_area: bool = False,
 ) -> Tuple[List[dict], Dict[str, dict]]:
     """Returns (strategy8_questions, per_image_classification) where
     per_image_classification maps image -> {"o_pos": [...], "o_neg": [...],
     "responsibilities": {canonical: gamma}} -- the latter is useful for the
-    HTML report (item (f)/(g) of the spec) without recomputing anything."""
+    HTML report (item (f)/(g) of the spec) without recomputing anything.
+    use_area must match what was used when the GMM was fitted (default: off)."""
     try:
         with open(question_path) as f:
             questions = json.load(f)
@@ -91,7 +98,7 @@ def build_question_file(
         if img not in per_image_classification:
             rec = candidate_pool_cache.get(img)
             candidates = rec["candidates"] if rec is not None else []
-            o_pos, o_neg, gammas = classify_image_candidates(candidates, gmm, tau)
+            o_pos, o_neg, gammas = classify_image_candidates(candidates, gmm, tau, use_area=use_area)
             per_image_classification[img] = {
                 "o_pos": o_pos,
                 "o_neg": o_neg,

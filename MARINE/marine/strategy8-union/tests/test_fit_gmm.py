@@ -34,9 +34,12 @@ def _fake_cache(seed=0):
 def test_pool_features_stacks_correctly():
     cache = _fake_cache()
     images = list(cache.keys())[:10]
-    X = pool_features(cache, images)
+    X = pool_features(cache, images)                    # default: 2D [s_det, s_clip]
     expected_n = sum(len(cache[img]["candidates"]) for img in images)
-    assert X.shape == (expected_n, 3)
+    assert X.shape == (expected_n, 2), X.shape
+
+    X3 = pool_features(cache, images, use_area=True)    # 3D when explicitly requested
+    assert X3.shape == (expected_n, 3), X3.shape
     print("test_pool_features_stacks_correctly OK")
 
 
@@ -44,13 +47,14 @@ def test_pool_features_handles_missing_images():
     cache = _fake_cache()
     X = pool_features(cache, ["img0.jpg", "nonexistent.jpg"])
     assert X.shape[0] == len(cache["img0.jpg"]["candidates"])
+    assert X.shape[1] == 2  # default: 2D
     print("test_pool_features_handles_missing_images OK")
 
 
 def test_pool_features_empty():
     cache = {}
     X = pool_features(cache, ["a.jpg"])
-    assert X.shape == (0, 3)
+    assert X.shape == (0, 2)  # default: 2D
     print("test_pool_features_empty OK")
 
 

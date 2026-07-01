@@ -8,7 +8,15 @@ Implements Phase II "Tri-State Contrastive Decoding"
     z_ung  = LogitsM(y_t | y_<t, c_ung,  I)      (Eq. 17)
     z_pos  = LogitsM(y_t | y_<t, c_pos,  I)      (Eq. 18)
     z_neg  = LogitsM(y_t | y_<t, c_neg,  I)      (Eq. 19)
-    z_final = (1 - alpha) * z_ung + alpha * (z_pos - z_neg)   (Eq. 20)
+    z_final = z_ung + alpha * (z_pos - z_neg)     (modified decoding)
+
+NOTE: this is a modification of the original Eq. 20 from the spec
+    (1 - alpha) * z_ung + alpha * (z_pos - z_neg)
+The difference: the unguided branch is now kept at full weight (coefficient
+1 instead of 1-alpha) regardless of alpha. This means alpha only controls
+how strongly the positive/negative contrast is injected on top of the base
+generation, rather than simultaneously downweighting the unguided branch.
+The alpha range of interest shifts accordingly (0.6-0.8 is reasonable).
 
 This is a genuinely new 3-branch decoder, NOT a drop-in extension of the
 original MARINE codebase's `marine/utils/utils_guidance.py::GuidanceLogits`
@@ -149,5 +157,5 @@ class TriStateGuidanceLogits(LogitsProcessor):
         z_pos = self._step_branch("pos", new_token)
         z_neg = self._step_branch("neg", new_token)
 
-        z_final = (1.0 - self.alpha) * z_ung + self.alpha * (z_pos - z_neg)  # Eq. 20
+        z_final = z_ung + self.alpha * (z_pos - z_neg)  # modified decoding: z_ung + alpha*(z_pos - z_neg)
         return F.log_softmax(z_final, dim=-1)

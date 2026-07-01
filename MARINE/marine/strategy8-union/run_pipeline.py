@@ -64,7 +64,10 @@ if _EVAL_DIR not in sys.path:
     sys.path.insert(0, _EVAL_DIR)
 
 from splits import ImageSplit, make_split  # noqa: E402
-from hyperparam_grid import TrialConfig, TrialResult, build_grid, chair_f1, pick_best, select_gmm_presets  # noqa: E402
+from hyperparam_grid import (  # noqa: E402
+    TrialConfig, TrialResult, build_grid, chair_f1, pick_best, select_gmm_presets,
+    BASE_GMM_PRESETS, DAMPED_GMM_PRESETS,
+)
 from gmm import GlobalGMM, GMMParams  # noqa: E402
 from gmm_selection import GMMSelectionResult, select_best_gmm_preset  # noqa: E402
 from fit_gmm import fit_global_gmm  # noqa: E402
@@ -74,7 +77,7 @@ from pope_labels import build_pope_label_file  # noqa: E402
 import generate  # noqa: E402
 
 
-STAGE_CHOICES = ["all", "tune_only", "chair", "pope", "report"]
+STAGE_CHOICES = ["all", "tune_only", "set_hyperparams", "chair", "pope", "report"]
 
 
 # ---------------------------------------------------------------------------
@@ -126,15 +129,16 @@ def run_one_chair_trial(
     work_dir: str,
     gen_args_template,
     prefit_gmm: Optional[GlobalGMM] = None,
+    use_area: bool = False,
 ):
     os.makedirs(work_dir, exist_ok=True)
 
-    gmm = prefit_gmm if prefit_gmm is not None else fit_global_gmm(cache, images, trial.gmm_preset)
+    gmm = prefit_gmm if prefit_gmm is not None else fit_global_gmm(cache, images, trial.gmm_preset, use_area=use_area)
     gmm_params_path = os.path.join(work_dir, "gmm_params.json")
     gmm.params.save(gmm_params_path)
 
     questions, _ = build_question_file(
-        chair_question_file, cache, gmm, trial.tau, image_filter=images,
+        chair_question_file, cache, gmm, trial.tau, image_filter=images, use_area=use_area,
     )
     qfile_path = os.path.join(work_dir, "question_file.json")
     with open(qfile_path, "w") as f:
@@ -205,7 +209,7 @@ def run_hyperparameter_search(
 
     # ---- Phase B': GMM preset selection -- intrinsic quality, NO generation ----
     gmm_selection_path = os.path.join(tune_root, "gmm_selection.json")
-    candidate_presets = select_gmm_presets(args.tune_learning_rate)
+    candidate_presets = select_gmm_presets(args.tune_learning_rate, use_area=args.use_area_feature)
     if os.path.exists(gmm_selection_path) and not args.force_recompute_trials:
         selection = GMMSelectionResult.load(gmm_selection_path)
         print(f"[Strategy8-U][Tune] Reusing cached GMM preset selection: '{selection.chosen_preset_name}' "
@@ -214,7 +218,7 @@ def run_hyperparameter_search(
         print(f"[Strategy8-U][Tune] Selecting GMM preset among {[p['name'] for p in candidate_presets]} "
               f"via intrinsic fit quality (silhouette score) on {len(split.tune_images)} tuning images "
               f"-- no LVLM generation involved in this step.")
-        selection = select_best_gmm_preset(cache, split.tune_images, candidate_presets)
+        selection = select_best_gmm_preset(cache, split.tune_images, candidate_presets, use_area=args.use_area_feature)
         selection.save(gmm_selection_path)
         for name, q in selection.quality_by_preset.items():
             marker = " <= CHOSEN" if name == selection.chosen_preset_name else ""
@@ -255,7 +259,7 @@ def run_hyperparameter_search(
             result, _ = run_one_chair_trial(
                 trial, cache, split.tune_images, args.chair_question_file,
                 model, tokenizer, processor, model_name, chair_evaluator,
-                work_dir, gen_args_template, prefit_gmm=chosen_gmm,
+                work_dir, gen_args_template, prefit_gmm=chosen_gmm, use_area=args.use_area_feature,
             )
             with open(cached_result_path, "w") as f:
                 json.dump(result.to_dict(), f, indent=2)
@@ -300,7 +304,7 @@ def run_final_chair_eval(
     os.makedirs(out_dir, exist_ok=True)
 
     questions, per_image = build_question_file(
-        args.chair_question_file, cache, gmm, tau, image_filter=images,
+        args.chair_question_file, cache, gmm, tau, image_filter=images, use_area=args.use_area_feature,
     )
     qfile_path = os.path.join(out_dir, f"chair_question_file_{tag}.json")
     with open(qfile_path, "w") as f:
@@ -342,7 +346,7 @@ def run_final_pope_eval(
     os.makedirs(out_dir, exist_ok=True)
 
     questions, per_image = build_question_file(
-        args.pope_question_file, cache, gmm, tau, image_filter=images,
+        args.pope_question_file, cache, gmm, tau, image_filter=images, use_area=args.use_area_feature,
     )
     qfile_path = os.path.join(out_dir, f"pope_question_file_{tag}.json")
     with open(qfile_path, "w") as f:
@@ -394,6 +398,72 @@ def update_summary(output_dir: str, **updates) -> dict:
     with open(summary_path, "w") as f:
         json.dump(summary, f, indent=2)
     return summary
+
+
+# ---------------------------------------------------------------------------
+# --stage set_hyperparams: directly fix (tau, alpha) to known values, with
+# NO generation and NO evaluation -- just fits the chosen GMM preset and
+# writes best_hyperparams.json. Use this when you already know exactly
+# which (tau, alpha) you want and don't need the grid search at all.
+# Lightweight: loads the LVLM only if the Step A cache doesn't exist yet.
+# ---------------------------------------------------------------------------
+def run_set_hyperparams_stage(args) -> None:
+    if args.fixed_tau is None or args.fixed_alpha is None:
+        raise ValueError("--stage set_hyperparams requires both --fixed_tau and --fixed_alpha.")
+
+    all_presets = {p["name"]: p for p in (BASE_GMM_PRESETS + DAMPED_GMM_PRESETS)}
+    if args.gmm_preset_name not in all_presets:
+        raise ValueError(f"--gmm_preset_name must be one of {list(all_presets)}, got {args.gmm_preset_name!r}")
+    preset = all_presets[args.gmm_preset_name]
+
+    with open(args.chair_question_file) as f:
+        chair_questions = json.load(f)
+    all_images = sorted({q["image"] for q in chair_questions})
+
+    split_path = os.path.join(args.output_dir, "split.json")
+    if os.path.exists(split_path):
+        split = ImageSplit.load(split_path)
+    else:
+        split = make_split(all_images, n_tune=args.n_tune_images, n_report=args.n_report_images, seed=args.split_seed)
+        split.save(split_path)
+        print(f"[Strategy8-U] Created new split ({len(split.tune_images)} tune / "
+              f"{len(split.test_images)} test / {len(split.report_images)} report) -> {split_path}")
+
+    cache_path = os.path.join(args.output_dir, "candidate_pool_cache.jsonl")
+    if os.path.exists(cache_path) and not args.force_recompute_pool:
+        cache = load_candidate_pool_cache(cache_path)
+        print(f"[Strategy8-U] Reusing existing candidate pool cache: {cache_path} (no LVLM loaded for this stage).")
+    else:
+        print("[Strategy8-U] Candidate pool cache not found yet -- building it first "
+              "(this DOES require loading the LVLM once, but only this one time).")
+        model, tokenizer, processor, model_name = generate.load_strategy8_model(args.model_path)
+
+        def _feature_extractor_factory():
+            from feature_extractors import FeatureExtractor
+            return FeatureExtractor(args.owlvit_model, args.clip_model, device=args.device)
+
+        cache = ensure_candidate_pool_cache(args, model, tokenizer, processor, _feature_extractor_factory, all_images)
+
+    print(f"[Strategy8-U] Fitting GMM preset '{args.gmm_preset_name}' on {len(split.tune_images)} tuning images "
+          f"(pure numpy -- no generation, no evaluation).")
+    gmm = fit_global_gmm(cache, split.tune_images, preset)
+
+    best_hyperparams = {
+        "trial": {
+            "trial_id": f"{preset['name']}__tau{args.fixed_tau}__alpha{args.fixed_alpha}__manual",
+            "gmm_preset": preset,
+            "tau": args.fixed_tau,
+            "alpha": args.fixed_alpha,
+        },
+        "gmm_params": gmm.params.to_dict(),
+        "tuning_result": None,
+        "note": "Set directly via --stage set_hyperparams; no grid search or tuning-set "
+                "evaluation was performed, so there is no F1/CHAIR score to report here.",
+    }
+    with open(args.best_hyperparams_file, "w") as f:
+        json.dump(best_hyperparams, f, indent=2)
+    print(f"[Strategy8-U] Wrote {args.best_hyperparams_file}: tau={args.fixed_tau}, alpha={args.fixed_alpha}, "
+          f"gmm_preset='{args.gmm_preset_name}'. Run --stage chair / pope / report next.")
 
 
 # ---------------------------------------------------------------------------
@@ -507,6 +577,13 @@ def build_arg_parser() -> argparse.ArgumentParser:
                     help="Also consider damped (lr<1.0) GMM M-step variants during GMM preset "
                          "selection. Off by default: only standard, undamped EM (lr=1.0) presets "
                          "are considered.")
+    p.add_argument("--use_area_feature", action="store_true",
+                    help="Include s_area (normalised bounding-box area) as a third GMM feature "
+                         "dimension, restoring the original [s_det, s_clip, s_area] 3D feature "
+                         "vector. OFF by default: only [s_det, s_clip] are used, which avoids "
+                         "penalising small-but-genuinely-present objects whose bounding box area "
+                         "happens to be low. Must be the same value during --tune and all "
+                         "subsequent --stage runs against the same output directory.")
     p.add_argument("--force_recompute_trials", action="store_true",
                     help="Re-run GMM preset selection and every (tau, alpha) trial even if a "
                          "cached result already exists on disk. Off by default: any trial (or "
@@ -542,10 +619,13 @@ def main():
     from transformers import set_seed
     set_seed(args.seed)
 
-    # ---- --stage report is lightweight: no LVLM, no CHAIR evaluator, no
-    # feature extractors -- handle it first and return early. ----
+    # ---- --stage report / set_hyperparams are lightweight: no LVLM (if the
+    # cache already exists), no CHAIR evaluator, no feature extractors. ----
     if args.stage == "report":
         run_report_stage(args)
+        return
+    if args.stage == "set_hyperparams":
+        run_set_hyperparams_stage(args)
         return
 
     if args.stage == "tune_only" and not args.tune:
