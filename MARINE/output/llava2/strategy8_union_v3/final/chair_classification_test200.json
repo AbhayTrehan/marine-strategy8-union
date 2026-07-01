@@ -1,0 +1,7964 @@
+{
+  "COCO_val2014_000000144305.jpg": {
+    "o_pos": [],
+    "o_neg": [
+      "dining table",
+      "laptop",
+      "person",
+      "remote",
+      "cd dvd",
+      "charger",
+      "connect",
+      "electronic",
+      "headphone",
+      "ipod",
+      "open",
+      "plug",
+      "sit",
+      "top"
+    ],
+    "responsibilities": {
+      "dining table": 0.08332089839246799,
+      "laptop": 0.11472617224654114,
+      "person": 0.08843857926797183,
+      "remote": 0.11774059582171686,
+      "cd dvd": 0.08997601927693018,
+      "charger": 0.0902386034839895,
+      "connect": 0.08455431294075813,
+      "electronic": 0.08730124025424411,
+      "headphone": 0.19107874017996532,
+      "ipod": 0.27298802471193445,
+      "open": 0.0838824545087472,
+      "plug": 0.07905031505774196,
+      "sit": 0.07926433395808029,
+      "top": 0.08492191410046979
+    }
+  },
+  "COCO_val2014_000000054870.jpg": {
+    "o_pos": [
+      "knife",
+      "sandwich",
+      "bacon",
+      "cheese",
+      "food",
+      "lettuce",
+      "pickle",
+      "platter",
+      "salad",
+      "tomato",
+      "vegetable"
+    ],
+    "o_neg": [
+      "peak",
+      "plate",
+      "white"
+    ],
+    "responsibilities": {
+      "knife": 0.9999999472097163,
+      "sandwich": 0.9999993517387717,
+      "bacon": 0.3782308346240053,
+      "cheese": 0.9999999998722378,
+      "food": 0.32335022210174064,
+      "lettuce": 0.9999999999551372,
+      "peak": 0.11636230892640893,
+      "pickle": 0.8715280726408008,
+      "plate": 0.18717272179724923,
+      "platter": 0.5592604770038497,
+      "salad": 0.9999999999972415,
+      "tomato": 0.9999999999999996,
+      "vegetable": 0.9999056884607159,
+      "white": 0.0804360552296367
+    }
+  },
+  "COCO_val2014_000000329614.jpg": {
+    "o_pos": [
+      "bus",
+      "car",
+      "building",
+      "cathedral",
+      "church",
+      "cloudy",
+      "decker",
+      "large",
+      "road",
+      "sky",
+      "spire",
+      "stormy",
+      "street",
+      "tower"
+    ],
+    "o_neg": [
+      "bu",
+      "double",
+      "drive",
+      "gothic",
+      "street scene",
+      "yellow"
+    ],
+    "responsibilities": {
+      "bus": 1.0,
+      "car": 0.9999155674476166,
+      "bu": 0.07931196478885086,
+      "building": 0.9999764047235331,
+      "cathedral": 0.9999803916573509,
+      "church": 0.9999985683076335,
+      "cloudy": 0.9931195115140075,
+      "decker": 0.9999898537823687,
+      "double": 0.08426005389445668,
+      "drive": 0.1001984644147505,
+      "gothic": 0.08944444696243044,
+      "large": 0.5885688284721708,
+      "road": 0.9989011052423427,
+      "sky": 0.9964846344850499,
+      "spire": 0.978559742220127,
+      "stormy": 0.5884782892898593,
+      "street": 0.9416402379344859,
+      "street scene": 0.27726185833480316,
+      "tower": 0.9999827302736293,
+      "yellow": 0.09177284391305626
+    }
+  },
+  "COCO_val2014_000000234433.jpg": {
+    "o_pos": [
+      "pole",
+      "post",
+      "sign"
+    ],
+    "o_neg": [
+      "bicycle",
+      "car",
+      "person",
+      "attach",
+      "flood",
+      "left",
+      "one",
+      "overpas",
+      "parking",
+      "parking garage",
+      "pillar",
+      "say",
+      "turn",
+      "way"
+    ],
+    "responsibilities": {
+      "bicycle": 0.09199059977367272,
+      "car": 0.08984699960358405,
+      "person": 0.10343749795156784,
+      "attach": 0.08924606458098744,
+      "flood": 0.10742070210577306,
+      "left": 0.11484463780084095,
+      "one": 0.08762450126168767,
+      "overpas": 0.11618255155997853,
+      "parking": 0.10403020240959623,
+      "parking garage": 0.08617879370956946,
+      "pillar": 0.08056722554284253,
+      "pole": 0.4981456923224177,
+      "post": 0.31968693113888025,
+      "say": 0.07860778944876709,
+      "sign": 0.9996135110112028,
+      "turn": 0.11689857188697123,
+      "way": 0.10597256325639784
+    }
+  },
+  "COCO_val2014_000000039053.jpg": {
+    "o_pos": [
+      "bowl",
+      "cake",
+      "cell phone",
+      "cup",
+      "dining table",
+      "spoon",
+      "bread",
+      "butter",
+      "egg",
+      "food",
+      "napkin",
+      "plate",
+      "platter",
+      "quesadilla",
+      "sauce",
+      "tablecloth",
+      "tomato",
+      "tortilla",
+      "utensil"
+    ],
+    "o_neg": [
+      "cream",
+      "dip",
+      "including",
+      "peak",
+      "variety"
+    ],
+    "responsibilities": {
+      "bowl": 0.9999999698817712,
+      "cake": 0.9924027366118493,
+      "cell phone": 0.9999263978042057,
+      "cup": 0.4410720847436752,
+      "dining table": 0.9842521049472192,
+      "spoon": 0.9999999999999993,
+      "bread": 0.9999999999999512,
+      "butter": 0.7197164644913233,
+      "cream": 0.08788626668229982,
+      "dip": 0.0830669061769869,
+      "egg": 0.9999999902739398,
+      "food": 0.9999999961740142,
+      "including": 0.07929817223190412,
+      "napkin": 0.999999917275393,
+      "peak": 0.10751077754234692,
+      "plate": 0.9999999782051268,
+      "platter": 0.9998387369903967,
+      "quesadilla": 0.9999999508180596,
+      "sauce": 0.7918890266367304,
+      "tablecloth": 0.9999999928907286,
+      "tomato": 0.9999893962957734,
+      "tortilla": 0.9999998548812766,
+      "utensil": 0.9999999997309139,
+      "variety": 0.0806758510362033
+    }
+  },
+  "COCO_val2014_000000493862.jpg": {
+    "o_pos": [
+      "dog",
+      "person",
+      "tennis racket",
+      "gras",
+      "hand"
+    ],
+    "o_neg": [
+      "catch",
+      "field",
+      "grassy",
+      "green",
+      "hillside",
+      "lush",
+      "play",
+      "playing",
+      "stand",
+      "tenni"
+    ],
+    "responsibilities": {
+      "dog": 0.9035290014646814,
+      "person": 0.8230263517562655,
+      "tennis racket": 0.9999999999999993,
+      "catch": 0.1009120154256023,
+      "field": 0.21027027816173818,
+      "gras": 0.6981274872842641,
+      "grassy": 0.1918400787400412,
+      "green": 0.09074089345108877,
+      "hand": 0.6242269911498777,
+      "hillside": 0.22512860169189264,
+      "lush": 0.09083824626012466,
+      "play": 0.09906148553763329,
+      "playing": 0.11584885769091081,
+      "stand": 0.10347792269242492,
+      "tenni": 0.09514870494568452
+    }
+  },
+  "COCO_val2014_000000269873.jpg": {
+    "o_pos": [
+      "bus",
+      "person",
+      "bus stop",
+      "photo",
+      "street sign"
+    ],
+    "o_neg": [
+      "handbag",
+      "black",
+      "carrying",
+      "city bu",
+      "commuter",
+      "crowd",
+      "crowded",
+      "group",
+      "stand",
+      "street",
+      "street corner",
+      "walking",
+      "white"
+    ],
+    "responsibilities": {
+      "bus": 0.7098666513769717,
+      "handbag": 0.08173167695103772,
+      "person": 0.4677985293599263,
+      "black": 0.0824574984798089,
+      "bus stop": 0.8893737673874028,
+      "carrying": 0.09806594655379816,
+      "city bu": 0.07918706334188481,
+      "commuter": 0.08369470282616577,
+      "crowd": 0.10040604774074545,
+      "crowded": 0.10064737504060867,
+      "group": 0.08062305634515078,
+      "photo": 0.4466686092209278,
+      "stand": 0.07963815993217861,
+      "street": 0.08143420184181709,
+      "street corner": 0.09858093919789725,
+      "street sign": 0.39170029767992787,
+      "walking": 0.0856863314382733,
+      "white": 0.09197097535218594
+    }
+  },
+  "COCO_val2014_000000524656.jpg": {
+    "o_pos": [
+      "microwave",
+      "oven",
+      "refrigerator",
+      "sink",
+      "appliance",
+      "cabinet",
+      "dish washer",
+      "kitchen",
+      "kitchen counter",
+      "kitchenware"
+    ],
+    "o_neg": [
+      "bottle",
+      "cup",
+      "knife",
+      "wine glass",
+      "exhaust hood",
+      "plate",
+      "top",
+      "utensil",
+      "window"
+    ],
+    "responsibilities": {
+      "bottle": 0.14975670312940667,
+      "cup": 0.08495826737657959,
+      "knife": 0.07918589540411763,
+      "microwave": 0.9183387254318539,
+      "oven": 0.9999999997398987,
+      "refrigerator": 0.9542205574814755,
+      "sink": 0.9999999999771338,
+      "wine glass": 0.08296687459144896,
+      "appliance": 0.9999999999999098,
+      "cabinet": 0.9999999975058247,
+      "dish washer": 0.9999891600031054,
+      "exhaust hood": 0.12313915865761685,
+      "kitchen": 1.0,
+      "kitchen counter": 0.9930961757180736,
+      "kitchenware": 0.9999999968314142,
+      "plate": 0.09759224665828488,
+      "top": 0.0975069372377207,
+      "utensil": 0.08998248239159058,
+      "window": 0.15835270254771114
+    }
+  },
+  "COCO_val2014_000000369547.jpg": {
+    "o_pos": [
+      "bird",
+      "dog"
+    ],
+    "o_neg": [
+      "cat",
+      "beach",
+      "black",
+      "distance",
+      "floor",
+      "flying",
+      "gravel",
+      "looking",
+      "rocky",
+      "sand",
+      "sea",
+      "sit",
+      "sitting",
+      "stone",
+      "white"
+    ],
+    "responsibilities": {
+      "bird": 0.9838334130973166,
+      "cat": 0.23114357902421567,
+      "dog": 1.0,
+      "beach": 0.08735489257207711,
+      "black": 0.25321241212986634,
+      "distance": 0.11090876296802597,
+      "floor": 0.10183857771545678,
+      "flying": 0.0874192370025999,
+      "gravel": 0.08485768756049109,
+      "looking": 0.08787649851795686,
+      "rocky": 0.07957868535802488,
+      "sand": 0.13303103085657905,
+      "sea": 0.07835136094084773,
+      "sit": 0.09737523816459985,
+      "sitting": 0.1022591573883918,
+      "stone": 0.09616779609495493,
+      "white": 0.08388405920950875
+    }
+  },
+  "COCO_val2014_000000181446.jpg": {
+    "o_pos": [
+      "bottle",
+      "person",
+      "refrigerator",
+      "home appliance",
+      "kitchen",
+      "kitchen counter"
+    ],
+    "o_neg": [
+      "cup",
+      "beard",
+      "condiment",
+      "food",
+      "glas",
+      "glass",
+      "leaning",
+      "open",
+      "selfie",
+      "stand",
+      "stretch"
+    ],
+    "responsibilities": {
+      "bottle": 0.9999994134327094,
+      "cup": 0.08273111770173676,
+      "person": 0.9999949799131224,
+      "refrigerator": 0.9999999959057293,
+      "beard": 0.17553853183174856,
+      "condiment": 0.15866806107656087,
+      "food": 0.07916796946075678,
+      "glas": 0.13811902280925062,
+      "glass": 0.10980676454306418,
+      "home appliance": 0.9777746184219959,
+      "kitchen": 0.9999999999996918,
+      "kitchen counter": 0.9907920979538484,
+      "leaning": 0.08684056458595076,
+      "open": 0.15854734345107593,
+      "selfie": 0.08520330851988046,
+      "stand": 0.09547849968615146,
+      "stretch": 0.10956797331022079
+    }
+  },
+  "COCO_val2014_000000326021.jpg": {
+    "o_pos": [
+      "bear",
+      "person",
+      "teddy bear",
+      "animal",
+      "denim jacket",
+      "tablecloth",
+      "teddy"
+    ],
+    "o_neg": [
+      "dining table",
+      "bad",
+      "brown",
+      "catch",
+      "day",
+      "footstall",
+      "pose",
+      "say",
+      "sign",
+      "sit",
+      "smile",
+      "stall",
+      "stuff"
+    ],
+    "responsibilities": {
+      "bear": 0.9999998550785285,
+      "dining table": 0.24667901064446215,
+      "person": 0.9999999997028541,
+      "teddy bear": 1.0,
+      "animal": 0.9999999728335566,
+      "bad": 0.13072406284835403,
+      "brown": 0.12857203338186007,
+      "catch": 0.11102933192588488,
+      "day": 0.16986859587721365,
+      "denim jacket": 0.9999989079378963,
+      "footstall": 0.09772446228754825,
+      "pose": 0.12990867859012495,
+      "say": 0.0956286392522709,
+      "sign": 0.08846034843580479,
+      "sit": 0.07851066391642636,
+      "smile": 0.1470879953416763,
+      "stall": 0.08742088912833924,
+      "stuff": 0.10139993036641656,
+      "tablecloth": 0.5007667145756466,
+      "teddy": 1.0
+    }
+  },
+  "COCO_val2014_000000195645.jpg": {
+    "o_pos": [
+      "bench",
+      "dining table",
+      "wine glass",
+      "champagne",
+      "drink",
+      "family",
+      "group",
+      "wine"
+    ],
+    "o_neg": [
+      "bottle",
+      "handbag",
+      "person",
+      "alcohol",
+      "hillside",
+      "including",
+      "picnic",
+      "sitting",
+      "stand",
+      "stone",
+      "wine tasting"
+    ],
+    "responsibilities": {
+      "bench": 0.9998792055793515,
+      "bottle": 0.08254236279337462,
+      "dining table": 0.5961481927304856,
+      "handbag": 0.08430115256880577,
+      "person": 0.08955818610335821,
+      "wine glass": 0.9999999999999933,
+      "alcohol": 0.1417092510895705,
+      "champagne": 0.4297282969985152,
+      "drink": 0.9200044272027137,
+      "family": 0.4347031144821289,
+      "group": 0.7575524898597223,
+      "hillside": 0.2286936872232185,
+      "including": 0.07925536559329363,
+      "picnic": 0.1085602653529315,
+      "sitting": 0.0893102205668686,
+      "stand": 0.08025603567952705,
+      "stone": 0.09139270657862886,
+      "wine": 0.9797831672863164,
+      "wine tasting": 0.13549016956308924
+    }
+  },
+  "COCO_val2014_000000018688.jpg": {
+    "o_pos": [
+      "baseball glove",
+      "sports ball",
+      "bat",
+      "batter",
+      "catcher",
+      "game",
+      "scoreboard"
+    ],
+    "o_neg": [
+      "person",
+      "hit",
+      "mound",
+      "play",
+      "ready",
+      "referee",
+      "stand"
+    ],
+    "responsibilities": {
+      "baseball glove": 1.0,
+      "person": 0.2268357795132429,
+      "sports ball": 0.9425990051248233,
+      "bat": 0.8565963488590332,
+      "batter": 0.9999999999538676,
+      "catcher": 1.0,
+      "game": 0.45990216658731503,
+      "hit": 0.10640547998028906,
+      "mound": 0.13066964352690374,
+      "play": 0.07851883536437071,
+      "ready": 0.0836196071045883,
+      "referee": 0.14556819389383313,
+      "scoreboard": 0.9998636936596024,
+      "stand": 0.14837765973841546
+    }
+  },
+  "COCO_val2014_000000343534.jpg": {
+    "o_pos": [
+      "bear",
+      "chair",
+      "dog",
+      "person",
+      "potted plant",
+      "teddy bear",
+      "animal",
+      "armchair",
+      "boot",
+      "doll",
+      "hat",
+      "stand",
+      "stocking",
+      "stuffed",
+      "sweater",
+      "teddy",
+      "toy"
+    ],
+    "o_neg": [
+      "catch",
+      "dres",
+      "pink",
+      "stuff",
+      "tight",
+      "wear"
+    ],
+    "responsibilities": {
+      "bear": 0.9999998558965745,
+      "chair": 0.9999999999999829,
+      "dog": 0.30724950299000103,
+      "person": 0.9999999998408913,
+      "potted plant": 0.9999999998926534,
+      "teddy bear": 1.0,
+      "animal": 0.9999832142070205,
+      "armchair": 0.9999999998963249,
+      "boot": 0.9999991292219963,
+      "catch": 0.1086372661297265,
+      "doll": 1.0,
+      "dres": 0.27600952895682657,
+      "hat": 0.5330918507390714,
+      "pink": 0.10288554625060739,
+      "stand": 0.5043899623413167,
+      "stocking": 0.976250700023635,
+      "stuff": 0.0897097193857609,
+      "stuffed": 0.9999999999999998,
+      "sweater": 0.6077024641870782,
+      "teddy": 0.999999999999996,
+      "tight": 0.1484573667399079,
+      "toy": 1.0,
+      "wear": 0.10224780189583682
+    }
+  },
+  "COCO_val2014_000000370657.jpg": {
+    "o_pos": [
+      "handbag",
+      "motorcycle",
+      "person",
+      "basket",
+      "crowded",
+      "family",
+      "helmet"
+    ],
+    "o_neg": [
+      "hat",
+      "mask",
+      "motorcyclist",
+      "red",
+      "ride",
+      "riding",
+      "road",
+      "wear"
+    ],
+    "responsibilities": {
+      "handbag": 0.9983525690908515,
+      "motorcycle": 0.9999999962250006,
+      "person": 0.3183354531255029,
+      "basket": 0.9999999748105989,
+      "crowded": 0.9325633955341257,
+      "family": 0.3454621267159585,
+      "hat": 0.28262424866659414,
+      "helmet": 0.9999999999993179,
+      "mask": 0.20169131664932702,
+      "motorcyclist": 0.12993098696503202,
+      "red": 0.09162199964651754,
+      "ride": 0.07982859935036156,
+      "riding": 0.08254907928740554,
+      "road": 0.10021417429513893,
+      "wear": 0.10828642099843885
+    }
+  },
+  "COCO_val2014_000000481596.jpg": {
+    "o_pos": [
+      "hot dog",
+      "crowd",
+      "crowded",
+      "eat",
+      "food",
+      "stadium"
+    ],
+    "o_neg": [
+      "dog",
+      "person",
+      "bite",
+      "bleacher",
+      "catch",
+      "condiment",
+      "fan",
+      "game",
+      "holding",
+      "hot",
+      "stand"
+    ],
+    "responsibilities": {
+      "dog": 0.0849427227574339,
+      "hot dog": 0.9999935628400896,
+      "person": 0.09838731654510263,
+      "bite": 0.1543154553179158,
+      "bleacher": 0.1314913647429383,
+      "catch": 0.08026676879299967,
+      "condiment": 0.10141906187020464,
+      "crowd": 0.7486246329831097,
+      "crowded": 0.5256777401164354,
+      "eat": 0.9824570968336634,
+      "fan": 0.09057725164475317,
+      "food": 0.908882810508113,
+      "game": 0.08159485583246248,
+      "holding": 0.08694791816432827,
+      "hot": 0.12628796085118266,
+      "stadium": 0.895519072832959,
+      "stand": 0.12069077650515768
+    }
+  },
+  "COCO_val2014_000000067833.jpg": {
+    "o_pos": [
+      "bowl",
+      "dining table",
+      "pizza",
+      "wine glass",
+      "bread",
+      "cheese",
+      "food",
+      "plate",
+      "platter",
+      "tray",
+      "wine"
+    ],
+    "o_neg": [
+      "green",
+      "large",
+      "peak",
+      "sit",
+      "topping",
+      "white"
+    ],
+    "responsibilities": {
+      "bowl": 0.999869331133111,
+      "dining table": 0.4516682177698071,
+      "pizza": 1.0,
+      "wine glass": 0.9999999998274425,
+      "bread": 0.3278935061136487,
+      "cheese": 0.8477393726471696,
+      "food": 0.4316188202463442,
+      "green": 0.10622755231684479,
+      "large": 0.2508703332257917,
+      "peak": 0.11841499279878301,
+      "plate": 0.9999014312748487,
+      "platter": 0.8974375275399531,
+      "sit": 0.08828749542676005,
+      "topping": 0.16615748534117314,
+      "tray": 0.8345218577497779,
+      "white": 0.08066751413967448,
+      "wine": 0.5273627663670271
+    }
+  },
+  "COCO_val2014_000000272880.jpg": {
+    "o_pos": [
+      "cup",
+      "fork",
+      "knife",
+      "pizza",
+      "food",
+      "hand",
+      "napkin",
+      "pizza pan",
+      "plate",
+      "platter"
+    ],
+    "o_neg": [
+      "dining table",
+      "person",
+      "bite",
+      "catch",
+      "holding",
+      "mis",
+      "mystic",
+      "sign",
+      "slouse",
+      "topping"
+    ],
+    "responsibilities": {
+      "cup": 0.9090479584512821,
+      "dining table": 0.11638422872893295,
+      "fork": 0.9999996872163619,
+      "knife": 0.5224263229551672,
+      "person": 0.1357743398093902,
+      "pizza": 0.9842263671084925,
+      "bite": 0.08165210249007555,
+      "catch": 0.10809883073307981,
+      "food": 0.9999997319628603,
+      "hand": 0.6829674541389544,
+      "holding": 0.09058109662797596,
+      "mis": 0.11493837267038093,
+      "mystic": 0.12559980286890965,
+      "napkin": 0.4981786443919686,
+      "pizza pan": 0.7075717108325751,
+      "plate": 0.9762721312160788,
+      "platter": 0.9064118700476892,
+      "sign": 0.1158010139976476,
+      "slouse": 0.0896666110978855,
+      "topping": 0.08578112199731157
+    }
+  },
+  "COCO_val2014_000000459141.jpg": {
+    "o_pos": [
+      "bicycle",
+      "motorcycle",
+      "person",
+      "potted plant",
+      "bag",
+      "cycle",
+      "hat"
+    ],
+    "o_neg": [
+      "basket",
+      "carry",
+      "cart",
+      "load",
+      "push",
+      "ride",
+      "riding",
+      "straw",
+      "wear"
+    ],
+    "responsibilities": {
+      "bicycle": 0.9999999999722975,
+      "motorcycle": 0.936360160129117,
+      "person": 0.9999838644228718,
+      "potted plant": 0.5475774241696693,
+      "bag": 0.9183467084482542,
+      "basket": 0.0992429088395001,
+      "carry": 0.09380141893079622,
+      "cart": 0.24402261816790222,
+      "cycle": 0.5577404288225482,
+      "hat": 0.9985733151446083,
+      "load": 0.07887172292233054,
+      "push": 0.10685835910832264,
+      "ride": 0.13275661179195752,
+      "riding": 0.18279676737661213,
+      "straw": 0.07992510544282684,
+      "wear": 0.10047515818812915
+    }
+  },
+  "COCO_val2014_000000231534.jpg": {
+    "o_pos": [
+      "airplane",
+      "person",
+      "truck",
+      "airport",
+      "cart",
+      "equipment",
+      "forklift",
+      "tarmac"
+    ],
+    "o_neg": [
+      "suitcase",
+      "floor",
+      "load",
+      "onto",
+      "park",
+      "parked",
+      "raceway",
+      "terminal"
+    ],
+    "responsibilities": {
+      "airplane": 0.9999999999999998,
+      "person": 0.5741259668604127,
+      "suitcase": 0.08483773867925432,
+      "truck": 0.9999999999999978,
+      "airport": 0.3653957379893723,
+      "cart": 0.7680170828028537,
+      "equipment": 0.7582916495799479,
+      "floor": 0.08428324957928937,
+      "forklift": 0.9999978598474137,
+      "load": 0.08278230911786466,
+      "onto": 0.08166425161647149,
+      "park": 0.12241169222563825,
+      "parked": 0.15685585428915652,
+      "raceway": 0.23480083329546736,
+      "tarmac": 0.9740756799080234,
+      "terminal": 0.11949677881850532
+    }
+  },
+  "COCO_val2014_000000227031.jpg": {
+    "o_pos": [
+      "cake",
+      "dining table",
+      "couple",
+      "tablecloth"
+    ],
+    "o_neg": [
+      "person",
+      "potted plant",
+      "cut",
+      "doll",
+      "newlywed",
+      "pillar",
+      "stand",
+      "together"
+    ],
+    "responsibilities": {
+      "cake": 0.9969124622245938,
+      "dining table": 0.7988211956155347,
+      "person": 0.2900930364626015,
+      "potted plant": 0.20732756962940815,
+      "couple": 0.3072760896589346,
+      "cut": 0.08638033156754867,
+      "doll": 0.15125082875144255,
+      "newlywed": 0.11411717832193878,
+      "pillar": 0.104512625797201,
+      "stand": 0.16549438462229205,
+      "tablecloth": 0.9938061097739391,
+      "together": 0.1271159578035853
+    }
+  },
+  "COCO_val2014_000000209347.jpg": {
+    "o_pos": [
+      "cell phone",
+      "handbag",
+      "person",
+      "train",
+      "jacket",
+      "subway"
+    ],
+    "o_neg": [
+      "check",
+      "coach",
+      "crowded",
+      "leather",
+      "looking",
+      "ride",
+      "sitting"
+    ],
+    "responsibilities": {
+      "cell phone": 0.9416568024710422,
+      "handbag": 0.47204906508453953,
+      "person": 0.3952287617254254,
+      "train": 0.5106176779934,
+      "check": 0.08642671907883331,
+      "coach": 0.08486673441927091,
+      "crowded": 0.09176797322370148,
+      "jacket": 0.833662602816937,
+      "leather": 0.15306254467805824,
+      "looking": 0.09892791057641162,
+      "ride": 0.08064948957766667,
+      "sitting": 0.07897830495241127,
+      "subway": 0.9412775839050304
+    }
+  },
+  "COCO_val2014_000000523292.jpg": {
+    "o_pos": [
+      "cat",
+      "chair",
+      "laptop"
+    ],
+    "o_neg": [
+      "dining table",
+      "open",
+      "paw",
+      "sit",
+      "stand",
+      "standing",
+      "stare"
+    ],
+    "responsibilities": {
+      "cat": 1.0,
+      "chair": 0.9897002503047294,
+      "dining table": 0.07983611663023624,
+      "laptop": 1.0,
+      "open": 0.10207236350742202,
+      "paw": 0.18596829864396935,
+      "sit": 0.08029077397511382,
+      "stand": 0.09865759608855104,
+      "standing": 0.1311705130863556,
+      "stare": 0.15018526547731031
+    }
+  },
+  "COCO_val2014_000000012375.jpg": {
+    "o_pos": [
+      "carrot",
+      "food",
+      "lettuce",
+      "meat",
+      "plate",
+      "platter",
+      "potato",
+      "salad",
+      "scallop",
+      "vegetable"
+    ],
+    "o_neg": [
+      "ham",
+      "including",
+      "peak",
+      "pork",
+      "variety",
+      "white"
+    ],
+    "responsibilities": {
+      "carrot": 1.0,
+      "food": 0.9955786135721738,
+      "ham": 0.10508927404595503,
+      "including": 0.13137325647701065,
+      "lettuce": 0.9999999963978738,
+      "meat": 0.42738663550715905,
+      "peak": 0.12118796484344288,
+      "plate": 0.9578577005543544,
+      "platter": 0.9812105431199039,
+      "pork": 0.09515105916365536,
+      "potato": 0.9999999995074855,
+      "salad": 0.8778088342910708,
+      "scallop": 0.7728708054789645,
+      "variety": 0.19238389408123427,
+      "vegetable": 0.911288112978634,
+      "white": 0.10285520306091717
+    }
+  },
+  "COCO_val2014_000000146837.jpg": {
+    "o_pos": [
+      "person",
+      "skateboard",
+      "park",
+      "rail"
+    ],
+    "o_neg": [
+      "balance",
+      "balustrade",
+      "grind",
+      "hedge",
+      "jumping",
+      "ledge",
+      "metal",
+      "pavement",
+      "performing",
+      "ramp",
+      "ride",
+      "skate",
+      "stair",
+      "trick"
+    ],
+    "responsibilities": {
+      "person": 0.9999999999874567,
+      "skateboard": 0.9987772257430833,
+      "balance": 0.0863441096785862,
+      "balustrade": 0.2293910802634447,
+      "grind": 0.10029919480936471,
+      "hedge": 0.1520965196543379,
+      "jumping": 0.10565872752330906,
+      "ledge": 0.10279734674215704,
+      "metal": 0.09167120413005006,
+      "park": 0.31384465457212624,
+      "pavement": 0.0922835749802905,
+      "performing": 0.20216103039670527,
+      "rail": 0.9999975390393468,
+      "ramp": 0.09667872897764347,
+      "ride": 0.0886967077167612,
+      "skate": 0.16576798652036584,
+      "stair": 0.07986784714597085,
+      "trick": 0.1704537599173275
+    }
+  },
+  "COCO_val2014_000000209925.jpg": {
+    "o_pos": [
+      "baseball glove",
+      "person",
+      "baseball",
+      "baseball uniform",
+      "batter",
+      "mound"
+    ],
+    "o_neg": [
+      "orange",
+      "sports ball",
+      "black",
+      "pant",
+      "pitch",
+      "shirt",
+      "stand",
+      "throw"
+    ],
+    "responsibilities": {
+      "baseball glove": 1.0,
+      "orange": 0.1143355142511906,
+      "person": 0.8736085371635268,
+      "sports ball": 0.136616301956881,
+      "baseball": 0.3468800612885636,
+      "baseball uniform": 0.9999999999999543,
+      "batter": 0.9999999991864916,
+      "black": 0.10070222010692532,
+      "mound": 0.9996653427471128,
+      "pant": 0.1257340769652635,
+      "pitch": 0.1927243082850027,
+      "shirt": 0.08822085539095573,
+      "stand": 0.11846764371692588,
+      "throw": 0.12839587871925542
+    }
+  },
+  "COCO_val2014_000000233888.jpg": {
+    "o_pos": [
+      "baseball bat",
+      "baseball glove",
+      "person",
+      "tv",
+      "bat",
+      "batter",
+      "entertainment center",
+      "game",
+      "living room",
+      "young"
+    ],
+    "o_neg": [
+      "sports ball",
+      "catch",
+      "play",
+      "playing",
+      "swing",
+      "swinge",
+      "video"
+    ],
+    "responsibilities": {
+      "baseball bat": 0.9999999999997562,
+      "baseball glove": 0.9978269547247522,
+      "person": 0.999999999999978,
+      "sports ball": 0.2226633895696422,
+      "tv": 0.9977211435850785,
+      "bat": 0.9999999808045559,
+      "batter": 0.9977439964691747,
+      "catch": 0.12974638508497943,
+      "entertainment center": 0.9999980578857953,
+      "game": 0.47787825905399817,
+      "living room": 0.9997183842404664,
+      "play": 0.1316265559753296,
+      "playing": 0.13598707523383202,
+      "swing": 0.09621409509306941,
+      "swinge": 0.10083522720816,
+      "video": 0.2712927185927499,
+      "young": 0.9807036958446225
+    }
+  },
+  "COCO_val2014_000000300784.jpg": {
+    "o_pos": [
+      "person"
+    ],
+    "o_neg": [
+      "bench",
+      "couch",
+      "dog",
+      "remote",
+      "group",
+      "holding",
+      "newspaper",
+      "one",
+      "pillar",
+      "play",
+      "sitting",
+      "stand",
+      "video game",
+      "wius"
+    ],
+    "responsibilities": {
+      "bench": 0.1059414733456949,
+      "couch": 0.1635983527409757,
+      "dog": 0.1894309621684628,
+      "person": 0.3700989617619788,
+      "remote": 0.1211895449675963,
+      "group": 0.08779566772548053,
+      "holding": 0.08023211349188855,
+      "newspaper": 0.2761892930865413,
+      "one": 0.08436900971602859,
+      "pillar": 0.10322531278926457,
+      "play": 0.09361815534371455,
+      "sitting": 0.08940461839580399,
+      "stand": 0.09275424840766146,
+      "video game": 0.08184751783946446,
+      "wius": 0.09594195390084581
+    }
+  },
+  "COCO_val2014_000000409346.jpg": {
+    "o_pos": [
+      "dining table",
+      "person",
+      "buffet",
+      "food",
+      "pastry",
+      "wall lamp"
+    ],
+    "o_neg": [
+      "bowl",
+      "spoon",
+      "dish",
+      "filled",
+      "plate",
+      "platter",
+      "reception",
+      "service",
+      "stand",
+      "themself",
+      "tray",
+      "treat",
+      "two",
+      "variou"
+    ],
+    "responsibilities": {
+      "bowl": 0.24612297187745089,
+      "dining table": 0.8118924817757655,
+      "person": 0.9999999999997675,
+      "spoon": 0.13092209274690148,
+      "buffet": 0.3251690977145461,
+      "dish": 0.08753108115394474,
+      "filled": 0.16005890762398392,
+      "food": 0.9967304177363532,
+      "pastry": 0.3297584456357618,
+      "plate": 0.1071417699547233,
+      "platter": 0.08253918448221423,
+      "reception": 0.09781607833982656,
+      "service": 0.1096993124795737,
+      "stand": 0.14374791174594087,
+      "themself": 0.10951910630527859,
+      "tray": 0.17083900703376576,
+      "treat": 0.2137261899880336,
+      "two": 0.08273649239678546,
+      "variou": 0.11193817851314748,
+      "wall lamp": 0.9983645271131194
+    }
+  },
+  "COCO_val2014_000000465601.jpg": {
+    "o_pos": [
+      "bench",
+      "handbag",
+      "person",
+      "umbrella",
+      "building"
+    ],
+    "o_neg": [
+      "catch",
+      "daylight",
+      "hat",
+      "pink",
+      "rain",
+      "rainy",
+      "stand",
+      "walk"
+    ],
+    "responsibilities": {
+      "bench": 0.9552939227955156,
+      "handbag": 0.9999983145816552,
+      "person": 0.9921817429664835,
+      "umbrella": 1.0,
+      "building": 0.9856778424644301,
+      "catch": 0.10668656501550915,
+      "daylight": 0.09138660094446191,
+      "hat": 0.2593083072501031,
+      "pink": 0.26013730109222555,
+      "rain": 0.09825422486303526,
+      "rainy": 0.12204046101841766,
+      "stand": 0.08511973785381347,
+      "walk": 0.08286933426815928
+    }
+  },
+  "COCO_val2014_000000175878.jpg": {
+    "o_pos": [
+      "cell phone"
+    ],
+    "o_neg": [
+      "person",
+      "conversation",
+      "group",
+      "hi",
+      "laugh",
+      "looking",
+      "one",
+      "outside",
+      "porch",
+      "pot",
+      "stand",
+      "standing",
+      "talk"
+    ],
+    "responsibilities": {
+      "cell phone": 0.7956683503463677,
+      "person": 0.23268506205266656,
+      "conversation": 0.11526617481945031,
+      "group": 0.08326950059609202,
+      "hi": 0.10997456867434353,
+      "laugh": 0.08620287540070996,
+      "looking": 0.09324800493525177,
+      "one": 0.08159484613694609,
+      "outside": 0.07972365006483179,
+      "porch": 0.07836308815373541,
+      "pot": 0.08357714780103057,
+      "stand": 0.09731718912114025,
+      "standing": 0.11471778597800647,
+      "talk": 0.11983686898483671
+    }
+  },
+  "COCO_val2014_000000498747.jpg": {
+    "o_pos": [
+      "bottle",
+      "cell phone",
+      "crowded",
+      "gathering",
+      "party"
+    ],
+    "o_neg": [
+      "person",
+      "alcohol",
+      "ear",
+      "group",
+      "hi",
+      "room",
+      "stand",
+      "surrounded",
+      "talk"
+    ],
+    "responsibilities": {
+      "bottle": 0.9174203911826698,
+      "cell phone": 0.9999987121903465,
+      "person": 0.08289159325587257,
+      "alcohol": 0.11191215030167673,
+      "crowded": 0.9767880112653484,
+      "ear": 0.14567644348748673,
+      "gathering": 0.4080251670190616,
+      "group": 0.2563458683553631,
+      "hi": 0.11955125576648168,
+      "party": 0.4394814126412388,
+      "room": 0.07995358860867098,
+      "stand": 0.09652988574124889,
+      "surrounded": 0.0809636690891979,
+      "talk": 0.13620631658051993
+    }
+  },
+  "COCO_val2014_000000052435.jpg": {
+    "o_pos": [],
+    "o_neg": [
+      "person",
+      "surfboard",
+      "beach",
+      "coast",
+      "enjoying",
+      "group",
+      "hill",
+      "hillside",
+      "sand",
+      "sea",
+      "shoreline",
+      "surfer",
+      "surfing",
+      "swim",
+      "swimmer",
+      "watching",
+      "water",
+      "wave"
+    ],
+    "responsibilities": {
+      "person": 0.09651231591583405,
+      "surfboard": 0.08121848690549527,
+      "beach": 0.0806958608006547,
+      "coast": 0.09558710144743937,
+      "enjoying": 0.10991144569892305,
+      "group": 0.09929204513470143,
+      "hill": 0.08043829293623364,
+      "hillside": 0.08541413935894707,
+      "sand": 0.08538068297698179,
+      "sea": 0.08880582709626114,
+      "shoreline": 0.10360196263475283,
+      "surfer": 0.14558639800629233,
+      "surfing": 0.12486948724474717,
+      "swim": 0.10268814765020406,
+      "swimmer": 0.09260012409432146,
+      "watching": 0.1241115262844782,
+      "water": 0.0837781170808349,
+      "wave": 0.10347228365448649
+    }
+  },
+  "COCO_val2014_000000353981.jpg": {
+    "o_pos": [
+      "airplane",
+      "truck",
+      "aircraft model",
+      "shuttle"
+    ],
+    "o_neg": [
+      "person",
+      "air field",
+      "black",
+      "floor",
+      "load",
+      "mounted",
+      "park",
+      "photo",
+      "propeller",
+      "raceway",
+      "space",
+      "tarmac",
+      "vintage",
+      "white"
+    ],
+    "responsibilities": {
+      "airplane": 1.0,
+      "person": 0.08258879281928909,
+      "truck": 0.9192417818218415,
+      "air field": 0.2364268750956003,
+      "aircraft model": 0.9999999995973747,
+      "black": 0.10551236735552667,
+      "floor": 0.10619251839076564,
+      "load": 0.08123304723890348,
+      "mounted": 0.08529542536815195,
+      "park": 0.11907044520401713,
+      "photo": 0.12015937517257005,
+      "propeller": 0.09048811484244126,
+      "raceway": 0.08428356246061698,
+      "shuttle": 0.9964518247716525,
+      "space": 0.10075003516302557,
+      "tarmac": 0.199417565005107,
+      "vintage": 0.09491709848853164,
+      "white": 0.10050296088080503
+    }
+  },
+  "COCO_val2014_000000185327.jpg": {
+    "o_pos": [
+      "bus",
+      "car",
+      "cow",
+      "person"
+    ],
+    "o_neg": [
+      "elephant",
+      "animal",
+      "cros",
+      "herd",
+      "road",
+      "street",
+      "street scene",
+      "walk"
+    ],
+    "responsibilities": {
+      "bus": 0.9999995369564731,
+      "car": 0.9999999999998321,
+      "cow": 0.9999112731251245,
+      "elephant": 0.10545306171236792,
+      "person": 0.7299657874899533,
+      "animal": 0.16340896725374696,
+      "cros": 0.09159088073870733,
+      "herd": 0.1876699233800029,
+      "road": 0.18751721850134623,
+      "street": 0.10872815485202143,
+      "street scene": 0.15867883544434302,
+      "walk": 0.0853196162415057
+    }
+  },
+  "COCO_val2014_000000348654.jpg": {
+    "o_pos": [
+      "cell phone",
+      "computer screen",
+      "iphone",
+      "ipod"
+    ],
+    "o_neg": [
+      "dining table",
+      "keyboard",
+      "laptop",
+      "mouse",
+      "tv",
+      "black",
+      "desktop",
+      "lock",
+      "office supply",
+      "sit",
+      "sitting",
+      "stand"
+    ],
+    "responsibilities": {
+      "cell phone": 1.0,
+      "dining table": 0.09202046604012165,
+      "keyboard": 0.08468723838021885,
+      "laptop": 0.13849342233260695,
+      "mouse": 0.13807165145684366,
+      "tv": 0.23313058762064354,
+      "black": 0.09628947016999799,
+      "computer screen": 0.998950152040553,
+      "desktop": 0.1797352583610961,
+      "iphone": 0.9999999999987537,
+      "ipod": 0.9917912772406843,
+      "lock": 0.08759998484189697,
+      "office supply": 0.1005122487390643,
+      "sit": 0.10283596337915431,
+      "sitting": 0.14410139030931085,
+      "stand": 0.0994284372032458
+    }
+  },
+  "COCO_val2014_000000129707.jpg": {
+    "o_pos": [
+      "cell phone",
+      "remote",
+      "hand"
+    ],
+    "o_neg": [
+      "book",
+      "person",
+      "catch",
+      "cathay",
+      "flip",
+      "holding",
+      "pacific"
+    ],
+    "responsibilities": {
+      "book": 0.09344933539828423,
+      "cell phone": 1.0,
+      "person": 0.1361807636077982,
+      "remote": 1.0,
+      "catch": 0.12250451007652106,
+      "cathay": 0.22049241720141585,
+      "flip": 0.09346008026881937,
+      "hand": 0.6180537408295615,
+      "holding": 0.11512977821397043,
+      "pacific": 0.09752552479346129
+    }
+  },
+  "COCO_val2014_000000379842.jpg": {
+    "o_pos": [
+      "remote",
+      "booklet",
+      "control",
+      "dvd",
+      "manual",
+      "super",
+      "toy"
+    ],
+    "o_neg": [
+      "dining table",
+      "electronic",
+      "galaxy",
+      "game",
+      "mario",
+      "placed",
+      "top",
+      "wiu",
+      "wius"
+    ],
+    "responsibilities": {
+      "dining table": 0.1144648208879547,
+      "remote": 0.9999999999999936,
+      "booklet": 0.9999999999905116,
+      "control": 0.3345021006136309,
+      "dvd": 0.9988011248267007,
+      "electronic": 0.19406055137758607,
+      "galaxy": 0.13861834360025022,
+      "game": 0.11715451616641784,
+      "manual": 0.9999999951917737,
+      "mario": 0.08036136478027371,
+      "placed": 0.15807762671521847,
+      "super": 0.9702124613584049,
+      "top": 0.10147940515171627,
+      "toy": 0.9999170581210598,
+      "wiu": 0.09440914863034355,
+      "wius": 0.08868606555335701
+    }
+  },
+  "COCO_val2014_000000103815.jpg": {
+    "o_pos": [
+      "baseball bat",
+      "baseball glove",
+      "sports ball",
+      "baseball uniform",
+      "bat",
+      "batter",
+      "field",
+      "mound"
+    ],
+    "o_neg": [
+      "person",
+      "catcher",
+      "deliver",
+      "game",
+      "pitch",
+      "referee",
+      "throw"
+    ],
+    "responsibilities": {
+      "baseball bat": 0.9999999999906883,
+      "baseball glove": 0.9872848745823912,
+      "person": 0.09502807718683906,
+      "sports ball": 0.9991319454966042,
+      "baseball uniform": 0.9015902224721865,
+      "bat": 0.9999999997678519,
+      "batter": 0.9999401069400741,
+      "catcher": 0.1096472746203374,
+      "deliver": 0.09396031708954114,
+      "field": 0.9784184481145006,
+      "game": 0.08251140788649654,
+      "mound": 0.999992949639323,
+      "pitch": 0.10883868057935152,
+      "referee": 0.08876294953726688,
+      "throw": 0.1808184398550488
+    }
+  },
+  "COCO_val2014_000000268854.jpg": {
+    "o_pos": [
+      "boat",
+      "person",
+      "basket",
+      "beach",
+      "sand",
+      "water"
+    ],
+    "o_neg": [
+      "banana",
+      "carrying",
+      "coast",
+      "dock",
+      "head",
+      "hut",
+      "load",
+      "sea",
+      "shore",
+      "shoreline",
+      "stand"
+    ],
+    "responsibilities": {
+      "banana": 0.10557179110604731,
+      "boat": 1.0,
+      "person": 1.0,
+      "basket": 0.41939402997284914,
+      "beach": 0.8552356070848076,
+      "carrying": 0.08059746243508557,
+      "coast": 0.08878433048361496,
+      "dock": 0.21657258871878882,
+      "head": 0.09189634150563215,
+      "hut": 0.1144871579013005,
+      "load": 0.08753018799020516,
+      "sand": 0.6027981670679166,
+      "sea": 0.21449832235537417,
+      "shore": 0.19166470525175255,
+      "shoreline": 0.0857914920852977,
+      "stand": 0.0959178729855196,
+      "water": 0.919091531787244
+    }
+  },
+  "COCO_val2014_000000034464.jpg": {
+    "o_pos": [
+      "boat",
+      "person",
+      "surfboard",
+      "beach",
+      "coast",
+      "lifeguard",
+      "raft",
+      "sand",
+      "sea",
+      "surfer",
+      "water",
+      "wave"
+    ],
+    "o_neg": [
+      "carrying",
+      "group",
+      "red",
+      "shoreline",
+      "stand",
+      "tube",
+      "walk"
+    ],
+    "responsibilities": {
+      "boat": 0.999123551271132,
+      "person": 1.0,
+      "surfboard": 1.0,
+      "beach": 0.9999997911860024,
+      "carrying": 0.07838153639699899,
+      "coast": 0.5828930548095879,
+      "group": 0.08354585108137502,
+      "lifeguard": 0.36223069426175447,
+      "raft": 0.9999964272874321,
+      "red": 0.09806903847317511,
+      "sand": 0.9999995331882051,
+      "sea": 0.7505829119570958,
+      "shoreline": 0.23855027843669555,
+      "stand": 0.09719035690745585,
+      "surfer": 0.9999634735875819,
+      "tube": 0.08111020296314297,
+      "walk": 0.09606588358267308,
+      "water": 0.985959299849336,
+      "wave": 0.9989650030695352
+    }
+  },
+  "COCO_val2014_000000529256.jpg": {
+    "o_pos": [
+      "bed",
+      "dog",
+      "bedcover",
+      "bedroom",
+      "blanket",
+      "comfort",
+      "lamp",
+      "laying",
+      "nightstand",
+      "picture frame",
+      "pillow"
+    ],
+    "o_neg": [
+      "book",
+      "couple",
+      "lay",
+      "left",
+      "one",
+      "red",
+      "relax",
+      "right",
+      "sleep",
+      "two"
+    ],
+    "responsibilities": {
+      "bed": 1.0,
+      "book": 0.11249557710659529,
+      "dog": 0.9999999999999987,
+      "bedcover": 0.4415692705086738,
+      "bedroom": 0.9999999824601603,
+      "blanket": 0.9991083727659212,
+      "comfort": 0.9410890391684745,
+      "couple": 0.07980550077807083,
+      "lamp": 0.9999998304452905,
+      "lay": 0.08836770685988449,
+      "laying": 0.5600252417335121,
+      "left": 0.08079898915623937,
+      "nightstand": 1.0,
+      "one": 0.09161295755438446,
+      "picture frame": 0.999271210614328,
+      "pillow": 1.0,
+      "red": 0.08169141307467502,
+      "relax": 0.08233409431268361,
+      "right": 0.08318406825599349,
+      "sleep": 0.09213996870925832,
+      "two": 0.10151918958008256
+    }
+  },
+  "COCO_val2014_000000037907.jpg": {
+    "o_pos": [
+      "cat",
+      "potted plant",
+      "tv"
+    ],
+    "o_neg": [
+      "entertainment center",
+      "sit",
+      "sitting",
+      "top"
+    ],
+    "responsibilities": {
+      "cat": 1.0,
+      "potted plant": 0.9970435591452126,
+      "tv": 0.9999995866965546,
+      "entertainment center": 0.26280269822342234,
+      "sit": 0.09468248900883806,
+      "sitting": 0.1691515189014704,
+      "top": 0.08382861709279092
+    }
+  },
+  "COCO_val2014_000000278365.jpg": {
+    "o_pos": [
+      "cup",
+      "dining table",
+      "person",
+      "pizza",
+      "beer",
+      "box",
+      "drink",
+      "eat",
+      "food",
+      "meal",
+      "plate",
+      "sweatshirt"
+    ],
+    "o_neg": [
+      "cell phone",
+      "chair",
+      "couple",
+      "sit",
+      "sitting",
+      "slouse"
+    ],
+    "responsibilities": {
+      "cell phone": 0.1841401051100015,
+      "chair": 0.25044226662218383,
+      "cup": 0.8705219292539538,
+      "dining table": 0.5919391093283747,
+      "person": 0.9999993760122884,
+      "pizza": 0.999990844645898,
+      "beer": 0.9999999907921757,
+      "box": 0.42325512487514644,
+      "couple": 0.09114432033445721,
+      "drink": 0.9999999999999967,
+      "eat": 0.9999964493535819,
+      "food": 1.0,
+      "meal": 0.9999999999986957,
+      "plate": 0.9999842756449645,
+      "sit": 0.09079091344732616,
+      "sitting": 0.08273810438208604,
+      "slouse": 0.07979235992885013,
+      "sweatshirt": 0.9999768744311697
+    }
+  },
+  "COCO_val2014_000000069757.jpg": {
+    "o_pos": [
+      "cake",
+      "chair",
+      "cup",
+      "dining table",
+      "person",
+      "wine glass",
+      "birthday",
+      "chocolate",
+      "platter"
+    ],
+    "o_neg": [
+      "knife",
+      "cutting",
+      "older",
+      "sit",
+      "watch"
+    ],
+    "responsibilities": {
+      "cake": 1.0,
+      "chair": 0.573553284098204,
+      "cup": 0.8869814402077465,
+      "dining table": 0.9999902912378413,
+      "knife": 0.28693963605192846,
+      "person": 0.3418312359858153,
+      "wine glass": 0.999999999999994,
+      "birthday": 0.9976148652957094,
+      "chocolate": 0.9269991368010504,
+      "cutting": 0.11801813703564215,
+      "older": 0.08309471768953977,
+      "platter": 0.9601173932662569,
+      "sit": 0.09560270065215985,
+      "watch": 0.10754417228369773
+    }
+  },
+  "COCO_val2014_000000092131.jpg": {
+    "o_pos": [
+      "bus",
+      "handbag",
+      "building",
+      "license plate",
+      "road"
+    ],
+    "o_neg": [
+      "person",
+      "bu",
+      "bus station",
+      "crowded",
+      "curb",
+      "higer",
+      "park",
+      "parked",
+      "stand",
+      "word",
+      "writing"
+    ],
+    "responsibilities": {
+      "bus": 0.9999999999999942,
+      "handbag": 0.9999943140169822,
+      "person": 0.16634774132009553,
+      "bu": 0.12455314925322948,
+      "building": 0.5641464329743989,
+      "bus station": 0.17464960584731734,
+      "crowded": 0.23565766205087743,
+      "curb": 0.17695677612206562,
+      "higer": 0.09842946910729279,
+      "license plate": 0.9989357757083474,
+      "park": 0.0861797985326162,
+      "parked": 0.09238478480898234,
+      "road": 0.3353899689587409,
+      "stand": 0.0858910058684918,
+      "word": 0.08951700488420315,
+      "writing": 0.09670584265864182
+    }
+  },
+  "COCO_val2014_000000565148.jpg": {
+    "o_pos": [
+      "baseball bat",
+      "baseball glove",
+      "sports ball",
+      "bat",
+      "batter",
+      "catcher",
+      "game",
+      "referee"
+    ],
+    "o_neg": [
+      "person",
+      "catch",
+      "getting",
+      "hit",
+      "holding",
+      "pitch",
+      "play",
+      "ready",
+      "stand",
+      "swing",
+      "swinge"
+    ],
+    "responsibilities": {
+      "baseball bat": 1.0,
+      "baseball glove": 1.0,
+      "person": 0.08585006424786099,
+      "sports ball": 0.9995517696804271,
+      "bat": 0.9999999999999942,
+      "batter": 0.9999999980587979,
+      "catch": 0.08911465874908911,
+      "catcher": 1.0,
+      "game": 0.41272612575245105,
+      "getting": 0.08211491560055689,
+      "hit": 0.13402685024217043,
+      "holding": 0.08802842931429339,
+      "pitch": 0.1069775613114991,
+      "play": 0.09032767755849955,
+      "ready": 0.0792359443302607,
+      "referee": 0.8732474279668462,
+      "stand": 0.09546420793767539,
+      "swing": 0.11471721138712522,
+      "swinge": 0.10687282459621113
+    }
+  },
+  "COCO_val2014_000000235595.jpg": {
+    "o_pos": [
+      "car",
+      "motorcycle",
+      "person",
+      "pavement",
+      "road",
+      "row"
+    ],
+    "o_neg": [
+      "curb",
+      "park",
+      "parked",
+      "red",
+      "storefront"
+    ],
+    "responsibilities": {
+      "car": 0.9996216443193157,
+      "motorcycle": 0.9999999881479052,
+      "person": 0.9884246769619099,
+      "curb": 0.16896346478652427,
+      "park": 0.09425128040992976,
+      "parked": 0.13999285557246438,
+      "pavement": 0.500976756771927,
+      "red": 0.08060029269412619,
+      "road": 0.8822636631002069,
+      "row": 0.9420967167781122,
+      "storefront": 0.13817700221802526
+    }
+  },
+  "COCO_val2014_000000409138.jpg": {
+    "o_pos": [
+      "bus",
+      "car",
+      "parked",
+      "road"
+    ],
+    "o_neg": [
+      "person",
+      "advertisement",
+      "bu",
+      "building",
+      "curb",
+      "drive",
+      "license plate",
+      "park",
+      "prince",
+      "travel",
+      "white"
+    ],
+    "responsibilities": {
+      "bus": 1.0,
+      "car": 1.0,
+      "person": 0.08484271914324887,
+      "advertisement": 0.11994076918522129,
+      "bu": 0.12946514174614315,
+      "building": 0.15737154169286774,
+      "curb": 0.20919505238160122,
+      "drive": 0.10722353884136686,
+      "license plate": 0.14398659187790738,
+      "park": 0.0787031346284246,
+      "parked": 0.6733044956109064,
+      "prince": 0.11137679622529863,
+      "road": 0.9958513793167963,
+      "travel": 0.09384981934398233,
+      "white": 0.11570680480967079
+    }
+  },
+  "COCO_val2014_000000333712.jpg": {
+    "o_pos": [
+      "pizza",
+      "spoon",
+      "food",
+      "scoop",
+      "topping"
+    ],
+    "o_neg": [
+      "fork",
+      "bacon",
+      "cheese",
+      "onion",
+      "pepperoni",
+      "plate",
+      "slouse",
+      "spinach",
+      "utensil",
+      "yellow"
+    ],
+    "responsibilities": {
+      "fork": 0.10722402145161922,
+      "pizza": 1.0,
+      "spoon": 0.9984236304519345,
+      "bacon": 0.10206168082833048,
+      "cheese": 0.10322785143547183,
+      "food": 0.9999929887218181,
+      "onion": 0.11736839522676418,
+      "pepperoni": 0.1347088950244364,
+      "plate": 0.08921254283575061,
+      "scoop": 0.7807239123903912,
+      "slouse": 0.12426537876646816,
+      "spinach": 0.08506678121015149,
+      "topping": 0.7400184202339984,
+      "utensil": 0.09275408646771668,
+      "yellow": 0.10941503994333822
+    }
+  },
+  "COCO_val2014_000000437910.jpg": {
+    "o_pos": [
+      "toilet",
+      "bathroom",
+      "bathroom accessory",
+      "doorway",
+      "floor",
+      "restroom",
+      "tile wall"
+    ],
+    "o_neg": [
+      "bottle",
+      "bowl",
+      "sink",
+      "shower",
+      "white"
+    ],
+    "responsibilities": {
+      "bottle": 0.0795262619573579,
+      "bowl": 0.1514502290187898,
+      "sink": 0.15350923331894675,
+      "toilet": 0.9999999999944311,
+      "bathroom": 0.9972421073388406,
+      "bathroom accessory": 0.9999526062789108,
+      "doorway": 0.9999931406736488,
+      "floor": 0.3149461610846916,
+      "restroom": 0.9993240208673906,
+      "shower": 0.12386226525147342,
+      "tile wall": 0.9688113956571002,
+      "white": 0.09138728794633895
+    }
+  },
+  "COCO_val2014_000000155885.jpg": {
+    "o_pos": [
+      "boat"
+    ],
+    "o_neg": [
+      "bird",
+      "person",
+      "anchor",
+      "black",
+      "city",
+      "dock",
+      "fill",
+      "flock",
+      "fly",
+      "flying",
+      "harbor",
+      "photo",
+      "sea",
+      "standing",
+      "water",
+      "waterway",
+      "white"
+    ],
+    "responsibilities": {
+      "bird": 0.09396838768607679,
+      "boat": 0.9999999999989142,
+      "person": 0.10375330767424003,
+      "anchor": 0.10987215758208203,
+      "black": 0.09243223419746302,
+      "city": 0.08997991954351318,
+      "dock": 0.07927754627061051,
+      "fill": 0.12222544382860764,
+      "flock": 0.1051754454078978,
+      "fly": 0.14698865672280834,
+      "flying": 0.10221384952431567,
+      "harbor": 0.1567721679170583,
+      "photo": 0.12682608725784017,
+      "sea": 0.07942294563749752,
+      "standing": 0.11196925829321422,
+      "water": 0.09785975395785083,
+      "waterway": 0.07990942224956797,
+      "white": 0.10696944664527527
+    }
+  },
+  "COCO_val2014_000000174402.jpg": {
+    "o_pos": [
+      "person",
+      "sports ball",
+      "tennis racket",
+      "court",
+      "hand",
+      "hat"
+    ],
+    "o_neg": [
+      "blue",
+      "catch",
+      "holding",
+      "play",
+      "shirt",
+      "stand",
+      "swing",
+      "swinge",
+      "tenni",
+      "wearing",
+      "white"
+    ],
+    "responsibilities": {
+      "person": 0.5485221360969844,
+      "sports ball": 1.0,
+      "tennis racket": 1.0,
+      "blue": 0.09565819059406919,
+      "catch": 0.08891408904792045,
+      "court": 0.9999845154055386,
+      "hand": 0.3524943095175738,
+      "hat": 0.4931063449455763,
+      "holding": 0.09015854489199723,
+      "play": 0.093678065908722,
+      "shirt": 0.08601731788658372,
+      "stand": 0.09510805566830648,
+      "swing": 0.09575017077258952,
+      "swinge": 0.09811561640529207,
+      "tenni": 0.0873625996148619,
+      "wearing": 0.09451794313119444,
+      "white": 0.08067814021781351
+    }
+  },
+  "COCO_val2014_000000295656.jpg": {
+    "o_pos": [
+      "car",
+      "chair",
+      "pizza",
+      "tie",
+      "bite",
+      "business suit",
+      "eat",
+      "food",
+      "plate",
+      "platter",
+      "together"
+    ],
+    "o_neg": [
+      "person",
+      "catch",
+      "enjoying",
+      "group",
+      "pose",
+      "stand"
+    ],
+    "responsibilities": {
+      "car": 0.6888749502325615,
+      "chair": 0.40999325854604746,
+      "person": 0.15564278010170343,
+      "pizza": 0.8047487949632214,
+      "tie": 0.9993187105073226,
+      "bite": 0.41154422468495105,
+      "business suit": 0.9999999943190168,
+      "catch": 0.10305526411231224,
+      "eat": 0.7487741109298343,
+      "enjoying": 0.07943027927816537,
+      "food": 0.9938726950443028,
+      "group": 0.1063644839551371,
+      "plate": 0.9999998528409574,
+      "platter": 0.9919322578832646,
+      "pose": 0.08485634434932869,
+      "stand": 0.08602346627566636,
+      "together": 0.3116828878286749
+    }
+  },
+  "COCO_val2014_000000129886.jpg": {
+    "o_pos": [
+      "person",
+      "skis",
+      "background",
+      "chairlift",
+      "hill",
+      "lift",
+      "ski resort",
+      "skiing",
+      "sky",
+      "snow",
+      "snowy",
+      "two"
+    ],
+    "o_neg": [
+      "blanket",
+      "couple",
+      "crane",
+      "hut",
+      "ramp",
+      "ride"
+    ],
+    "responsibilities": {
+      "person": 1.0,
+      "skis": 1.0,
+      "background": 0.9250527662558727,
+      "blanket": 0.0987635629244782,
+      "chairlift": 0.6766889346493753,
+      "couple": 0.08462921043296258,
+      "crane": 0.07916957906563354,
+      "hill": 0.9978942341849684,
+      "hut": 0.08790089320205045,
+      "lift": 0.9999299306881653,
+      "ramp": 0.11391990023978019,
+      "ride": 0.10129676445752245,
+      "ski resort": 0.36724378194627233,
+      "skiing": 0.9420861718858712,
+      "sky": 0.5239606391517537,
+      "snow": 0.9957615901358023,
+      "snowy": 0.9996887304557862,
+      "two": 0.3962293649810242
+    }
+  },
+  "COCO_val2014_000000313928.jpg": {
+    "o_pos": [
+      "chair",
+      "dining table",
+      "surfboard",
+      "sea"
+    ],
+    "o_neg": [
+      "bottle",
+      "balcony",
+      "balustrade",
+      "beach",
+      "dining",
+      "propped",
+      "rail",
+      "sit",
+      "terrace",
+      "wine",
+      "yellow"
+    ],
+    "responsibilities": {
+      "bottle": 0.10624427259704253,
+      "chair": 1.0,
+      "dining table": 0.9999999999853078,
+      "surfboard": 0.33498105356250724,
+      "balcony": 0.09482258153976615,
+      "balustrade": 0.08651944177523709,
+      "beach": 0.08998145106910246,
+      "dining": 0.10297691434528564,
+      "propped": 0.11322546902887122,
+      "rail": 0.24503565313992415,
+      "sea": 0.8633319570883614,
+      "sit": 0.07914442763045317,
+      "terrace": 0.08717032078198879,
+      "wine": 0.10741235658122039,
+      "yellow": 0.08899943136038586
+    }
+  },
+  "COCO_val2014_000000255934.jpg": {
+    "o_pos": [
+      "elephant",
+      "person",
+      "dirt",
+      "enclosure",
+      "fence",
+      "hay",
+      "zoo"
+    ],
+    "o_neg": [
+      "area",
+      "floor",
+      "large",
+      "pen",
+      "pole",
+      "sand",
+      "smaller",
+      "stone",
+      "two",
+      "walk"
+    ],
+    "responsibilities": {
+      "elephant": 1.0,
+      "person": 0.9613620025653786,
+      "area": 0.09899469615927943,
+      "dirt": 0.4175798491508945,
+      "enclosure": 0.4217798892020132,
+      "fence": 0.9663386743393562,
+      "floor": 0.15884428924122146,
+      "hay": 0.9117100478130284,
+      "large": 0.1138121667768644,
+      "pen": 0.13367007411942977,
+      "pole": 0.13713930805870203,
+      "sand": 0.1964178701629233,
+      "smaller": 0.08305508713389258,
+      "stone": 0.24476945126338986,
+      "two": 0.13278231554521516,
+      "walk": 0.10428191185334071,
+      "zoo": 0.3649661835410131
+    }
+  },
+  "COCO_val2014_000000289640.jpg": {
+    "o_pos": [
+      "chair",
+      "cup",
+      "dining table",
+      "frisbee",
+      "person",
+      "beer",
+      "beverage",
+      "face",
+      "plate",
+      "platter"
+    ],
+    "o_neg": [
+      "catch",
+      "cd",
+      "hi",
+      "sit",
+      "sitting"
+    ],
+    "responsibilities": {
+      "chair": 0.8437885516122411,
+      "cup": 0.8536372457656737,
+      "dining table": 0.9982321563007152,
+      "frisbee": 0.8928793677730833,
+      "person": 0.9591059496917036,
+      "beer": 1.0,
+      "beverage": 0.9999996425598895,
+      "catch": 0.09634795504645054,
+      "cd": 0.1644658302906766,
+      "face": 0.9999999986485326,
+      "hi": 0.08174388442678598,
+      "plate": 0.9999537842483911,
+      "platter": 0.9942976490919282,
+      "sit": 0.21522019566448533,
+      "sitting": 0.07852098248667533
+    }
+  },
+  "COCO_val2014_000000024104.jpg": {
+    "o_pos": [
+      "keyboard",
+      "computer screen",
+      "desktop",
+      "printer"
+    ],
+    "o_neg": [
+      "bed",
+      "cup",
+      "dining table",
+      "laptop",
+      "mouse",
+      "tv",
+      "electronic",
+      "equipment",
+      "lamp",
+      "office",
+      "office supply",
+      "speaker",
+      "two"
+    ],
+    "responsibilities": {
+      "bed": 0.1671140335105599,
+      "cup": 0.08744861868108522,
+      "dining table": 0.16122428318383683,
+      "keyboard": 0.9999699069425703,
+      "laptop": 0.1003717790967794,
+      "mouse": 0.08982610853555321,
+      "tv": 0.14356751853084998,
+      "computer screen": 0.4357066949619077,
+      "desktop": 0.3783727867019206,
+      "electronic": 0.07866596357619966,
+      "equipment": 0.09227283176598058,
+      "lamp": 0.11766031603180015,
+      "office": 0.1308713892147177,
+      "office supply": 0.1291857326418015,
+      "printer": 0.9925039536604621,
+      "speaker": 0.08700876132084573,
+      "two": 0.08086873346215269
+    }
+  },
+  "COCO_val2014_000000527497.jpg": {
+    "o_pos": [
+      "dining table",
+      "keyboard",
+      "tv",
+      "computer screen",
+      "desktop",
+      "lamp",
+      "office"
+    ],
+    "o_neg": [
+      "cell phone",
+      "laptop",
+      "mouse",
+      "office supply",
+      "sit",
+      "stall",
+      "two"
+    ],
+    "responsibilities": {
+      "cell phone": 0.08705612805318468,
+      "dining table": 0.3783280196768092,
+      "keyboard": 1.0,
+      "laptop": 0.08439286932902208,
+      "mouse": 0.0824712363576249,
+      "tv": 0.3026282862463169,
+      "computer screen": 0.9999698868286919,
+      "desktop": 0.9398838529604896,
+      "lamp": 0.9712424920399554,
+      "office": 0.9999999999999916,
+      "office supply": 0.0901199749052087,
+      "sit": 0.07849446927856663,
+      "stall": 0.09700907984247467,
+      "two": 0.091525633463367
+    }
+  },
+  "COCO_val2014_000000473118.jpg": {
+    "o_pos": [
+      "bicycle",
+      "person",
+      "skateboard",
+      "ramp",
+      "skate",
+      "skate park"
+    ],
+    "o_neg": [
+      "balance",
+      "doodle",
+      "grind",
+      "ledge",
+      "rail",
+      "ride",
+      "riding",
+      "stunt",
+      "trick"
+    ],
+    "responsibilities": {
+      "bicycle": 0.9999999999999989,
+      "person": 0.9999999995306124,
+      "skateboard": 1.0,
+      "balance": 0.09085921290077377,
+      "doodle": 0.10079038614979187,
+      "grind": 0.10324190715333158,
+      "ledge": 0.1132380811098022,
+      "rail": 0.07972451527680322,
+      "ramp": 0.42052569658612066,
+      "ride": 0.10123309166883833,
+      "riding": 0.1518388751376917,
+      "skate": 0.9999852135363613,
+      "skate park": 0.5313885607516375,
+      "stunt": 0.12983903881466735,
+      "trick": 0.12447448215146224
+    }
+  },
+  "COCO_val2014_000000416104.jpg": {
+    "o_pos": [
+      "bottle",
+      "chair",
+      "dining table",
+      "person",
+      "umbrella",
+      "beer",
+      "canopy",
+      "crowded",
+      "drink",
+      "group",
+      "sit",
+      "stall"
+    ],
+    "o_neg": [
+      "blue",
+      "enjoying",
+      "food",
+      "outdoor",
+      "outside",
+      "sitting",
+      "time",
+      "together"
+    ],
+    "responsibilities": {
+      "bottle": 0.9987357724057417,
+      "chair": 0.999998708567995,
+      "dining table": 0.9981098873807345,
+      "person": 0.8073991512990057,
+      "umbrella": 0.9999994705807171,
+      "beer": 0.9998161433858782,
+      "blue": 0.08105351448480355,
+      "canopy": 0.9243640179118061,
+      "crowded": 0.8722703779346656,
+      "drink": 0.9999995778614201,
+      "enjoying": 0.08219427384914096,
+      "food": 0.07983664451985852,
+      "group": 0.3608828497884909,
+      "outdoor": 0.13244649896499872,
+      "outside": 0.15538574946044661,
+      "sit": 0.7748194968819659,
+      "sitting": 0.08360730057940974,
+      "stall": 0.31309000116586205,
+      "time": 0.09153985877444751,
+      "together": 0.15192045059901838
+    }
+  },
+  "COCO_val2014_000000511852.jpg": {
+    "o_pos": [
+      "backpack",
+      "person",
+      "skis",
+      "ski pole",
+      "slope",
+      "snow",
+      "snowy"
+    ],
+    "o_neg": [
+      "blanket",
+      "couple",
+      "hill",
+      "ride",
+      "skiing",
+      "two"
+    ],
+    "responsibilities": {
+      "backpack": 0.9999845950867707,
+      "person": 1.0,
+      "skis": 0.9999999999999967,
+      "blanket": 0.10364645943051014,
+      "couple": 0.1099574486912108,
+      "hill": 0.20635275669036196,
+      "ride": 0.09605287215003405,
+      "ski pole": 0.999999999439315,
+      "skiing": 0.24791055060915437,
+      "slope": 0.9094259713357058,
+      "snow": 0.9692777470790355,
+      "snowy": 0.9956130303643718,
+      "two": 0.09800509965560732
+    }
+  },
+  "COCO_val2014_000000059386.jpg": {
+    "o_pos": [
+      "giraffe"
+    ],
+    "o_neg": [
+      "zebra",
+      "animal",
+      "eat",
+      "eating",
+      "enclosure",
+      "field",
+      "food",
+      "gras",
+      "grassy",
+      "green",
+      "group",
+      "herd",
+      "leaf",
+      "lush",
+      "pole",
+      "savanna",
+      "stand",
+      "tree"
+    ],
+    "responsibilities": {
+      "giraffe": 0.46991369598918736,
+      "zebra": 0.2814508153382666,
+      "animal": 0.08484577929034579,
+      "eat": 0.13536030780507083,
+      "eating": 0.09100168128537955,
+      "enclosure": 0.10805277045041543,
+      "field": 0.16234356171470984,
+      "food": 0.10692118829819765,
+      "gras": 0.2910958754542546,
+      "grassy": 0.12825562418402897,
+      "green": 0.07978004989549027,
+      "group": 0.08663275844969742,
+      "herd": 0.25322050954968656,
+      "leaf": 0.10464063986928941,
+      "lush": 0.10138174974917755,
+      "pole": 0.08024805493673369,
+      "savanna": 0.20000687120669192,
+      "stand": 0.11571622910878135,
+      "tree": 0.07901782241762363
+    }
+  },
+  "COCO_val2014_000000265628.jpg": {
+    "o_pos": [
+      "toilet",
+      "bathroom",
+      "restroom",
+      "shoe"
+    ],
+    "o_neg": [
+      "bowl",
+      "chair",
+      "person",
+      "ceiling",
+      "floor",
+      "hi",
+      "lid",
+      "standing",
+      "tile wall",
+      "white"
+    ],
+    "responsibilities": {
+      "bowl": 0.12499631370605326,
+      "chair": 0.15125002020793435,
+      "person": 0.09372768533472935,
+      "toilet": 1.0,
+      "bathroom": 0.9999730860352088,
+      "ceiling": 0.20143799936877912,
+      "floor": 0.09869135825719463,
+      "hi": 0.1434510042089499,
+      "lid": 0.28313735617542773,
+      "restroom": 0.9999988104619113,
+      "shoe": 0.9999987912239487,
+      "standing": 0.1552932023825314,
+      "tile wall": 0.1204123460753603,
+      "white": 0.08989692727514412
+    }
+  },
+  "COCO_val2014_000000499594.jpg": {
+    "o_pos": [
+      "bottle",
+      "broccoli",
+      "fork",
+      "asparagu",
+      "cheese",
+      "food",
+      "meat",
+      "plate",
+      "platter",
+      "silverware",
+      "steak",
+      "vegetable",
+      "wine"
+    ],
+    "o_neg": [
+      "knife",
+      "butter",
+      "grill",
+      "mat",
+      "peak",
+      "potato",
+      "tray",
+      "white"
+    ],
+    "responsibilities": {
+      "bottle": 0.9999642643855023,
+      "broccoli": 1.0,
+      "fork": 1.0,
+      "knife": 0.14991708186445407,
+      "asparagu": 0.36202475100195036,
+      "butter": 0.24338039619259477,
+      "cheese": 0.9999999317399612,
+      "food": 0.9491077776630682,
+      "grill": 0.1310702094829577,
+      "mat": 0.11753966988744984,
+      "meat": 0.999724205041119,
+      "peak": 0.11647621120796756,
+      "plate": 0.999999999999569,
+      "platter": 0.999999999730691,
+      "potato": 0.291880219337467,
+      "silverware": 0.9999999999999538,
+      "steak": 0.999806838738286,
+      "tray": 0.13512870627540613,
+      "vegetable": 0.37121606815352015,
+      "white": 0.10341963280467789,
+      "wine": 0.9936109126548399
+    }
+  },
+  "COCO_val2014_000000047828.jpg": {
+    "o_pos": [
+      "boat"
+    ],
+    "o_neg": [
+      "person",
+      "blue",
+      "calm",
+      "illuminate",
+      "light",
+      "night",
+      "night view",
+      "river",
+      "span",
+      "stroll",
+      "walk",
+      "water",
+      "waterway"
+    ],
+    "responsibilities": {
+      "boat": 0.9999813144078417,
+      "person": 0.09796426723395152,
+      "blue": 0.1450727533328084,
+      "calm": 0.08497617247542939,
+      "illuminate": 0.08847914897356791,
+      "light": 0.1308214594505392,
+      "night": 0.08107187086639296,
+      "night view": 0.09997934299085633,
+      "river": 0.08132465961091746,
+      "span": 0.16994635959242121,
+      "stroll": 0.08415779473347028,
+      "walk": 0.0895482156632491,
+      "water": 0.09101917275546305,
+      "waterway": 0.08479838335436608
+    }
+  },
+  "COCO_val2014_000000047916.jpg": {
+    "o_pos": [
+      "bench",
+      "car",
+      "dog",
+      "frisbee",
+      "truck",
+      "field",
+      "gras",
+      "grassy",
+      "three"
+    ],
+    "o_neg": [
+      "brown",
+      "cd",
+      "chase",
+      "holding",
+      "lush",
+      "mouth",
+      "one",
+      "play",
+      "playing",
+      "red",
+      "run",
+      "toy",
+      "white",
+      "yard"
+    ],
+    "responsibilities": {
+      "bench": 0.9999966181701924,
+      "car": 0.6809765786477614,
+      "dog": 1.0,
+      "frisbee": 1.0,
+      "truck": 0.8200226621439857,
+      "brown": 0.07880948372221733,
+      "cd": 0.11284586252127564,
+      "chase": 0.1357530790549026,
+      "field": 0.8746442791776299,
+      "gras": 0.9948619876646047,
+      "grassy": 0.9380085457075333,
+      "holding": 0.0798241248540389,
+      "lush": 0.09314168976808522,
+      "mouth": 0.09035358451191028,
+      "one": 0.081977451211643,
+      "play": 0.14978491999277846,
+      "playing": 0.154538224201088,
+      "red": 0.09099333706991271,
+      "run": 0.15263605539430242,
+      "three": 0.3642501944242831,
+      "toy": 0.07871985941278788,
+      "white": 0.08030522468414857,
+      "yard": 0.1047954826154621
+    }
+  },
+  "COCO_val2014_000000131138.jpg": {
+    "o_pos": [
+      "chair",
+      "cup",
+      "dining table",
+      "keyboard",
+      "laptop",
+      "tv",
+      "computer screen",
+      "desktop",
+      "lamp",
+      "office",
+      "pen",
+      "window"
+    ],
+    "o_neg": [
+      "book",
+      "mouse",
+      "electronic",
+      "office supply"
+    ],
+    "responsibilities": {
+      "book": 0.23375379280277145,
+      "chair": 0.9999999999992091,
+      "cup": 0.9813613615065403,
+      "dining table": 0.6061958662712612,
+      "keyboard": 1.0,
+      "laptop": 0.9999999999999996,
+      "mouse": 0.08267620294327657,
+      "tv": 0.8247407115602986,
+      "computer screen": 0.6001039109133613,
+      "desktop": 0.5739797500807655,
+      "electronic": 0.09185428344550867,
+      "lamp": 0.32646915842309376,
+      "office": 0.9999999999960736,
+      "office supply": 0.28737977718211194,
+      "pen": 0.9994135666620683,
+      "window": 0.9464522912554887
+    }
+  },
+  "COCO_val2014_000000347453.jpg": {
+    "o_pos": [
+      "bus",
+      "car",
+      "traffic light",
+      "city",
+      "urban"
+    ],
+    "o_neg": [
+      "person",
+      "bu",
+      "building",
+      "drive",
+      "license plate",
+      "red",
+      "road",
+      "street",
+      "street scene",
+      "travel"
+    ],
+    "responsibilities": {
+      "bus": 0.9999999947723488,
+      "car": 0.9999776105615329,
+      "person": 0.08162218925464926,
+      "traffic light": 0.9999999999590932,
+      "bu": 0.08212602933118937,
+      "building": 0.10619756514237262,
+      "city": 0.9261109141817508,
+      "drive": 0.08826874966823892,
+      "license plate": 0.08829053343219631,
+      "red": 0.08202265011189255,
+      "road": 0.2046400069347385,
+      "street": 0.19488589678354298,
+      "street scene": 0.24895649478560633,
+      "travel": 0.23313737504881898,
+      "urban": 0.9898106162027555
+    }
+  },
+  "COCO_val2014_000000285820.jpg": {
+    "o_pos": [
+      "chair",
+      "couch",
+      "dining table",
+      "armchair",
+      "blind",
+      "furniture",
+      "pillow",
+      "room",
+      "window"
+    ],
+    "o_neg": [
+      "book",
+      "cell phone",
+      "tv",
+      "den",
+      "fill",
+      "living"
+    ],
+    "responsibilities": {
+      "book": 0.09819676584013728,
+      "cell phone": 0.09615176603057758,
+      "chair": 0.39531677577863733,
+      "couch": 0.9999999999999996,
+      "dining table": 0.9998823397048696,
+      "tv": 0.23780673884904507,
+      "armchair": 0.9738956701965497,
+      "blind": 0.9999982118177823,
+      "den": 0.11623579487153854,
+      "fill": 0.1063957450077613,
+      "furniture": 0.8341288406812823,
+      "living": 0.08275696875490608,
+      "pillow": 1.0,
+      "room": 0.9913217024608784,
+      "window": 0.9999735186755729
+    }
+  },
+  "COCO_val2014_000000245664.jpg": {
+    "o_pos": [
+      "keyboard",
+      "laptop",
+      "wine glass",
+      "computer screen",
+      "desktop",
+      "office"
+    ],
+    "o_neg": [
+      "book",
+      "dining table",
+      "mouse",
+      "tv",
+      "office supply",
+      "pen",
+      "sit",
+      "sitting",
+      "window"
+    ],
+    "responsibilities": {
+      "book": 0.0862073284074886,
+      "dining table": 0.14067694914894419,
+      "keyboard": 0.9999999999996596,
+      "laptop": 0.9999999999371938,
+      "mouse": 0.093506902080892,
+      "tv": 0.08647832399705899,
+      "wine glass": 0.9999411651333171,
+      "computer screen": 0.8392956182962288,
+      "desktop": 0.4368154353948895,
+      "office": 0.9675729926742795,
+      "office supply": 0.08750767857936219,
+      "pen": 0.14095296281210035,
+      "sit": 0.10968918235217306,
+      "sitting": 0.2170989589312855,
+      "window": 0.0958552278684459
+    }
+  },
+  "COCO_val2014_000000087052.jpg": {
+    "o_pos": [
+      "oven",
+      "person",
+      "refrigerator",
+      "appliance",
+      "dish washer",
+      "exhaust hood",
+      "kitchen",
+      "preparing"
+    ],
+    "o_neg": [
+      "cup",
+      "vase",
+      "archway",
+      "couple",
+      "doorway",
+      "food",
+      "hug",
+      "kis",
+      "magnet",
+      "stand",
+      "standing"
+    ],
+    "responsibilities": {
+      "cup": 0.1233520345434901,
+      "oven": 0.4738940906544419,
+      "person": 0.9997688728765775,
+      "refrigerator": 1.0,
+      "vase": 0.08519381486819895,
+      "appliance": 0.9999999995651372,
+      "archway": 0.07863135615503673,
+      "couple": 0.11933963808044731,
+      "dish washer": 0.35146922607829734,
+      "doorway": 0.14657652536825333,
+      "exhaust hood": 0.6397217385688754,
+      "food": 0.13700541548662162,
+      "hug": 0.10277423368230884,
+      "kis": 0.08367069608010617,
+      "kitchen": 0.9994344882311735,
+      "magnet": 0.0832543690347907,
+      "preparing": 0.33294387457520763,
+      "stand": 0.14066504355809828,
+      "standing": 0.11140090214911033
+    }
+  },
+  "COCO_val2014_000000259345.jpg": {
+    "o_pos": [
+      "bench",
+      "chair",
+      "person",
+      "umbrella",
+      "beard",
+      "lap"
+    ],
+    "o_neg": [
+      "catch",
+      "mustache",
+      "pink",
+      "robe",
+      "sit",
+      "sitting",
+      "smile",
+      "sunshade"
+    ],
+    "responsibilities": {
+      "bench": 0.35394393745421493,
+      "chair": 0.6204388945645634,
+      "person": 0.9132459577261154,
+      "umbrella": 1.0,
+      "beard": 0.997589198527805,
+      "catch": 0.09288007619942341,
+      "lap": 0.42659140491760367,
+      "mustache": 0.07840497551321592,
+      "pink": 0.07869078228381123,
+      "robe": 0.09864194912222495,
+      "sit": 0.0833106886037422,
+      "sitting": 0.08400017362836906,
+      "smile": 0.11155336730109237,
+      "sunshade": 0.20726162171024237
+    }
+  },
+  "COCO_val2014_000000422328.jpg": {
+    "o_pos": [
+      "car",
+      "horse",
+      "cart",
+      "donkey",
+      "sack",
+      "sleigh",
+      "snow",
+      "snowy",
+      "wagon"
+    ],
+    "o_neg": [
+      "attach",
+      "bag",
+      "blanket",
+      "carry",
+      "coach",
+      "load",
+      "pull",
+      "standing",
+      "white",
+      "winter"
+    ],
+    "responsibilities": {
+      "car": 0.9975640578402251,
+      "horse": 1.0,
+      "attach": 0.1293307100005049,
+      "bag": 0.0880479776889264,
+      "blanket": 0.0788322331877641,
+      "carry": 0.09814335506589739,
+      "cart": 0.9999999999999942,
+      "coach": 0.12286092965154687,
+      "donkey": 0.9999935123886315,
+      "load": 0.07937450033368854,
+      "pull": 0.1282302542360934,
+      "sack": 0.40669661306647825,
+      "sleigh": 0.3184879146830574,
+      "snow": 0.9859000884375265,
+      "snowy": 0.9869669535564566,
+      "standing": 0.08233927011520237,
+      "wagon": 0.9970827543174191,
+      "white": 0.08040832189741336,
+      "winter": 0.1752994701221792
+    }
+  },
+  "COCO_val2014_000000354559.jpg": {
+    "o_pos": [
+      "person",
+      "teddy bear",
+      "animal",
+      "brunette",
+      "corset",
+      "doll",
+      "head",
+      "lipstick",
+      "pose",
+      "smile",
+      "teddy",
+      "toy"
+    ],
+    "o_neg": [
+      "apron",
+      "black",
+      "brown",
+      "catch",
+      "dre",
+      "dres",
+      "holding",
+      "red",
+      "selfie",
+      "stuff",
+      "two",
+      "wear"
+    ],
+    "responsibilities": {
+      "person": 0.9305270282966692,
+      "teddy bear": 0.9999921395641062,
+      "animal": 0.999994174339114,
+      "apron": 0.14614056390481686,
+      "black": 0.092898138055421,
+      "brown": 0.08143920105631935,
+      "brunette": 0.9999999994364019,
+      "catch": 0.08271493580560906,
+      "corset": 0.9999999974399945,
+      "doll": 0.9891421611823633,
+      "dre": 0.08302473781574783,
+      "dres": 0.21074679180810782,
+      "head": 0.4645612859624903,
+      "holding": 0.08742908877365506,
+      "lipstick": 1.0,
+      "pose": 0.4308207354952312,
+      "red": 0.10021930912479418,
+      "selfie": 0.15715071854936338,
+      "smile": 0.7668859077791285,
+      "stuff": 0.12803299101788354,
+      "teddy": 0.9990891906240349,
+      "toy": 0.9999265753921024,
+      "two": 0.08104178843596746,
+      "wear": 0.1098911121003299
+    }
+  },
+  "COCO_val2014_000000438788.jpg": {
+    "o_pos": [
+      "cake",
+      "knife",
+      "person",
+      "spoon",
+      "foil",
+      "frost",
+      "plate",
+      "platter"
+    ],
+    "o_neg": [
+      "dining table",
+      "cream",
+      "cut",
+      "mis",
+      "placed",
+      "slouse",
+      "white"
+    ],
+    "responsibilities": {
+      "cake": 0.9999882469324213,
+      "dining table": 0.2435882808049719,
+      "knife": 0.4710853511957686,
+      "person": 0.9999999976206668,
+      "spoon": 0.4426117340933034,
+      "cream": 0.08696306322229784,
+      "cut": 0.08125538832892742,
+      "foil": 0.4655830341232939,
+      "frost": 0.7581659149444065,
+      "mis": 0.07956954473511081,
+      "placed": 0.0867286152294985,
+      "plate": 0.9999999834109158,
+      "platter": 0.9999818864866745,
+      "slouse": 0.08226479996753241,
+      "white": 0.08666348995122351
+    }
+  },
+  "COCO_val2014_000000545594.jpg": {
+    "o_pos": [
+      "bus",
+      "person",
+      "ceiling",
+      "wearing"
+    ],
+    "o_neg": [
+      "chair",
+      "bu",
+      "coach",
+      "crowded",
+      "ride",
+      "shirt",
+      "stand",
+      "subway",
+      "tie dye"
+    ],
+    "responsibilities": {
+      "bus": 0.9815088433490669,
+      "chair": 0.07902877286898298,
+      "person": 0.9968741573329184,
+      "bu": 0.12962385259443354,
+      "ceiling": 0.5048038191496153,
+      "coach": 0.08758375944996905,
+      "crowded": 0.116088214341502,
+      "ride": 0.1555832504287452,
+      "shirt": 0.12076363645456238,
+      "stand": 0.10677609799330431,
+      "subway": 0.22963742402289666,
+      "tie dye": 0.08259245053688086,
+      "wearing": 0.619047349063005
+    }
+  },
+  "COCO_val2014_000000219546.jpg": {
+    "o_pos": [
+      "bowl",
+      "chair",
+      "cup",
+      "dining table",
+      "fork",
+      "knife",
+      "spoon",
+      "cloth",
+      "condiment",
+      "dinner",
+      "food",
+      "ham",
+      "meal",
+      "meat",
+      "plate",
+      "platter",
+      "set",
+      "tablecloth",
+      "tray",
+      "utensil"
+    ],
+    "o_neg": [
+      "bottle",
+      "buffet",
+      "christma",
+      "fill",
+      "full",
+      "including",
+      "thanksgiving",
+      "variety"
+    ],
+    "responsibilities": {
+      "bottle": 0.21252932819444492,
+      "bowl": 0.9999999159273232,
+      "chair": 0.999998441325964,
+      "cup": 0.30157841889109677,
+      "dining table": 0.9999999999999936,
+      "fork": 0.9653867049234951,
+      "knife": 0.9999992231704018,
+      "spoon": 0.9993902639925292,
+      "buffet": 0.23357310376188659,
+      "christma": 0.18693639900177453,
+      "cloth": 0.8342341789919218,
+      "condiment": 0.4698212758494082,
+      "dinner": 0.35542676395363854,
+      "fill": 0.09499576331609627,
+      "food": 0.9999999999991833,
+      "full": 0.09554626232093391,
+      "ham": 0.6336007043648331,
+      "including": 0.09339758522652755,
+      "meal": 0.9999987069575995,
+      "meat": 0.3515044974016835,
+      "plate": 0.9999994853997808,
+      "platter": 0.9999239159637641,
+      "set": 0.5886415471557656,
+      "tablecloth": 0.9999999999910423,
+      "thanksgiving": 0.11351179222166445,
+      "tray": 0.9999809742130088,
+      "utensil": 0.9999999984914241,
+      "variety": 0.11619096415817563
+    }
+  },
+  "COCO_val2014_000000155131.jpg": {
+    "o_pos": [
+      "person",
+      "sports ball",
+      "tennis racket",
+      "court",
+      "hit"
+    ],
+    "o_neg": [
+      "beat",
+      "catch",
+      "dre",
+      "dres",
+      "jump",
+      "play",
+      "playing",
+      "service",
+      "swing",
+      "swinge",
+      "tenni",
+      "white"
+    ],
+    "responsibilities": {
+      "person": 0.5892283797307961,
+      "sports ball": 0.999973518418608,
+      "tennis racket": 0.9996533925898148,
+      "beat": 0.10434850516575045,
+      "catch": 0.12135644391736636,
+      "court": 0.928782889033032,
+      "dre": 0.0991452788911505,
+      "dres": 0.0830866933018297,
+      "hit": 0.4553598679269043,
+      "jump": 0.09133688893491872,
+      "play": 0.08382971798526266,
+      "playing": 0.12483283061742313,
+      "service": 0.08660870902591047,
+      "swing": 0.14608757922987498,
+      "swinge": 0.07865540264585798,
+      "tenni": 0.09375872727818688,
+      "white": 0.08071709970166972
+    }
+  },
+  "COCO_val2014_000000188752.jpg": {
+    "o_pos": [
+      "apple",
+      "banana",
+      "person",
+      "fruit",
+      "produce",
+      "vegetable"
+    ],
+    "o_neg": [
+      "attach",
+      "bunch",
+      "canopy",
+      "ceiling",
+      "display",
+      "hang",
+      "hanging",
+      "hook",
+      "market",
+      "pillar",
+      "pole",
+      "stall",
+      "string",
+      "yellow"
+    ],
+    "responsibilities": {
+      "apple": 0.4730886358549073,
+      "banana": 0.9999802017119612,
+      "person": 0.9999999977513689,
+      "attach": 0.11352593493590353,
+      "bunch": 0.2648023776345554,
+      "canopy": 0.10146035214328211,
+      "ceiling": 0.09236160395490015,
+      "display": 0.09511169808986153,
+      "fruit": 0.9990489505527849,
+      "hang": 0.1052487734968488,
+      "hanging": 0.13350027670528444,
+      "hook": 0.07920685587700212,
+      "market": 0.22862033540536228,
+      "pillar": 0.09996777937210956,
+      "pole": 0.08005560963822121,
+      "produce": 0.9873703377351649,
+      "stall": 0.16953531497870622,
+      "string": 0.08440450722506791,
+      "vegetable": 0.5575341571986839,
+      "yellow": 0.14688972284031554
+    }
+  },
+  "COCO_val2014_000000228350.jpg": {
+    "o_pos": [
+      "chair",
+      "dining table",
+      "person",
+      "umbrella",
+      "canopy",
+      "group",
+      "outside",
+      "waiter"
+    ],
+    "o_neg": [
+      "enjoying",
+      "meal",
+      "outdoor",
+      "restaurant",
+      "sit",
+      "sitting"
+    ],
+    "responsibilities": {
+      "chair": 1.0,
+      "dining table": 1.0,
+      "person": 0.9999801180576354,
+      "umbrella": 0.9999999999999967,
+      "canopy": 0.9996366795049374,
+      "enjoying": 0.14076842668198142,
+      "group": 0.979543680360557,
+      "meal": 0.17772290252589085,
+      "outdoor": 0.23766300498481338,
+      "outside": 0.8684988621883709,
+      "restaurant": 0.27110906935445156,
+      "sit": 0.140824766533335,
+      "sitting": 0.15853955732152916,
+      "waiter": 0.943167224190712
+    }
+  },
+  "COCO_val2014_000000378831.jpg": {
+    "o_pos": [
+      "fire hydrant",
+      "handbag",
+      "person",
+      "bag"
+    ],
+    "o_neg": [
+      "carry",
+      "carrying",
+      "cart",
+      "curb",
+      "pavement",
+      "red",
+      "road",
+      "shirt",
+      "street",
+      "walk",
+      "yellow"
+    ],
+    "responsibilities": {
+      "fire hydrant": 0.9998608221056988,
+      "handbag": 0.35326686946789704,
+      "person": 0.9999999999997025,
+      "bag": 0.9933967701327376,
+      "carry": 0.16352083179868554,
+      "carrying": 0.19285147973856695,
+      "cart": 0.10780768744837395,
+      "curb": 0.1975444815236861,
+      "pavement": 0.07965751076209464,
+      "red": 0.08703783857874776,
+      "road": 0.09137903278248904,
+      "shirt": 0.08086272602780871,
+      "street": 0.10700531230103645,
+      "walk": 0.1308723181749784,
+      "yellow": 0.08553768232566114
+    }
+  },
+  "COCO_val2014_000000330369.jpg": {
+    "o_pos": [
+      "boat",
+      "water"
+    ],
+    "o_neg": [
+      "bird",
+      "person",
+      "calm",
+      "dock",
+      "emulatet",
+      "harbor",
+      "name",
+      "red",
+      "sea",
+      "seawall",
+      "white",
+      "wy1010"
+    ],
+    "responsibilities": {
+      "bird": 0.09167376111106955,
+      "boat": 1.0,
+      "person": 0.08262104323725208,
+      "calm": 0.0955067858390074,
+      "dock": 0.07880325717738373,
+      "emulatet": 0.1366872433529242,
+      "harbor": 0.08217412478363786,
+      "name": 0.08503678011593666,
+      "red": 0.13910187436245916,
+      "sea": 0.21299583166653827,
+      "seawall": 0.1518845304337581,
+      "water": 0.8126942162654409,
+      "white": 0.10062325538944904,
+      "wy1010": 0.2845126812200259
+    }
+  },
+  "COCO_val2014_000000288576.jpg": {
+    "o_pos": [
+      "bicycle",
+      "frisbee",
+      "person",
+      "ground",
+      "hedge",
+      "nearby",
+      "park",
+      "stump"
+    ],
+    "o_neg": [
+      "chair",
+      "catch",
+      "cd",
+      "laying",
+      "play",
+      "red",
+      "stand",
+      "throw",
+      "throwing",
+      "toy"
+    ],
+    "responsibilities": {
+      "bicycle": 0.9984661961804177,
+      "chair": 0.09765299231099256,
+      "frisbee": 0.9999999999957332,
+      "person": 0.9971454700219669,
+      "catch": 0.08743935327068754,
+      "cd": 0.11649767641407306,
+      "ground": 0.3638289998421833,
+      "hedge": 0.9999913875798395,
+      "laying": 0.09237579293432403,
+      "nearby": 0.48291672140095937,
+      "park": 0.7816792407031723,
+      "play": 0.13035568570889822,
+      "red": 0.12161716949254328,
+      "stand": 0.10538340002768602,
+      "stump": 0.9999999999502984,
+      "throw": 0.10413949904804076,
+      "throwing": 0.14317046486048893,
+      "toy": 0.09669074766077751
+    }
+  },
+  "COCO_val2014_000000020650.jpg": {
+    "o_pos": [
+      "bowl",
+      "broccoli",
+      "fork",
+      "sandwich",
+      "avocado",
+      "cheese",
+      "food",
+      "pickle",
+      "plate",
+      "vegetable"
+    ],
+    "o_neg": [
+      "dining table",
+      "chip",
+      "half",
+      "peak",
+      "red"
+    ],
+    "responsibilities": {
+      "bowl": 0.829243092622386,
+      "broccoli": 0.9999999999997202,
+      "dining table": 0.09624700358155143,
+      "fork": 0.999999445860717,
+      "sandwich": 1.0,
+      "avocado": 0.9996523273457146,
+      "cheese": 0.31413249279774946,
+      "chip": 0.08488726324489279,
+      "food": 0.5421315444301135,
+      "half": 0.09303103766655409,
+      "peak": 0.11156846080976805,
+      "pickle": 0.9999999981055285,
+      "plate": 0.9995610987403328,
+      "red": 0.08930808721109122,
+      "vegetable": 0.9212656831165603
+    }
+  },
+  "COCO_val2014_000000152499.jpg": {
+    "o_pos": [
+      "chair",
+      "person",
+      "surfboard",
+      "umbrella",
+      "pool",
+      "young"
+    ],
+    "o_neg": [
+      "group",
+      "play",
+      "playing",
+      "sitting",
+      "water"
+    ],
+    "responsibilities": {
+      "chair": 0.728828851675711,
+      "person": 0.9999997419959827,
+      "surfboard": 0.8261557983622688,
+      "umbrella": 0.995704539414022,
+      "group": 0.08168051713133112,
+      "play": 0.08467495608154231,
+      "playing": 0.08371107983924254,
+      "pool": 1.0,
+      "sitting": 0.12831936107014538,
+      "water": 0.1650630586498015,
+      "young": 0.999973511486984
+    }
+  },
+  "COCO_val2014_000000180764.jpg": {
+    "o_pos": [
+      "bottle",
+      "donut",
+      "microwave",
+      "person",
+      "bite",
+      "eat",
+      "frost",
+      "frosted",
+      "home appliance",
+      "pastry"
+    ],
+    "o_neg": [
+      "cup",
+      "brown",
+      "catch",
+      "eating",
+      "glaze",
+      "pink",
+      "sprinkle",
+      "take"
+    ],
+    "responsibilities": {
+      "bottle": 0.6690254510751011,
+      "cup": 0.08843395123494364,
+      "donut": 1.0,
+      "microwave": 0.9999999996922735,
+      "person": 0.994823681710023,
+      "bite": 0.30842673425182243,
+      "brown": 0.08447225330783602,
+      "catch": 0.1032420662688847,
+      "eat": 0.601154885716146,
+      "eating": 0.11297461533929529,
+      "frost": 0.3175446783812045,
+      "frosted": 0.9999871795176806,
+      "glaze": 0.15936612913456116,
+      "home appliance": 0.9999991450055306,
+      "pastry": 0.8156516038219892,
+      "pink": 0.08694871963086803,
+      "sprinkle": 0.19327796862359362,
+      "take": 0.08260036243473627
+    }
+  },
+  "COCO_val2014_000000113860.jpg": {
+    "o_pos": [
+      "boat"
+    ],
+    "o_neg": [
+      "person",
+      "umbrella",
+      "black",
+      "boat house",
+      "calm",
+      "canal",
+      "float",
+      "hero",
+      "lake",
+      "narrow",
+      "river",
+      "travel",
+      "water",
+      "waterway",
+      "word"
+    ],
+    "responsibilities": {
+      "boat": 1.0,
+      "person": 0.09372250994925016,
+      "umbrella": 0.09912720639781472,
+      "black": 0.08678978792916296,
+      "boat house": 0.1345416133784345,
+      "calm": 0.08182435382303468,
+      "canal": 0.08931655629670035,
+      "float": 0.12460858889684917,
+      "hero": 0.09855214676103004,
+      "lake": 0.1323635676809789,
+      "narrow": 0.097274533691796,
+      "river": 0.09705473873660733,
+      "travel": 0.10021561458233161,
+      "water": 0.12688205030885188,
+      "waterway": 0.10722133253036925,
+      "word": 0.11459912374792602
+    }
+  },
+  "COCO_val2014_000000333998.jpg": {
+    "o_pos": [
+      "bowl",
+      "microwave",
+      "oven",
+      "refrigerator",
+      "sink",
+      "appliance",
+      "cabinet",
+      "can",
+      "counter",
+      "counter top",
+      "cutting board",
+      "dish washer",
+      "doorway",
+      "exhaust hood",
+      "faucet",
+      "kitchen",
+      "kitchen island",
+      "tray"
+    ],
+    "o_neg": [
+      "bottle",
+      "closet",
+      "magnet"
+    ],
+    "responsibilities": {
+      "bottle": 0.1482988157281822,
+      "bowl": 0.6104263958609479,
+      "microwave": 0.9999999999999987,
+      "oven": 0.999999999857327,
+      "refrigerator": 1.0,
+      "sink": 0.9999999999999738,
+      "appliance": 1.0,
+      "cabinet": 0.9762783791499505,
+      "can": 0.9999992077989381,
+      "closet": 0.08402372458826309,
+      "counter": 0.9999999999983471,
+      "counter top": 0.9999999999999949,
+      "cutting board": 1.0,
+      "dish washer": 0.9957332149619796,
+      "doorway": 0.4300152906803641,
+      "exhaust hood": 1.0,
+      "faucet": 0.9999999843399271,
+      "kitchen": 1.0,
+      "kitchen island": 0.656560808523518,
+      "magnet": 0.0840206954539733,
+      "tray": 0.95529244631172
+    }
+  },
+  "COCO_val2014_000000047131.jpg": {
+    "o_pos": [
+      "boat",
+      "person",
+      "train"
+    ],
+    "o_neg": [
+      "car",
+      "accident",
+      "black",
+      "crash",
+      "crew",
+      "damage",
+      "derailed",
+      "destruction",
+      "group",
+      "ha",
+      "photo",
+      "railroad",
+      "stand",
+      "train track",
+      "white",
+      "working"
+    ],
+    "responsibilities": {
+      "boat": 0.9999999966016659,
+      "car": 0.07870817997512236,
+      "person": 0.9995840845629494,
+      "train": 0.9463590398297934,
+      "accident": 0.24384324534405666,
+      "black": 0.08986430254305851,
+      "crash": 0.15341321703040722,
+      "crew": 0.23888833097657433,
+      "damage": 0.2736716372916397,
+      "derailed": 0.24846986458626064,
+      "destruction": 0.18955047063456748,
+      "group": 0.07926188943427294,
+      "ha": 0.10678580073062617,
+      "photo": 0.2680746756225788,
+      "railroad": 0.09242106884480035,
+      "stand": 0.09428019877416358,
+      "train track": 0.08519785902730106,
+      "white": 0.0946595365276086,
+      "working": 0.19144044721204037
+    }
+  },
+  "COCO_val2014_000000425447.jpg": {
+    "o_pos": [
+      "truck",
+      "pick up",
+      "tree"
+    ],
+    "o_neg": [
+      "fire hydrant",
+      "person",
+      "back",
+      "curb",
+      "hose",
+      "park",
+      "parked",
+      "plectrum",
+      "spray",
+      "standing",
+      "wash",
+      "white"
+    ],
+    "responsibilities": {
+      "fire hydrant": 0.0981239095899899,
+      "person": 0.22919061577502026,
+      "truck": 0.9999921833879665,
+      "back": 0.09573815998937783,
+      "curb": 0.10833133703998754,
+      "hose": 0.1058092646502372,
+      "park": 0.11996388783191611,
+      "parked": 0.1062005833283315,
+      "pick up": 0.9999999975340319,
+      "plectrum": 0.12131225485787629,
+      "spray": 0.12566678808839177,
+      "standing": 0.11642156386441166,
+      "tree": 0.9998208862811957,
+      "wash": 0.13353693741811834,
+      "white": 0.15801300989361283
+    }
+  },
+  "COCO_val2014_000000443259.jpg": {
+    "o_pos": [
+      "bowl",
+      "chair",
+      "orange",
+      "potted plant",
+      "refrigerator",
+      "sink",
+      "appliance",
+      "cabinet",
+      "ceiling",
+      "counter top",
+      "dish washer",
+      "fruit",
+      "kitchen",
+      "kitchen counter",
+      "kitchen island",
+      "modern",
+      "wood floor"
+    ],
+    "o_neg": [
+      "bottle",
+      "oven",
+      "stainle",
+      "steel",
+      "white"
+    ],
+    "responsibilities": {
+      "bottle": 0.10156863757445987,
+      "bowl": 0.9989686330746149,
+      "chair": 0.9572996111495198,
+      "orange": 0.9968565472785802,
+      "oven": 0.1511142504130014,
+      "potted plant": 0.9549955518684737,
+      "refrigerator": 1.0,
+      "sink": 1.0,
+      "appliance": 0.999999988314019,
+      "cabinet": 0.9981433122080756,
+      "ceiling": 0.9807037589734894,
+      "counter top": 0.9999999987248849,
+      "dish washer": 0.9999999368246917,
+      "fruit": 0.39456814686211417,
+      "kitchen": 0.9999999682692164,
+      "kitchen counter": 0.9999986473692968,
+      "kitchen island": 0.9999991717993144,
+      "modern": 0.9998789903964853,
+      "stainle": 0.09520905282919616,
+      "steel": 0.15777800384078575,
+      "white": 0.0875302226209129,
+      "wood floor": 0.5851334390009832
+    }
+  },
+  "COCO_val2014_000000145020.jpg": {
+    "o_pos": [
+      "person",
+      "teddy bear",
+      "amusement park",
+      "animal",
+      "disneyland",
+      "display",
+      "mall",
+      "stuffed",
+      "teddy",
+      "toy",
+      "tree"
+    ],
+    "o_neg": [
+      "bench",
+      "bird",
+      "chair",
+      "christma",
+      "decorate",
+      "footstall",
+      "large",
+      "sitting",
+      "stuff"
+    ],
+    "responsibilities": {
+      "bench": 0.1014567853615266,
+      "bird": 0.08067756732622852,
+      "chair": 0.09388372741811654,
+      "person": 0.999969238700642,
+      "teddy bear": 0.9999999917943105,
+      "amusement park": 0.5579002266808574,
+      "animal": 0.7010160780717828,
+      "christma": 0.1073900000146309,
+      "decorate": 0.08226628019078322,
+      "disneyland": 0.3744009584848586,
+      "display": 0.9481244184381177,
+      "footstall": 0.08053802191572315,
+      "large": 0.09458647891438415,
+      "mall": 0.9984469676187712,
+      "sitting": 0.08086767295642437,
+      "stuff": 0.08206826306414378,
+      "stuffed": 0.9403398935305065,
+      "teddy": 0.9977931090534767,
+      "toy": 0.9004575497134472,
+      "tree": 0.4429212966016943
+    }
+  },
+  "COCO_val2014_000000146504.jpg": {
+    "o_pos": [
+      "keyboard",
+      "person",
+      "hand"
+    ],
+    "o_neg": [
+      "cup",
+      "dining table",
+      "laptop",
+      "mouse",
+      "catch",
+      "desktop",
+      "office supply"
+    ],
+    "responsibilities": {
+      "cup": 0.09341243738527395,
+      "dining table": 0.15219798919906474,
+      "keyboard": 0.9999979457548102,
+      "laptop": 0.2007802175737464,
+      "mouse": 0.0817523282482244,
+      "person": 1.0,
+      "catch": 0.0808038917479835,
+      "desktop": 0.1281215395295398,
+      "hand": 0.9999998096549704,
+      "office supply": 0.21243535685174111
+    }
+  },
+  "COCO_val2014_000000178753.jpg": {
+    "o_pos": [],
+    "o_neg": [
+      "cell phone",
+      "chair",
+      "person",
+      "amusement park",
+      "brace",
+      "catch",
+      "coaster",
+      "escalator",
+      "holding",
+      "laugh",
+      "rail",
+      "red",
+      "ride",
+      "sit",
+      "sitting",
+      "smile"
+    ],
+    "responsibilities": {
+      "cell phone": 0.08124085540978679,
+      "chair": 0.10272551082294883,
+      "person": 0.23655259724565672,
+      "amusement park": 0.13793812908010694,
+      "brace": 0.1425601169182158,
+      "catch": 0.12022610174556936,
+      "coaster": 0.14611251228792152,
+      "escalator": 0.22720777050713362,
+      "holding": 0.07994950481022108,
+      "laugh": 0.09807760913981932,
+      "rail": 0.08681244565561569,
+      "red": 0.13150838675069626,
+      "ride": 0.12077208066816798,
+      "sit": 0.12730242495282204,
+      "sitting": 0.11225026886166739,
+      "smile": 0.12713860326273715
+    }
+  },
+  "COCO_val2014_000000047781.jpg": {
+    "o_pos": [
+      "bedroom",
+      "bureau",
+      "drawer",
+      "floor",
+      "headboard",
+      "lamp",
+      "modern",
+      "nightstand",
+      "pillow",
+      "room"
+    ],
+    "o_neg": [
+      "bed",
+      "book",
+      "vase",
+      "blanket",
+      "red",
+      "sheet",
+      "white"
+    ],
+    "responsibilities": {
+      "bed": 0.10583673773199469,
+      "book": 0.09796492888980318,
+      "vase": 0.15449669431639698,
+      "bedroom": 0.9798616525845112,
+      "blanket": 0.11869142074672703,
+      "bureau": 0.3335194770909824,
+      "drawer": 0.4051287671695363,
+      "floor": 0.8391492914553776,
+      "headboard": 0.7925866559170249,
+      "lamp": 0.9711770061757818,
+      "modern": 0.5002269478217009,
+      "nightstand": 0.9937764184872471,
+      "pillow": 0.9937161553735593,
+      "red": 0.08594715515140597,
+      "room": 0.9740247984828504,
+      "sheet": 0.0866706460274725,
+      "white": 0.08891371199930082
+    }
+  },
+  "COCO_val2014_000000542792.jpg": {
+    "o_pos": [
+      "building",
+      "sky"
+    ],
+    "o_neg": [
+      "baseball bat",
+      "person",
+      "bat",
+      "lamp post",
+      "large",
+      "leaning",
+      "pole",
+      "swinge",
+      "wooden"
+    ],
+    "responsibilities": {
+      "baseball bat": 0.17391801908887736,
+      "person": 0.08112715701904312,
+      "bat": 0.09208599664363999,
+      "building": 0.9999999997112545,
+      "lamp post": 0.2900583837197024,
+      "large": 0.08162585560023605,
+      "leaning": 0.09411959274266356,
+      "pole": 0.2937945352489626,
+      "sky": 0.8689891386746814,
+      "swinge": 0.10448950038029195,
+      "wooden": 0.098098482321037
+    }
+  },
+  "COCO_val2014_000000293703.jpg": {
+    "o_pos": [
+      "bottle",
+      "chair",
+      "cup",
+      "dining table",
+      "person",
+      "pizza",
+      "drink",
+      "food",
+      "picture frame",
+      "tray"
+    ],
+    "o_neg": [
+      "vase",
+      "couple",
+      "sit",
+      "sitting",
+      "smile",
+      "three"
+    ],
+    "responsibilities": {
+      "bottle": 0.6549092872264028,
+      "chair": 0.9999914495861211,
+      "cup": 0.5781097519162269,
+      "dining table": 0.999999999985361,
+      "person": 0.9999999987056025,
+      "pizza": 0.999999999995625,
+      "vase": 0.09585036119341488,
+      "couple": 0.1559363681813967,
+      "drink": 0.9999931031594814,
+      "food": 0.9999999987008765,
+      "picture frame": 0.9999999967809097,
+      "sit": 0.14683866306592047,
+      "sitting": 0.08234642412452656,
+      "smile": 0.08796017728172335,
+      "three": 0.2626417767794802,
+      "tray": 0.6835120340407864
+    }
+  },
+  "COCO_val2014_000000521863.jpg": {
+    "o_pos": [
+      "skateboard"
+    ],
+    "o_neg": [
+      "bicycle",
+      "person",
+      "building",
+      "crowd",
+      "doorway",
+      "pavement",
+      "pillar",
+      "ride",
+      "skate",
+      "skateboarding",
+      "trick",
+      "watching"
+    ],
+    "responsibilities": {
+      "bicycle": 0.08152116224789127,
+      "person": 0.12921685318803458,
+      "skateboard": 0.9999917993907516,
+      "building": 0.2062664933606551,
+      "crowd": 0.08414778248508145,
+      "doorway": 0.0993925629606986,
+      "pavement": 0.0829119201125455,
+      "pillar": 0.08339496373838069,
+      "ride": 0.08148990523114841,
+      "skate": 0.10221992098360372,
+      "skateboarding": 0.10183795451817158,
+      "trick": 0.10374217568387907,
+      "watching": 0.12921587789417371
+    }
+  },
+  "COCO_val2014_000000250540.jpg": {
+    "o_pos": [
+      "motorcycle",
+      "person",
+      "group",
+      "helmet",
+      "motorcyclist"
+    ],
+    "o_neg": [
+      "handbag",
+      "ride",
+      "road",
+      "sitting",
+      "wearing"
+    ],
+    "responsibilities": {
+      "handbag": 0.1467276490793471,
+      "motorcycle": 0.9999999889537496,
+      "person": 0.9999463512122089,
+      "group": 0.9517823236836203,
+      "helmet": 0.999999999792132,
+      "motorcyclist": 0.5066588626899096,
+      "ride": 0.08148215551995962,
+      "road": 0.11366608748962392,
+      "sitting": 0.08146063596440405,
+      "wearing": 0.13825964756379647
+    }
+  },
+  "COCO_val2014_000000211604.jpg": {
+    "o_pos": [
+      "tennis racket"
+    ],
+    "o_neg": [
+      "person",
+      "sports ball",
+      "blue",
+      "catch",
+      "floor",
+      "hat",
+      "lay",
+      "laying",
+      "shirt",
+      "wearing",
+      "white"
+    ],
+    "responsibilities": {
+      "person": 0.13967330965600327,
+      "sports ball": 0.07871114890744914,
+      "tennis racket": 0.9998899404226979,
+      "blue": 0.08393990805555519,
+      "catch": 0.08020829569840678,
+      "floor": 0.08997316550358946,
+      "hat": 0.13785867164027038,
+      "lay": 0.09279655051113753,
+      "laying": 0.09641969349138858,
+      "shirt": 0.0833499653394306,
+      "wearing": 0.08251412421859278,
+      "white": 0.09632617030957455
+    }
+  },
+  "COCO_val2014_000000461311.jpg": {
+    "o_pos": [
+      "kite",
+      "person",
+      "crowd",
+      "flying",
+      "gathering",
+      "sky"
+    ],
+    "o_neg": [
+      "collect",
+      "crowded",
+      "enjoying",
+      "field",
+      "floor",
+      "fly",
+      "gathered",
+      "group",
+      "large",
+      "outdoor",
+      "park"
+    ],
+    "responsibilities": {
+      "kite": 1.0,
+      "person": 0.940837161970998,
+      "collect": 0.11472255818569191,
+      "crowd": 0.3796220797091527,
+      "crowded": 0.22008790149425392,
+      "enjoying": 0.09235619113999556,
+      "field": 0.08472689616899105,
+      "floor": 0.16100855660024058,
+      "fly": 0.0940698330653263,
+      "flying": 0.9999979899156677,
+      "gathered": 0.17000878661237873,
+      "gathering": 0.4919226881481934,
+      "group": 0.1608552792582121,
+      "large": 0.08832060409512414,
+      "outdoor": 0.0800218943795958,
+      "park": 0.07931577134951592,
+      "sky": 0.9922430494350922
+    }
+  },
+  "COCO_val2014_000000047940.jpg": {
+    "o_pos": [
+      "book",
+      "laptop",
+      "person",
+      "blanket",
+      "foot",
+      "jean"
+    ],
+    "o_neg": [
+      "bed",
+      "animal",
+      "doll",
+      "lap",
+      "lay",
+      "read",
+      "relax",
+      "sit",
+      "stuffed"
+    ],
+    "responsibilities": {
+      "bed": 0.08070014832342248,
+      "book": 0.9998165357222838,
+      "laptop": 0.31291561047653577,
+      "person": 0.9988175009364783,
+      "animal": 0.09227883322507915,
+      "blanket": 0.7795601903607683,
+      "doll": 0.1096774218813769,
+      "foot": 0.9994285536150589,
+      "jean": 0.9999999999983511,
+      "lap": 0.25792485975360885,
+      "lay": 0.08209126484704535,
+      "read": 0.26971105339941054,
+      "relax": 0.08409488840619846,
+      "sit": 0.15542084508050724,
+      "stuffed": 0.09708487215942625
+    }
+  },
+  "COCO_val2014_000000134768.jpg": {
+    "o_pos": [
+      "keyboard",
+      "cord",
+      "electronic",
+      "speaker",
+      "stereo",
+      "subwoofer"
+    ],
+    "o_neg": [
+      "dining table",
+      "laptop",
+      "mouse",
+      "black",
+      "desktop",
+      "laying",
+      "plug",
+      "sit"
+    ],
+    "responsibilities": {
+      "dining table": 0.18420049936966765,
+      "keyboard": 0.9999999999999973,
+      "laptop": 0.16776041122177926,
+      "mouse": 0.08264671015459568,
+      "black": 0.08190620022538239,
+      "cord": 0.8127401579053612,
+      "desktop": 0.14166384433030485,
+      "electronic": 0.9986440972972923,
+      "laying": 0.08525641019948342,
+      "plug": 0.09466470102278654,
+      "sit": 0.08073610047518705,
+      "speaker": 0.9999997579598259,
+      "stereo": 0.9802009885132283,
+      "subwoofer": 0.9892177211644504
+    }
+  },
+  "COCO_val2014_000000526414.jpg": {
+    "o_pos": [
+      "cat",
+      "couch",
+      "cup",
+      "dining table",
+      "tv",
+      "armchair",
+      "bookshelf",
+      "equipment",
+      "lamp",
+      "machine",
+      "office supply",
+      "room",
+      "sewing"
+    ],
+    "o_neg": [
+      "laptop",
+      "floor",
+      "sew",
+      "sit"
+    ],
+    "responsibilities": {
+      "cat": 0.9896422141363609,
+      "couch": 0.9999887800334193,
+      "cup": 0.4014261822110314,
+      "dining table": 0.4928165792199679,
+      "laptop": 0.11509041529804465,
+      "tv": 0.6427606822271595,
+      "armchair": 0.9999999999999991,
+      "bookshelf": 0.999999999997315,
+      "equipment": 0.9687113377095048,
+      "floor": 0.23234990983184486,
+      "lamp": 0.9999990106856607,
+      "machine": 0.9731153957624666,
+      "office supply": 0.9996101316754433,
+      "room": 0.3223857861175894,
+      "sew": 0.10856036536890536,
+      "sewing": 0.9956782365271702,
+      "sit": 0.13810208241622426
+    }
+  },
+  "COCO_val2014_000000273132.jpg": {
+    "o_pos": [
+      "person",
+      "elderly",
+      "face",
+      "photo"
+    ],
+    "o_neg": [
+      "bench",
+      "black",
+      "glas",
+      "hand",
+      "hat",
+      "lap",
+      "relax",
+      "sit",
+      "swing",
+      "wearing",
+      "white"
+    ],
+    "responsibilities": {
+      "bench": 0.12542197666547222,
+      "person": 0.9990781383652978,
+      "black": 0.09269747198921013,
+      "elderly": 0.9883553009474638,
+      "face": 0.9999895329387728,
+      "glas": 0.09367020254836778,
+      "hand": 0.27577035187829557,
+      "hat": 0.08070552283763699,
+      "lap": 0.07900106536731671,
+      "photo": 0.6016993985857592,
+      "relax": 0.09876376170015377,
+      "sit": 0.08105507390373061,
+      "swing": 0.1057415224496983,
+      "wearing": 0.08301228613419678,
+      "white": 0.0895062226422008
+    }
+  },
+  "COCO_val2014_000000505213.jpg": {
+    "o_pos": [
+      "hot dog",
+      "mouth"
+    ],
+    "o_neg": [
+      "dog",
+      "person",
+      "bite",
+      "catch",
+      "condiment",
+      "eat",
+      "eating",
+      "food",
+      "hot",
+      "ketchup",
+      "mall",
+      "mustard",
+      "open",
+      "roll",
+      "topping"
+    ],
+    "responsibilities": {
+      "dog": 0.09362836904158821,
+      "hot dog": 0.9975564840047754,
+      "person": 0.07910069149619696,
+      "bite": 0.09437810117189856,
+      "catch": 0.09940142334538939,
+      "condiment": 0.08179560028424926,
+      "eat": 0.11974351129722129,
+      "eating": 0.17612186291428536,
+      "food": 0.08953875887564303,
+      "hot": 0.17826485854625743,
+      "ketchup": 0.09956326087341107,
+      "mall": 0.12272178678372125,
+      "mouth": 0.4792402090245968,
+      "mustard": 0.0980124156174249,
+      "open": 0.08037174296284623,
+      "roll": 0.07982870125058644,
+      "topping": 0.10082972370347623
+    }
+  },
+  "COCO_val2014_000000272728.jpg": {
+    "o_pos": [
+      "dining table",
+      "potted plant",
+      "vase",
+      "bouquet",
+      "floral arrangement",
+      "flower",
+      "tablecloth"
+    ],
+    "o_neg": [
+      "person",
+      "brown",
+      "colorful",
+      "fill",
+      "filled",
+      "sit"
+    ],
+    "responsibilities": {
+      "dining table": 0.9999938502931063,
+      "person": 0.0895286627025452,
+      "potted plant": 0.8043933538035234,
+      "vase": 0.9999999626278433,
+      "bouquet": 0.7418090571162131,
+      "brown": 0.08049066363860205,
+      "colorful": 0.20474031878116197,
+      "fill": 0.083175692380756,
+      "filled": 0.08040413325600154,
+      "floral arrangement": 0.9999947737189763,
+      "flower": 1.0,
+      "sit": 0.09740143561272234,
+      "tablecloth": 0.9999999639321067
+    }
+  },
+  "COCO_val2014_000000282553.jpg": {
+    "o_pos": [
+      "person"
+    ],
+    "o_neg": [
+      "cell phone",
+      "dirt",
+      "field",
+      "grassy",
+      "one",
+      "path",
+      "pillar",
+      "stand",
+      "sunset",
+      "talking",
+      "two",
+      "walk"
+    ],
+    "responsibilities": {
+      "cell phone": 0.12015346793878771,
+      "person": 1.0,
+      "dirt": 0.08233833228726548,
+      "field": 0.12383853996920158,
+      "grassy": 0.08419605629667898,
+      "one": 0.08999265729348054,
+      "path": 0.08584994710808519,
+      "pillar": 0.11858038966321753,
+      "stand": 0.09571772321690589,
+      "sunset": 0.07840769570106296,
+      "talking": 0.10451060606357182,
+      "two": 0.07928548082864877,
+      "walk": 0.1775556696463392
+    }
+  },
+  "COCO_val2014_000000089378.jpg": {
+    "o_pos": [
+      "motorcycle",
+      "person",
+      "building",
+      "jumpsuit",
+      "motorcyclist"
+    ],
+    "o_neg": [
+      "backpack",
+      "garage",
+      "garage door",
+      "park",
+      "red",
+      "stand",
+      "suit"
+    ],
+    "responsibilities": {
+      "backpack": 0.08124935029665596,
+      "motorcycle": 1.0,
+      "person": 0.9978624942674824,
+      "building": 0.9983193650254439,
+      "garage": 0.18582796291486903,
+      "garage door": 0.09607932602101375,
+      "jumpsuit": 0.3621690164759352,
+      "motorcyclist": 0.6589080968182215,
+      "park": 0.23616350400005406,
+      "red": 0.07857844397351593,
+      "stand": 0.08175690432243449,
+      "suit": 0.07932628505831438
+    }
+  },
+  "COCO_val2014_000000007125.jpg": {
+    "o_pos": [
+      "bicycle",
+      "dog",
+      "person",
+      "bicycle helmet",
+      "biking",
+      "cycle",
+      "lake",
+      "river",
+      "water"
+    ],
+    "o_neg": [
+      "group",
+      "park",
+      "path",
+      "ride",
+      "walk",
+      "waterway"
+    ],
+    "responsibilities": {
+      "bicycle": 1.0,
+      "dog": 0.9998417172883994,
+      "person": 1.0,
+      "bicycle helmet": 1.0,
+      "biking": 1.0,
+      "cycle": 0.9999986399249229,
+      "group": 0.09038995701468722,
+      "lake": 0.7334926662170312,
+      "park": 0.09258554261885914,
+      "path": 0.16766734901543318,
+      "ride": 0.08670713249695892,
+      "river": 0.30791795546886797,
+      "walk": 0.0802821994400006,
+      "water": 0.5738249842035535,
+      "waterway": 0.11864930021646324
+    }
+  },
+  "COCO_val2014_000000280930.jpg": {
+    "o_pos": [
+      "oven",
+      "person",
+      "refrigerator",
+      "baking sheet",
+      "dough",
+      "food",
+      "home appliance",
+      "kitchen",
+      "sleepwear",
+      "tray",
+      "young"
+    ],
+    "o_neg": [
+      "bottle",
+      "donut",
+      "catch",
+      "exhaust hood",
+      "holding",
+      "laugh",
+      "laughing",
+      "pastry",
+      "scrub",
+      "smile",
+      "stand",
+      "teal"
+    ],
+    "responsibilities": {
+      "bottle": 0.16755461081366227,
+      "donut": 0.0829886989829035,
+      "oven": 0.9953365498795212,
+      "person": 0.9999999892050138,
+      "refrigerator": 0.9999788463231691,
+      "baking sheet": 0.3986878206772598,
+      "catch": 0.0811076744602612,
+      "dough": 0.34918775458430173,
+      "exhaust hood": 0.14818624980807965,
+      "food": 0.9999927950227637,
+      "holding": 0.08871509535195696,
+      "home appliance": 0.9999999993574575,
+      "kitchen": 0.9999971776909745,
+      "laugh": 0.10097474245461786,
+      "laughing": 0.10125369847861762,
+      "pastry": 0.17543423312580822,
+      "scrub": 0.10295258484117074,
+      "sleepwear": 0.9999062396646804,
+      "smile": 0.1472789204591846,
+      "stand": 0.22588729696907625,
+      "teal": 0.11912129080253589,
+      "tray": 0.30813913201665066,
+      "young": 0.8834688102602175
+    }
+  },
+  "COCO_val2014_000000151081.jpg": {
+    "o_pos": [
+      "airplane",
+      "drone",
+      "equipment"
+    ],
+    "o_neg": [
+      "truck",
+      "crop",
+      "drive",
+      "farmland",
+      "fence",
+      "fly",
+      "flying",
+      "green",
+      "land",
+      "plow",
+      "raceway",
+      "rural",
+      "sky",
+      "small",
+      "tractor"
+    ],
+    "responsibilities": {
+      "airplane": 0.9999999999999916,
+      "truck": 0.08647263597580544,
+      "crop": 0.09681209659536813,
+      "drive": 0.10371107475646105,
+      "drone": 0.9653556692893749,
+      "equipment": 0.9988923506448185,
+      "farmland": 0.08111468009475041,
+      "fence": 0.08087593678299426,
+      "fly": 0.10985339766709122,
+      "flying": 0.15482419955312748,
+      "green": 0.08994359509739543,
+      "land": 0.08178044262298004,
+      "plow": 0.08712816903154623,
+      "raceway": 0.08631028795828069,
+      "rural": 0.07954303276545628,
+      "sky": 0.2937585486866697,
+      "small": 0.08697529022593571,
+      "tractor": 0.2807308615410071
+    }
+  },
+  "COCO_val2014_000000134223.jpg": {
+    "o_pos": [
+      "bowl",
+      "carrot",
+      "hot dog",
+      "sandwich",
+      "condiment",
+      "food",
+      "fry",
+      "hot",
+      "lettuce",
+      "mustard",
+      "pickle",
+      "plate",
+      "platter",
+      "salad",
+      "sauce",
+      "vegetable"
+    ],
+    "o_neg": [
+      "dining table",
+      "dog",
+      "chip",
+      "peak",
+      "roll",
+      "slaw",
+      "tray",
+      "white"
+    ],
+    "responsibilities": {
+      "bowl": 0.999999999997804,
+      "carrot": 0.3974224827344057,
+      "dining table": 0.08871428437543412,
+      "dog": 0.09875794195181258,
+      "hot dog": 0.9997091698625669,
+      "sandwich": 1.0,
+      "chip": 0.1223373854834936,
+      "condiment": 0.998890743014967,
+      "food": 0.46448222308701953,
+      "fry": 0.9999941390184732,
+      "hot": 0.9999809412602376,
+      "lettuce": 0.9459769891933509,
+      "mustard": 0.9987270636789752,
+      "peak": 0.10427392911151519,
+      "pickle": 0.9999999904371291,
+      "plate": 0.9999985577457924,
+      "platter": 0.9999977973585199,
+      "roll": 0.09647589743700113,
+      "salad": 0.9984794758766911,
+      "sauce": 1.0,
+      "slaw": 0.28979797406587615,
+      "tray": 0.2418289181075245,
+      "vegetable": 0.3872967096659474,
+      "white": 0.08600879901508507
+    }
+  },
+  "COCO_val2014_000000003742.jpg": {
+    "o_pos": [
+      "apple",
+      "bowl",
+      "vase",
+      "flower",
+      "fruit",
+      "rose",
+      "window"
+    ],
+    "o_neg": [
+      "fill",
+      "ledge",
+      "red",
+      "sill",
+      "sit"
+    ],
+    "responsibilities": {
+      "apple": 0.9999999539099292,
+      "bowl": 0.9999992901680274,
+      "vase": 0.9999999999999976,
+      "fill": 0.09836061782999375,
+      "flower": 0.9999999999999931,
+      "fruit": 0.99485337817844,
+      "ledge": 0.08669677859241559,
+      "red": 0.08826117740360356,
+      "rose": 1.0,
+      "sill": 0.19954385655664736,
+      "sit": 0.10822325182541652,
+      "window": 0.5994827756623367
+    }
+  },
+  "COCO_val2014_000000572081.jpg": {
+    "o_pos": [
+      "tennis racket",
+      "hi"
+    ],
+    "o_neg": [
+      "person",
+      "sports ball",
+      "court",
+      "game",
+      "hit",
+      "play",
+      "stand",
+      "swing",
+      "tenni",
+      "tennis match"
+    ],
+    "responsibilities": {
+      "person": 0.16761352489236891,
+      "sports ball": 0.11364340700879007,
+      "tennis racket": 0.9741833904019932,
+      "court": 0.22355538179746864,
+      "game": 0.08641470732333792,
+      "hi": 0.3742860414386867,
+      "hit": 0.10982521415280896,
+      "play": 0.09895640118974786,
+      "stand": 0.10483191722719813,
+      "swing": 0.1539871269039354,
+      "tenni": 0.09768242800686802,
+      "tennis match": 0.24295371930556525
+    }
+  },
+  "COCO_val2014_000000477016.jpg": {
+    "o_pos": [
+      "oven",
+      "person",
+      "sink",
+      "arcade machine",
+      "home appliance",
+      "inside",
+      "toy"
+    ],
+    "o_neg": [
+      "bottle",
+      "chair",
+      "potted plant",
+      "aquarium",
+      "arcade",
+      "fish",
+      "little",
+      "looking",
+      "pink",
+      "play",
+      "shirt",
+      "stand",
+      "standing",
+      "video game"
+    ],
+    "responsibilities": {
+      "bottle": 0.1443227192366879,
+      "chair": 0.09689597055098467,
+      "oven": 0.9999997898686529,
+      "person": 0.9887905467887796,
+      "potted plant": 0.1273176896300334,
+      "sink": 0.9683060638314859,
+      "aquarium": 0.08445425798524722,
+      "arcade": 0.10752319407229151,
+      "arcade machine": 0.9106432844864173,
+      "fish": 0.09005311894499432,
+      "home appliance": 0.9999999999290874,
+      "inside": 0.65145237992526,
+      "little": 0.08177600807387626,
+      "looking": 0.08504972966453796,
+      "pink": 0.0928569352649492,
+      "play": 0.09339510859019251,
+      "shirt": 0.0881340788619835,
+      "stand": 0.07972693054145377,
+      "standing": 0.08968056621396786,
+      "toy": 0.9999459638305326,
+      "video game": 0.2049892514016614
+    }
+  },
+  "COCO_val2014_000000475813.jpg": {
+    "o_pos": [
+      "person",
+      "remote",
+      "room",
+      "sleepwear",
+      "toddler",
+      "toy",
+      "young"
+    ],
+    "o_neg": [
+      "catch",
+      "floor",
+      "holding",
+      "lamp",
+      "play",
+      "wiu"
+    ],
+    "responsibilities": {
+      "person": 0.9996926257156005,
+      "remote": 0.8826805127279507,
+      "catch": 0.0914650122622658,
+      "floor": 0.2503338767919078,
+      "holding": 0.09415302338160243,
+      "lamp": 0.08414926670154096,
+      "play": 0.08542865936714993,
+      "room": 0.994445398126868,
+      "sleepwear": 0.896286692529852,
+      "toddler": 1.0,
+      "toy": 0.33504433027268893,
+      "wiu": 0.11039461804189256,
+      "young": 0.9999999975893021
+    }
+  },
+  "COCO_val2014_000000558784.jpg": {
+    "o_pos": [
+      "backpack",
+      "creek",
+      "gras",
+      "lake",
+      "pond"
+    ],
+    "o_neg": [
+      "baseball bat",
+      "frisbee",
+      "person",
+      "ax",
+      "bat",
+      "catch",
+      "concrete",
+      "hand",
+      "hi",
+      "pad",
+      "paddle",
+      "park",
+      "stand",
+      "standing"
+    ],
+    "responsibilities": {
+      "backpack": 0.9969018943663287,
+      "baseball bat": 0.16641398428988433,
+      "frisbee": 0.10801188549362581,
+      "person": 0.08505688041283298,
+      "ax": 0.11730838616417127,
+      "bat": 0.2854830769089114,
+      "catch": 0.09849398121371793,
+      "concrete": 0.11850031576681318,
+      "creek": 0.9593842747964041,
+      "gras": 0.7487068489022151,
+      "hand": 0.15296567139167175,
+      "hi": 0.10070608002362152,
+      "lake": 0.3093593765597417,
+      "pad": 0.11873364683580195,
+      "paddle": 0.08020686093914786,
+      "park": 0.08130132979667741,
+      "pond": 0.9999953122091388,
+      "stand": 0.10078296971258832,
+      "standing": 0.10269038221951327
+    }
+  },
+  "COCO_val2014_000000322163.jpg": {
+    "o_pos": [
+      "bottle",
+      "bowl",
+      "oven",
+      "person",
+      "potted plant",
+      "cook",
+      "counter top",
+      "dough",
+      "exhaust hood",
+      "food",
+      "kitchen",
+      "kitchen counter",
+      "preparing",
+      "tortilla"
+    ],
+    "o_neg": [
+      "remote",
+      "bulletin board",
+      "group",
+      "job",
+      "make",
+      "stand",
+      "working"
+    ],
+    "responsibilities": {
+      "bottle": 0.9997641025933574,
+      "bowl": 0.5822140754478833,
+      "oven": 0.9999949401025825,
+      "person": 0.9999999999999798,
+      "potted plant": 0.9592638914894305,
+      "remote": 0.17239438916210487,
+      "bulletin board": 0.2405235722662103,
+      "cook": 0.998674386517469,
+      "counter top": 0.9640243733715148,
+      "dough": 0.9999260613738257,
+      "exhaust hood": 0.9921926303753236,
+      "food": 0.9999993925205202,
+      "group": 0.08278106128316412,
+      "job": 0.08452410239005567,
+      "kitchen": 0.9999999999999774,
+      "kitchen counter": 0.9235891550074955,
+      "make": 0.0936944738722184,
+      "preparing": 0.8984693561225703,
+      "stand": 0.09333428194638482,
+      "tortilla": 0.9999799993032089,
+      "working": 0.1443073333629352
+    }
+  },
+  "COCO_val2014_000000564629.jpg": {
+    "o_pos": [
+      "microwave",
+      "oven",
+      "sink",
+      "appliance",
+      "cabinet",
+      "cabinetry",
+      "ceiling",
+      "counter top",
+      "faucet",
+      "kitchen",
+      "kitchen counter"
+    ],
+    "o_neg": [
+      "boat",
+      "person",
+      "refrigerator",
+      "bureau",
+      "closet",
+      "dish washer",
+      "recreational vehicle"
+    ],
+    "responsibilities": {
+      "boat": 0.10048275608744046,
+      "microwave": 0.6981504382662476,
+      "oven": 0.9999999998449476,
+      "person": 0.08927233004884626,
+      "refrigerator": 0.2578845831093699,
+      "sink": 0.9999999999999949,
+      "appliance": 0.9999999999895723,
+      "bureau": 0.09343329384934206,
+      "cabinet": 0.9999565632683333,
+      "cabinetry": 0.999999921811607,
+      "ceiling": 0.9725368172805686,
+      "closet": 0.0808278649917832,
+      "counter top": 0.9999999952441812,
+      "dish washer": 0.09932957401322713,
+      "faucet": 1.0,
+      "kitchen": 0.9999999999950404,
+      "kitchen counter": 0.9999997508711397,
+      "recreational vehicle": 0.14499562660267534
+    }
+  },
+  "COCO_val2014_000000441840.jpg": {
+    "o_pos": [
+      "baseball bat",
+      "car",
+      "person",
+      "sports ball",
+      "baseball uniform",
+      "bat",
+      "batter",
+      "field",
+      "swing",
+      "young"
+    ],
+    "o_neg": [
+      "baseball",
+      "beat",
+      "blue",
+      "catch",
+      "grey",
+      "home base",
+      "play",
+      "shirt",
+      "short",
+      "swinge"
+    ],
+    "responsibilities": {
+      "baseball bat": 1.0,
+      "car": 0.934026809910909,
+      "person": 0.9999999999952327,
+      "sports ball": 0.9897965637023444,
+      "baseball": 0.1887433572477485,
+      "baseball uniform": 0.869575747072211,
+      "bat": 0.9999999999999993,
+      "batter": 0.9218540370882378,
+      "beat": 0.106971367656314,
+      "blue": 0.08454386435620159,
+      "catch": 0.20230901117957895,
+      "field": 0.9999989799561637,
+      "grey": 0.10038447940083879,
+      "home base": 0.08353040958417551,
+      "play": 0.10603317772380946,
+      "shirt": 0.09041034193996146,
+      "short": 0.08076866792250836,
+      "swing": 0.39439017143818794,
+      "swinge": 0.11455616746360579,
+      "young": 0.999861586953553
+    }
+  },
+  "COCO_val2014_000000530520.jpg": {
+    "o_pos": [
+      "laptop",
+      "gras",
+      "lawn"
+    ],
+    "o_neg": [
+      "clock",
+      "motorcycle",
+      "person",
+      "campu",
+      "floor",
+      "gra",
+      "one",
+      "sit",
+      "sitting",
+      "two",
+      "using"
+    ],
+    "responsibilities": {
+      "clock": 0.1129073110964843,
+      "laptop": 0.9994849194471308,
+      "motorcycle": 0.16966975637836054,
+      "person": 0.08383507911148934,
+      "campu": 0.11568615660082766,
+      "floor": 0.12097104875088621,
+      "gra": 0.08029787916676627,
+      "gras": 0.47232488139313794,
+      "lawn": 0.8049195035297183,
+      "one": 0.10313691400661781,
+      "sit": 0.11819202767441586,
+      "sitting": 0.0874532927995771,
+      "two": 0.0874711211098773,
+      "using": 0.09223793311541896
+    }
+  },
+  "COCO_val2014_000000248353.jpg": {
+    "o_pos": [
+      "person",
+      "skis",
+      "hill",
+      "skiing",
+      "slope",
+      "snow",
+      "snowy",
+      "three"
+    ],
+    "o_neg": [
+      "blanket",
+      "ride",
+      "stand",
+      "tree"
+    ],
+    "responsibilities": {
+      "person": 0.9999663066839596,
+      "skis": 0.9999999999383045,
+      "blanket": 0.10079745835447725,
+      "hill": 0.5692704362540284,
+      "ride": 0.12166564667604465,
+      "skiing": 0.3922240189696595,
+      "slope": 0.9916351321455918,
+      "snow": 0.9429939948844743,
+      "snowy": 0.9755172892489246,
+      "stand": 0.10765832904375498,
+      "three": 0.5995394747642451,
+      "tree": 0.2282035564445723
+    }
+  },
+  "COCO_val2014_000000254161.jpg": {
+    "o_pos": [
+      "kite",
+      "person",
+      "building",
+      "city",
+      "plaza",
+      "sky",
+      "skyscraper",
+      "urban"
+    ],
+    "o_neg": [
+      "remote",
+      "control",
+      "floor",
+      "fly",
+      "holding",
+      "square",
+      "standing"
+    ],
+    "responsibilities": {
+      "kite": 1.0,
+      "person": 0.9999999940381219,
+      "remote": 0.11066137054874961,
+      "building": 0.9999838739324065,
+      "city": 0.9790304475315125,
+      "control": 0.10339847896218789,
+      "floor": 0.12948644192277645,
+      "fly": 0.11385523028769431,
+      "holding": 0.0911784164589759,
+      "plaza": 0.3837700032416755,
+      "sky": 0.9808163173302524,
+      "skyscraper": 0.999999999999917,
+      "square": 0.07902817582194419,
+      "standing": 0.18280189948599487,
+      "urban": 0.7032535410855826
+    }
+  },
+  "COCO_val2014_000000525202.jpg": {
+    "o_pos": [
+      "pizza",
+      "tablecloth"
+    ],
+    "o_neg": [
+      "bottle",
+      "chair",
+      "dining table",
+      "person",
+      "beer",
+      "beverage",
+      "large",
+      "meat",
+      "pan",
+      "pepperoni",
+      "platter",
+      "sit",
+      "tomato",
+      "top",
+      "topping",
+      "tray",
+      "vegetable"
+    ],
+    "responsibilities": {
+      "bottle": 0.11612285481691959,
+      "chair": 0.13401164605122157,
+      "dining table": 0.22010698081382876,
+      "person": 0.22306025464044246,
+      "pizza": 0.9999999999597446,
+      "beer": 0.1524256187180398,
+      "beverage": 0.10588115250782046,
+      "large": 0.11432256611599913,
+      "meat": 0.07925176169875828,
+      "pan": 0.21475025356903885,
+      "pepperoni": 0.10609476743014519,
+      "platter": 0.10296026064886152,
+      "sit": 0.08430672688478646,
+      "tablecloth": 0.8275117964810669,
+      "tomato": 0.07999166612987928,
+      "top": 0.07904276120694283,
+      "topping": 0.13347187200603844,
+      "tray": 0.20595803633459528,
+      "vegetable": 0.08004123365668217
+    }
+  },
+  "COCO_val2014_000000118124.jpg": {
+    "o_pos": [
+      "car",
+      "person",
+      "tie",
+      "seat belt",
+      "shirt",
+      "vehicle"
+    ],
+    "o_neg": [
+      "chair",
+      "cup",
+      "back",
+      "glas",
+      "glass",
+      "purple",
+      "selfie",
+      "sit",
+      "sitting",
+      "wear"
+    ],
+    "responsibilities": {
+      "car": 0.9999403031782448,
+      "chair": 0.09967935204320498,
+      "cup": 0.1169746207941913,
+      "person": 0.9999344315855361,
+      "tie": 1.0,
+      "back": 0.09308515699198106,
+      "glas": 0.14765474822282088,
+      "glass": 0.2208522747319886,
+      "purple": 0.0950418797194936,
+      "seat belt": 0.9999954347182601,
+      "selfie": 0.08198657956387581,
+      "shirt": 0.988376847726571,
+      "sit": 0.08191193799942893,
+      "sitting": 0.09766316984909407,
+      "vehicle": 0.8896522302921495,
+      "wear": 0.10585054088814101
+    }
+  },
+  "COCO_val2014_000000302789.jpg": {
+    "o_pos": [
+      "backpack",
+      "bed",
+      "handbag",
+      "sink",
+      "suitcase",
+      "bag",
+      "home appliance",
+      "pillow",
+      "room"
+    ],
+    "o_neg": [
+      "bottle",
+      "kitchen",
+      "sit",
+      "sitting"
+    ],
+    "responsibilities": {
+      "backpack": 0.9999982250374408,
+      "bed": 0.9999938932168928,
+      "bottle": 0.09953976668591341,
+      "handbag": 0.5353481347882214,
+      "sink": 0.999999997152039,
+      "suitcase": 0.9999999999299052,
+      "bag": 0.8261856322674522,
+      "home appliance": 0.9999999981896344,
+      "kitchen": 0.18356496150522975,
+      "pillow": 0.9999999998550355,
+      "room": 0.9622297404072473,
+      "sit": 0.08011774537588023,
+      "sitting": 0.11130463355957508
+    }
+  },
+  "COCO_val2014_000000114108.jpg": {
+    "o_pos": [
+      "cup",
+      "dining table",
+      "person",
+      "pizza",
+      "basil",
+      "beer",
+      "cheese",
+      "food",
+      "plate",
+      "platter",
+      "spinach",
+      "topping"
+    ],
+    "o_neg": [
+      "sit",
+      "top"
+    ],
+    "responsibilities": {
+      "cup": 0.65174506752088,
+      "dining table": 0.9999998974697174,
+      "person": 0.9999962910640754,
+      "pizza": 1.0,
+      "basil": 0.4227321979400288,
+      "beer": 0.9996086307177053,
+      "cheese": 0.5010890648028168,
+      "food": 0.5777486840619216,
+      "plate": 0.9999999574479466,
+      "platter": 0.9999698334498585,
+      "sit": 0.095463152074717,
+      "spinach": 0.7380971392048442,
+      "top": 0.10842667334120282,
+      "topping": 0.8104854330394885
+    }
+  },
+  "COCO_val2014_000000291634.jpg": {
+    "o_pos": [
+      "motorcycle",
+      "person",
+      "pavement",
+      "pole",
+      "road",
+      "row"
+    ],
+    "o_neg": [
+      "bicycle",
+      "curb",
+      "park",
+      "parked"
+    ],
+    "responsibilities": {
+      "bicycle": 0.15616322536471694,
+      "motorcycle": 0.999999998483551,
+      "person": 0.999777695460114,
+      "curb": 0.2404428035559166,
+      "park": 0.1230615650554133,
+      "parked": 0.16662049825232828,
+      "pavement": 0.681730365693152,
+      "pole": 0.9974650748752613,
+      "road": 0.9348612718033045,
+      "row": 0.5766872521275069
+    }
+  },
+  "COCO_val2014_000000463678.jpg": {
+    "o_pos": [
+      "person",
+      "sports ball",
+      "tennis racket",
+      "court",
+      "short"
+    ],
+    "o_neg": [
+      "beat",
+      "catch",
+      "goggle",
+      "hit",
+      "play",
+      "shirt",
+      "stand",
+      "swing",
+      "swinge",
+      "tenni",
+      "white"
+    ],
+    "responsibilities": {
+      "person": 0.9995340459829408,
+      "sports ball": 1.0,
+      "tennis racket": 1.0,
+      "beat": 0.11032390305000205,
+      "catch": 0.12427748041908548,
+      "court": 0.5228770198592637,
+      "goggle": 0.11076739350090055,
+      "hit": 0.15978340060933066,
+      "play": 0.0802598065869981,
+      "shirt": 0.11982560832716423,
+      "short": 0.9597029279602186,
+      "stand": 0.09715051602721006,
+      "swing": 0.1219551367305818,
+      "swinge": 0.11053702997478727,
+      "tenni": 0.10710500757090594,
+      "white": 0.09074278786222426
+    }
+  },
+  "COCO_val2014_000000353898.jpg": {
+    "o_pos": [
+      "person"
+    ],
+    "o_neg": [
+      "bench",
+      "bird",
+      "flock",
+      "floor",
+      "park",
+      "sit",
+      "sitting",
+      "stone",
+      "surround",
+      "surrounded",
+      "tree"
+    ],
+    "responsibilities": {
+      "bench": 0.09771171099794608,
+      "bird": 0.15419183702324663,
+      "person": 0.9999838353311103,
+      "flock": 0.08782605058561332,
+      "floor": 0.10634091196297242,
+      "park": 0.08256957709473746,
+      "sit": 0.12082062265749739,
+      "sitting": 0.1291514312782652,
+      "stone": 0.08214221869096831,
+      "surround": 0.1143475012169172,
+      "surrounded": 0.10227506885543189,
+      "tree": 0.14523859060914382
+    }
+  },
+  "COCO_val2014_000000088269.jpg": {
+    "o_pos": [
+      "bowl",
+      "sandwich",
+      "spoon",
+      "bread",
+      "cheese",
+      "food",
+      "plate",
+      "platter",
+      "soup",
+      "toast"
+    ],
+    "o_neg": [
+      "dining table",
+      "grill",
+      "piece",
+      "tablecloth",
+      "two",
+      "white"
+    ],
+    "responsibilities": {
+      "bowl": 1.0,
+      "dining table": 0.08573533203783068,
+      "sandwich": 1.0,
+      "spoon": 1.0,
+      "bread": 1.0,
+      "cheese": 0.41006417587543187,
+      "food": 0.9999985793967926,
+      "grill": 0.0817335467587763,
+      "piece": 0.07914142453981189,
+      "plate": 0.9999347073741848,
+      "platter": 0.9999738821769768,
+      "soup": 1.0,
+      "tablecloth": 0.152788902273464,
+      "toast": 1.0,
+      "two": 0.08915520205072025,
+      "white": 0.08704098072567178
+    }
+  },
+  "COCO_val2014_000000098979.jpg": {
+    "o_pos": [
+      "microwave",
+      "oven",
+      "appliance",
+      "counter",
+      "counter top"
+    ],
+    "o_neg": [
+      "bowl",
+      "black",
+      "display",
+      "electronic",
+      "silver",
+      "sit",
+      "time"
+    ],
+    "responsibilities": {
+      "bowl": 0.07961398228661136,
+      "microwave": 1.0,
+      "oven": 0.9999999999817364,
+      "appliance": 1.0,
+      "black": 0.07957845831396836,
+      "counter": 0.9999921765710306,
+      "counter top": 0.9999999999876397,
+      "display": 0.0860744827600236,
+      "electronic": 0.20999503454422733,
+      "silver": 0.08297052312722167,
+      "sit": 0.10070205280739096,
+      "time": 0.09122544940409326
+    }
+  },
+  "COCO_val2014_000000379443.jpg": {
+    "o_pos": [
+      "scissors",
+      "blanket",
+      "cloth",
+      "mat",
+      "pair",
+      "sew",
+      "tool"
+    ],
+    "o_neg": [
+      "dining table",
+      "orange",
+      "black",
+      "mesh",
+      "sitting"
+    ],
+    "responsibilities": {
+      "dining table": 0.11386564783409174,
+      "orange": 0.11205240745982357,
+      "scissors": 0.9999998995550113,
+      "black": 0.08563691856632494,
+      "blanket": 0.999991677430061,
+      "cloth": 0.9876146768338138,
+      "mat": 0.6924303215295735,
+      "mesh": 0.12642103982708774,
+      "pair": 0.3687467514785961,
+      "sew": 0.55003980000306,
+      "sitting": 0.10970161624076318,
+      "tool": 0.9738300878749885
+    }
+  },
+  "COCO_val2014_000000374061.jpg": {
+    "o_pos": [
+      "cat",
+      "pet"
+    ],
+    "o_neg": [
+      "bed",
+      "couch",
+      "teddy bear",
+      "animal",
+      "black",
+      "curl",
+      "lay",
+      "paw",
+      "pillow",
+      "play",
+      "sleep",
+      "sleeping",
+      "stuff",
+      "stuffed",
+      "teddy",
+      "toy",
+      "white"
+    ],
+    "responsibilities": {
+      "bed": 0.081793795652242,
+      "cat": 1.0,
+      "couch": 0.09185760140307657,
+      "teddy bear": 0.11709522992194382,
+      "animal": 0.09010336821400941,
+      "black": 0.09694272168759395,
+      "curl": 0.14727587838758305,
+      "lay": 0.11622789091853793,
+      "paw": 0.2977567404865171,
+      "pet": 0.9017204665358025,
+      "pillow": 0.08589113115909816,
+      "play": 0.10486202181431653,
+      "sleep": 0.11818948622259441,
+      "sleeping": 0.08816253434489416,
+      "stuff": 0.09725294400536363,
+      "stuffed": 0.12208035216141055,
+      "teddy": 0.09080861977209345,
+      "toy": 0.07949523178532737,
+      "white": 0.09493037316579628
+    }
+  },
+  "COCO_val2014_000000560018.jpg": {
+    "o_pos": [
+      "kite",
+      "person",
+      "surfboard",
+      "cloudy",
+      "sea",
+      "surf",
+      "surfer",
+      "surfing",
+      "water",
+      "wave",
+      "wetsuit"
+    ],
+    "o_neg": [
+      "beach",
+      "coast",
+      "group",
+      "ride",
+      "riding"
+    ],
+    "responsibilities": {
+      "kite": 0.9999999999999998,
+      "person": 0.9999999959634671,
+      "surfboard": 1.0,
+      "beach": 0.2881188297446331,
+      "cloudy": 0.6035249054589039,
+      "coast": 0.16413645981321667,
+      "group": 0.13224978537054877,
+      "ride": 0.08474583290862303,
+      "riding": 0.09949682913829325,
+      "sea": 0.9998619431468131,
+      "surf": 0.5013345104314602,
+      "surfer": 0.9845412238292298,
+      "surfing": 0.9154483651205917,
+      "water": 0.9996793584165508,
+      "wave": 0.5403797356718301,
+      "wetsuit": 0.7968865800414336
+    }
+  },
+  "COCO_val2014_000000256628.jpg": {
+    "o_pos": [
+      "bowl",
+      "chair",
+      "dog",
+      "floor"
+    ],
+    "o_neg": [
+      "brown",
+      "deck",
+      "golden",
+      "lay",
+      "laying",
+      "leash",
+      "mouth",
+      "red",
+      "relax"
+    ],
+    "responsibilities": {
+      "bowl": 0.9998513353724412,
+      "chair": 1.0,
+      "dog": 1.0,
+      "brown": 0.08227144009173709,
+      "deck": 0.19648146674936565,
+      "floor": 0.9732313543334213,
+      "golden": 0.2230949338606389,
+      "lay": 0.09703165282674842,
+      "laying": 0.08008642311935603,
+      "leash": 0.08449812915624039,
+      "mouth": 0.09502530162951367,
+      "red": 0.12376785602615745,
+      "relax": 0.07930221156217107
+    }
+  },
+  "COCO_val2014_000000158806.jpg": {
+    "o_pos": [
+      "dog",
+      "person",
+      "bread",
+      "food",
+      "toast"
+    ],
+    "o_neg": [
+      "frisbee",
+      "sandwich",
+      "bite",
+      "blue",
+      "brown",
+      "catch",
+      "pet",
+      "plate",
+      "platter"
+    ],
+    "responsibilities": {
+      "dog": 1.0,
+      "frisbee": 0.08047108094470812,
+      "person": 0.9926717583016451,
+      "sandwich": 0.27414314822617525,
+      "bite": 0.13569398988673512,
+      "blue": 0.09435463011477331,
+      "bread": 0.9999999999999998,
+      "brown": 0.1362615507396509,
+      "catch": 0.08501388918258865,
+      "food": 0.8920967430373501,
+      "pet": 0.1783698594035727,
+      "plate": 0.09966639054943419,
+      "platter": 0.09789655531752431,
+      "toast": 0.7586059308908946
+    }
+  },
+  "COCO_val2014_000000051054.jpg": {
+    "o_pos": [
+      "bed",
+      "bottle",
+      "person",
+      "dresser"
+    ],
+    "o_neg": [
+      "cell phone",
+      "cup",
+      "black",
+      "headboard",
+      "older",
+      "photo",
+      "sit",
+      "sitting",
+      "sleepwear",
+      "talk",
+      "white"
+    ],
+    "responsibilities": {
+      "bed": 0.9881324446196668,
+      "bottle": 0.9588974797182593,
+      "cell phone": 0.07881049336494285,
+      "cup": 0.09449048794802696,
+      "person": 0.6833301898826888,
+      "black": 0.1185563721317001,
+      "dresser": 0.9999851862591725,
+      "headboard": 0.1053640729287261,
+      "older": 0.20131092208691168,
+      "photo": 0.19526715862034227,
+      "sit": 0.08092568386125933,
+      "sitting": 0.08734894090339858,
+      "sleepwear": 0.2760600558872315,
+      "talk": 0.09238230679352363,
+      "white": 0.10056028627866731
+    }
+  },
+  "COCO_val2014_000000001268.jpg": {
+    "o_pos": [
+      "backpack",
+      "bird",
+      "boat",
+      "handbag",
+      "river",
+      "water"
+    ],
+    "o_neg": [
+      "bench",
+      "person",
+      "body",
+      "bridge",
+      "nearby",
+      "photo",
+      "selfie",
+      "sit",
+      "stand",
+      "take",
+      "waterway"
+    ],
+    "responsibilities": {
+      "backpack": 0.6404952147841768,
+      "bench": 0.11917946662600483,
+      "bird": 0.9999999999927747,
+      "boat": 0.6020628090768997,
+      "handbag": 0.9999999408785629,
+      "person": 0.23426995694084282,
+      "body": 0.27979707278630567,
+      "bridge": 0.0906475651930283,
+      "nearby": 0.09032957178616172,
+      "photo": 0.14328902225862802,
+      "river": 0.3764354073872445,
+      "selfie": 0.08161614504467035,
+      "sit": 0.08207282268472482,
+      "stand": 0.10833138397820385,
+      "take": 0.09031723502467363,
+      "water": 0.9604389290058714,
+      "waterway": 0.1738431807681616
+    }
+  },
+  "COCO_val2014_000000062692.jpg": {
+    "o_pos": [
+      "person",
+      "tennis racket",
+      "court",
+      "net",
+      "skirt"
+    ],
+    "o_neg": [
+      "sports ball",
+      "black",
+      "catch",
+      "play",
+      "playing",
+      "shirt",
+      "swing",
+      "swinge",
+      "tenni",
+      "white"
+    ],
+    "responsibilities": {
+      "person": 0.9388934016632352,
+      "sports ball": 0.08496577829010678,
+      "tennis racket": 0.9999999800926507,
+      "black": 0.089636440647918,
+      "catch": 0.08010092142578917,
+      "court": 0.9529359874446428,
+      "net": 0.9330957788850799,
+      "play": 0.07967551729800829,
+      "playing": 0.10828499745123887,
+      "shirt": 0.11314094454021037,
+      "skirt": 0.9999999972494238,
+      "swing": 0.09809948466153798,
+      "swinge": 0.09535844436921362,
+      "tenni": 0.10079846156192764,
+      "white": 0.08982909355412366
+    }
+  },
+  "COCO_val2014_000000377879.jpg": {
+    "o_pos": [
+      "truck",
+      "army",
+      "building",
+      "rail",
+      "railroad",
+      "tank",
+      "transported",
+      "vehicle"
+    ],
+    "o_neg": [
+      "car",
+      "equipment",
+      "flatbed",
+      "turret",
+      "two"
+    ],
+    "responsibilities": {
+      "car": 0.09538954359398628,
+      "truck": 0.30092742846157855,
+      "army": 0.7056969038319665,
+      "building": 0.9924167204513005,
+      "equipment": 0.21563351870381067,
+      "flatbed": 0.2126164831569994,
+      "rail": 0.6298480522580288,
+      "railroad": 0.9772356302569019,
+      "tank": 0.999616536152537,
+      "transported": 0.8784081658390386,
+      "turret": 0.08888866998024417,
+      "two": 0.09174318680434655,
+      "vehicle": 0.39375617216404085
+    }
+  },
+  "COCO_val2014_000000436814.jpg": {
+    "o_pos": [
+      "chair",
+      "dining table",
+      "laptop",
+      "tv",
+      "equipment",
+      "office",
+      "room",
+      "tripod"
+    ],
+    "o_neg": [
+      "mouse",
+      "attach",
+      "blanket",
+      "desktop",
+      "door",
+      "office supply",
+      "poster",
+      "sitting",
+      "telescope"
+    ],
+    "responsibilities": {
+      "chair": 0.9999943684811821,
+      "dining table": 0.7528296981750211,
+      "laptop": 0.5609026537004649,
+      "mouse": 0.09967747575060036,
+      "tv": 0.999999822598191,
+      "attach": 0.08852156058442022,
+      "blanket": 0.08954994363971017,
+      "desktop": 0.24410844457356223,
+      "door": 0.1919980100112754,
+      "equipment": 0.9935804789128232,
+      "office": 0.9999999945173232,
+      "office supply": 0.08979000866886717,
+      "poster": 0.23503844011289,
+      "room": 0.9203182841562166,
+      "sitting": 0.11032473003916568,
+      "telescope": 0.08180690553806591,
+      "tripod": 1.0
+    }
+  },
+  "COCO_val2014_000000063934.jpg": {
+    "o_pos": [
+      "car",
+      "person",
+      "skateboard",
+      "truck",
+      "building",
+      "road",
+      "skate"
+    ],
+    "o_neg": [
+      "courthouse",
+      "dres",
+      "monk",
+      "nun",
+      "pavement",
+      "preacher",
+      "ride",
+      "riding",
+      "robe"
+    ],
+    "responsibilities": {
+      "car": 0.99998257563549,
+      "person": 0.9999999710110457,
+      "skateboard": 1.0,
+      "truck": 0.9748794516993536,
+      "building": 0.8990690104516882,
+      "courthouse": 0.19674777069111674,
+      "dres": 0.08381472132894079,
+      "monk": 0.09979328874467899,
+      "nun": 0.13313671900309576,
+      "pavement": 0.27601309011802727,
+      "preacher": 0.08971369045717383,
+      "ride": 0.09117032133024934,
+      "riding": 0.08991278432003269,
+      "road": 0.8195160498308264,
+      "robe": 0.07868473712945671,
+      "skate": 0.7648360178790862
+    }
+  },
+  "COCO_val2014_000000275611.jpg": {
+    "o_pos": [
+      "pizza",
+      "plate",
+      "platter",
+      "topping"
+    ],
+    "o_neg": [
+      "dining table",
+      "knife",
+      "cheese",
+      "mis",
+      "pan",
+      "silver",
+      "sit",
+      "spinach",
+      "top",
+      "tray"
+    ],
+    "responsibilities": {
+      "dining table": 0.09189920262426596,
+      "knife": 0.08984596996407025,
+      "pizza": 1.0,
+      "cheese": 0.20689825679406482,
+      "mis": 0.08768997725786036,
+      "pan": 0.2123403769923606,
+      "plate": 0.999963755585349,
+      "platter": 0.9998385438824129,
+      "silver": 0.08977847990368197,
+      "sit": 0.10738316152137281,
+      "spinach": 0.08902437471133713,
+      "top": 0.07967330466880765,
+      "topping": 0.31034227715321416,
+      "tray": 0.11450165824968711
+    }
+  },
+  "COCO_val2014_000000516248.jpg": {
+    "o_pos": [
+      "keyboard",
+      "computer screen",
+      "hand"
+    ],
+    "o_neg": [
+      "dining table",
+      "laptop",
+      "mouse",
+      "person",
+      "tv",
+      "using"
+    ],
+    "responsibilities": {
+      "dining table": 0.10652304763630935,
+      "keyboard": 0.9999999980979011,
+      "laptop": 0.09798242738068208,
+      "mouse": 0.10141468090410774,
+      "person": 0.15172520540388623,
+      "tv": 0.09854221899372606,
+      "computer screen": 0.3115016411489305,
+      "hand": 0.6966557609118991,
+      "using": 0.18711263026595465
+    }
+  },
+  "COCO_val2014_000000422326.jpg": {
+    "o_pos": [
+      "car",
+      "motorcycle",
+      "person",
+      "truck",
+      "cart",
+      "motorcyclist",
+      "parked",
+      "row",
+      "sidecar",
+      "silver"
+    ],
+    "o_neg": [
+      "park",
+      "trailer"
+    ],
+    "responsibilities": {
+      "car": 0.9990754024984964,
+      "motorcycle": 1.0,
+      "person": 0.9999937639254702,
+      "truck": 0.999963241980837,
+      "cart": 0.9985747151355211,
+      "motorcyclist": 0.36794287586208463,
+      "park": 0.1544268236975056,
+      "parked": 0.5659104755500852,
+      "row": 0.5717685726557985,
+      "sidecar": 0.9636191416550949,
+      "silver": 0.300824829208449,
+      "trailer": 0.10602964298462271
+    }
+  },
+  "COCO_val2014_000000110449.jpg": {
+    "o_pos": [
+      "person",
+      "remote",
+      "baseball hat",
+      "hand",
+      "wii controller"
+    ],
+    "o_neg": [
+      "laptop",
+      "computer screen",
+      "earphone",
+      "play",
+      "shirt",
+      "standing",
+      "two",
+      "video game",
+      "wearing",
+      "white",
+      "wius"
+    ],
+    "responsibilities": {
+      "laptop": 0.09138303214111279,
+      "person": 0.9999999928505692,
+      "remote": 0.5633776211941116,
+      "baseball hat": 0.9999339608082989,
+      "computer screen": 0.0794990047800227,
+      "earphone": 0.12136529162359097,
+      "hand": 0.9178982583076767,
+      "play": 0.08190677536959912,
+      "shirt": 0.08105910755314553,
+      "standing": 0.10218511173691347,
+      "two": 0.08928266340027306,
+      "video game": 0.09963525774858893,
+      "wearing": 0.15077139461281588,
+      "white": 0.0917499544892443,
+      "wii controller": 0.9958961802383864,
+      "wius": 0.12415041636016691
+    }
+  },
+  "COCO_val2014_000000082709.jpg": {
+    "o_pos": [
+      "backpack",
+      "dog",
+      "frisbee",
+      "person",
+      "air",
+      "crowd",
+      "crowded",
+      "gras"
+    ],
+    "o_neg": [
+      "black",
+      "catch",
+      "cd",
+      "floor",
+      "jump",
+      "mouth",
+      "toy",
+      "white"
+    ],
+    "responsibilities": {
+      "backpack": 0.9999998035565751,
+      "dog": 1.0,
+      "frisbee": 0.9999999982378198,
+      "person": 0.6328618867873965,
+      "air": 0.35146472505316784,
+      "black": 0.16115713828931055,
+      "catch": 0.09267285634903845,
+      "cd": 0.10229895019489085,
+      "crowd": 0.6348153959491417,
+      "crowded": 0.3614017878571112,
+      "floor": 0.1361200588259097,
+      "gras": 0.9998208705455607,
+      "jump": 0.08090649269397998,
+      "mouth": 0.08397256340047811,
+      "toy": 0.08202166697525162,
+      "white": 0.08329859025887033
+    }
+  },
+  "COCO_val2014_000000303099.jpg": {
+    "o_pos": [
+      "cat",
+      "toilet",
+      "bathroom",
+      "bathroom accessory",
+      "lid",
+      "shower curtain",
+      "tile wall"
+    ],
+    "o_neg": [
+      "bowl",
+      "chair",
+      "couple",
+      "sit",
+      "sitting",
+      "two",
+      "white"
+    ],
+    "responsibilities": {
+      "bowl": 0.09315109067274907,
+      "cat": 0.9999999854947418,
+      "chair": 0.08186181869785329,
+      "toilet": 0.9970890967643202,
+      "bathroom": 0.999999999997937,
+      "bathroom accessory": 0.4478825115590671,
+      "couple": 0.1328282653812423,
+      "lid": 0.9957068354214265,
+      "shower curtain": 0.9999999973663454,
+      "sit": 0.10704675052063337,
+      "sitting": 0.1499708687818725,
+      "tile wall": 0.5313548121161917,
+      "two": 0.09339329553879948,
+      "white": 0.08121187486268791
+    }
+  },
+  "COCO_val2014_000000205193.jpg": {
+    "o_pos": [
+      "microwave",
+      "oven",
+      "appliance",
+      "bag",
+      "beverage",
+      "counter top",
+      "food",
+      "jar",
+      "juice",
+      "liquid",
+      "package",
+      "tea"
+    ],
+    "o_neg": [
+      "bowl",
+      "person",
+      "chip",
+      "counter",
+      "honey",
+      "kitchenware",
+      "sit",
+      "teapot"
+    ],
+    "responsibilities": {
+      "bowl": 0.12557937552111703,
+      "microwave": 0.9999998851568098,
+      "oven": 0.9999999999998999,
+      "person": 0.11802488033703776,
+      "appliance": 1.0,
+      "bag": 0.30004242930220787,
+      "beverage": 0.999513503757199,
+      "chip": 0.13895912315319245,
+      "counter": 0.10771597518928779,
+      "counter top": 0.3157647281365701,
+      "food": 0.9726702036366932,
+      "honey": 0.16071470620147169,
+      "jar": 0.999903576637914,
+      "juice": 0.999999998564765,
+      "kitchenware": 0.29702587074868514,
+      "liquid": 0.9999961609856121,
+      "package": 0.9999301990672557,
+      "sit": 0.10269048522031703,
+      "tea": 0.9591321115872875,
+      "teapot": 0.127950490489086
+    }
+  },
+  "COCO_val2014_000000014940.jpg": {
+    "o_pos": [
+      "teddy bear",
+      "teddy"
+    ],
+    "o_neg": [
+      "cat",
+      "couch",
+      "animal",
+      "blanket",
+      "doll",
+      "lay",
+      "laying",
+      "paw",
+      "pillow",
+      "stuff",
+      "stuffed",
+      "toy"
+    ],
+    "responsibilities": {
+      "cat": 0.15204138765768163,
+      "couch": 0.082058763443943,
+      "teddy bear": 0.9350095155150075,
+      "animal": 0.08266956107731672,
+      "blanket": 0.19299627618392365,
+      "doll": 0.10522659614203708,
+      "lay": 0.08531693569410008,
+      "laying": 0.08374601389275214,
+      "paw": 0.15711006825463222,
+      "pillow": 0.11331363666324927,
+      "stuff": 0.09120457286281075,
+      "stuffed": 0.2910939476630169,
+      "teddy": 0.9413644781109133,
+      "toy": 0.17192723829304
+    }
+  },
+  "COCO_val2014_000000408449.jpg": {
+    "o_pos": [
+      "car",
+      "person",
+      "skateboard",
+      "truck",
+      "pavement",
+      "skate",
+      "skateboarding"
+    ],
+    "o_neg": [
+      "backpack",
+      "blue",
+      "city",
+      "muscle",
+      "pole",
+      "ride",
+      "road",
+      "shirt",
+      "shirtles",
+      "street",
+      "street corner",
+      "trick",
+      "urban",
+      "walk",
+      "wearing"
+    ],
+    "responsibilities": {
+      "backpack": 0.1259824638696301,
+      "car": 0.9999999999986011,
+      "person": 0.6809059540695869,
+      "skateboard": 1.0,
+      "truck": 0.993306872475843,
+      "blue": 0.08567446260289031,
+      "city": 0.16851266119195002,
+      "muscle": 0.10354346376308807,
+      "pavement": 0.3437401922774188,
+      "pole": 0.09037026261437293,
+      "ride": 0.09375841695583094,
+      "road": 0.2114495466973414,
+      "shirt": 0.07921264079393413,
+      "shirtles": 0.10612505072385654,
+      "skate": 0.9620164495656933,
+      "skateboarding": 0.8878774195852002,
+      "street": 0.09251372670365597,
+      "street corner": 0.08100979175772742,
+      "trick": 0.09290760249270824,
+      "urban": 0.2646196913684107,
+      "walk": 0.08278023336139988,
+      "wearing": 0.08438340028513498
+    }
+  },
+  "COCO_val2014_000000124236.jpg": {
+    "o_pos": [
+      "dining table",
+      "oven",
+      "appliance",
+      "box",
+      "cooker",
+      "floor",
+      "kitchen",
+      "kitchen counter",
+      "kitchenware",
+      "pot",
+      "room"
+    ],
+    "o_neg": [
+      "bowl",
+      "chair",
+      "exhaust hood",
+      "food",
+      "full",
+      "green",
+      "pan",
+      "utensil"
+    ],
+    "responsibilities": {
+      "bowl": 0.13275173209481167,
+      "chair": 0.09670285330642936,
+      "dining table": 0.9999999999984266,
+      "oven": 0.6344027362767093,
+      "appliance": 0.9999999995853139,
+      "box": 0.9999999558639666,
+      "cooker": 0.9997437701677091,
+      "exhaust hood": 0.14425295095757512,
+      "floor": 0.9626490090268516,
+      "food": 0.08170558647381546,
+      "full": 0.1172888733647914,
+      "green": 0.11557145021775882,
+      "kitchen": 0.9999999999797995,
+      "kitchen counter": 0.7871974326747813,
+      "kitchenware": 0.9654895932554077,
+      "pan": 0.13310918979840192,
+      "pot": 0.9384947684926693,
+      "room": 0.5829435133674788,
+      "utensil": 0.18748990648658773
+    }
+  },
+  "COCO_val2014_000000014285.jpg": {
+    "o_pos": [
+      "bed",
+      "cat",
+      "chair",
+      "tv",
+      "bedcover",
+      "blanket",
+      "bookshelf",
+      "room"
+    ],
+    "o_neg": [
+      "remote",
+      "comfort",
+      "floor",
+      "lay",
+      "poster",
+      "relax",
+      "sitting",
+      "sleep",
+      "wall"
+    ],
+    "responsibilities": {
+      "bed": 1.0,
+      "cat": 0.9999102276891089,
+      "chair": 0.9863649737133242,
+      "remote": 0.09190538655727383,
+      "tv": 1.0,
+      "bedcover": 0.9996209553221527,
+      "blanket": 0.9950267783786811,
+      "bookshelf": 0.5445149410159901,
+      "comfort": 0.12565754149025374,
+      "floor": 0.08809691729857469,
+      "lay": 0.08496614888095645,
+      "poster": 0.22369613307311947,
+      "relax": 0.09455826170430152,
+      "room": 0.6791544012193417,
+      "sitting": 0.1144488761885673,
+      "sleep": 0.08209576487743477,
+      "wall": 0.14493894495286982
+    }
+  },
+  "COCO_val2014_000000410114.jpg": {
+    "o_pos": [],
+    "o_neg": [
+      "cow",
+      "horse",
+      "person",
+      "animal",
+      "herd",
+      "horseback",
+      "lush",
+      "ride",
+      "road",
+      "rural",
+      "walk"
+    ],
+    "responsibilities": {
+      "cow": 0.1855047198565214,
+      "horse": 0.10723255056197503,
+      "person": 0.13333888302043723,
+      "animal": 0.09747472553014229,
+      "herd": 0.10937524471841938,
+      "horseback": 0.07844601762017207,
+      "lush": 0.10584175921215025,
+      "ride": 0.100103137363857,
+      "road": 0.09022604647015757,
+      "rural": 0.07987311938404233,
+      "walk": 0.09980912956238383
+    }
+  },
+  "COCO_val2014_000000100274.jpg": {
+    "o_pos": [
+      "train",
+      "truck",
+      "building",
+      "railroad"
+    ],
+    "o_neg": [
+      "car",
+      "park",
+      "parked",
+      "rail",
+      "rural",
+      "travel"
+    ],
+    "responsibilities": {
+      "car": 0.14666611766604806,
+      "train": 0.9999999999994447,
+      "truck": 0.7507355607656623,
+      "building": 0.9036810338735891,
+      "park": 0.08241505235589625,
+      "parked": 0.12344142947711348,
+      "rail": 0.20140677925925282,
+      "railroad": 0.4660351354773326,
+      "rural": 0.08646936916413858,
+      "travel": 0.09484223314310775
+    }
+  },
+  "COCO_val2014_000000210372.jpg": {
+    "o_pos": [
+      "sink",
+      "appliance",
+      "blind",
+      "bureau",
+      "cabinet",
+      "counter top",
+      "dish washer",
+      "drawer",
+      "floor",
+      "kitchen",
+      "kitchen counter",
+      "window"
+    ],
+    "o_neg": [
+      "bottle",
+      "cage",
+      "closet",
+      "red",
+      "shopping cart"
+    ],
+    "responsibilities": {
+      "bottle": 0.1768487751812141,
+      "sink": 0.9999999999999338,
+      "appliance": 0.9990196706498199,
+      "blind": 0.9999999912716429,
+      "bureau": 0.3020667616910248,
+      "cabinet": 0.9999925472655387,
+      "cage": 0.22935011207075384,
+      "closet": 0.09213995901946727,
+      "counter top": 0.9999999988049475,
+      "dish washer": 0.7599956653315971,
+      "drawer": 0.9999999999611395,
+      "floor": 0.9999941988433585,
+      "kitchen": 0.9999999999961156,
+      "kitchen counter": 0.999874415082734,
+      "red": 0.10337211090065475,
+      "shopping cart": 0.15069994525714026,
+      "window": 0.9994750284036577
+    }
+  },
+  "COCO_val2014_000000349642.jpg": {
+    "o_pos": [
+      "bench",
+      "dog",
+      "person"
+    ],
+    "o_neg": [
+      "boardwalk",
+      "hi",
+      "lay",
+      "relax",
+      "sit"
+    ],
+    "responsibilities": {
+      "bench": 1.0,
+      "dog": 1.0,
+      "person": 0.99999999986575,
+      "boardwalk": 0.1503568159484226,
+      "hi": 0.10254409339573371,
+      "lay": 0.08738798741665785,
+      "relax": 0.0889291867050919,
+      "sit": 0.09950263777336772
+    }
+  },
+  "COCO_val2014_000000423008.jpg": {
+    "o_pos": [
+      "boat",
+      "person",
+      "umbrella",
+      "crowded"
+    ],
+    "o_neg": [
+      "area",
+      "crowd",
+      "dock",
+      "fill",
+      "gathered",
+      "group",
+      "large",
+      "stand",
+      "water",
+      "waterway"
+    ],
+    "responsibilities": {
+      "boat": 1.0,
+      "person": 0.9301640616334187,
+      "umbrella": 0.9999984385460512,
+      "area": 0.07903931438085257,
+      "crowd": 0.12088318884309054,
+      "crowded": 0.3241994110449846,
+      "dock": 0.15869374199211442,
+      "fill": 0.11584037923590297,
+      "gathered": 0.08618414852782867,
+      "group": 0.08534047269111321,
+      "large": 0.16156266324677981,
+      "stand": 0.08031381949891292,
+      "water": 0.2147062375148689,
+      "waterway": 0.08477716606520833
+    }
+  },
+  "COCO_val2014_000000072656.jpg": {
+    "o_pos": [
+      "chair",
+      "dining table",
+      "person",
+      "pizza",
+      "deck",
+      "eat",
+      "food",
+      "meal",
+      "plate",
+      "platter",
+      "porch"
+    ],
+    "o_neg": [
+      "eating",
+      "sit",
+      "sitting",
+      "three"
+    ],
+    "responsibilities": {
+      "chair": 0.9999999999999976,
+      "dining table": 0.9999999999999993,
+      "person": 0.9999968234187642,
+      "pizza": 0.9991356890378832,
+      "deck": 0.4552932565364577,
+      "eat": 0.9582227397157925,
+      "eating": 0.16222561393490498,
+      "food": 0.9999999615329708,
+      "meal": 0.9999720291466551,
+      "plate": 0.9999999999820903,
+      "platter": 0.9980733548030468,
+      "porch": 0.9862465924021123,
+      "sit": 0.2430716976855117,
+      "sitting": 0.1334290529679267,
+      "three": 0.23903327202963096
+    }
+  },
+  "COCO_val2014_000000336209.jpg": {
+    "o_pos": [
+      "person",
+      "skateboard",
+      "building",
+      "rail",
+      "ramp",
+      "skate"
+    ],
+    "o_neg": [
+      "dining table",
+      "balance",
+      "doodle",
+      "grind",
+      "jump",
+      "ride",
+      "riding",
+      "shirt",
+      "shirtles",
+      "skate park",
+      "stunt",
+      "top",
+      "trick"
+    ],
+    "responsibilities": {
+      "dining table": 0.10592375903517624,
+      "person": 0.9999999379620254,
+      "skateboard": 1.0,
+      "balance": 0.08553634652251138,
+      "building": 0.9942069655958848,
+      "doodle": 0.10659641320750865,
+      "grind": 0.09878378189789097,
+      "jump": 0.2704322758280701,
+      "rail": 0.57424984817256,
+      "ramp": 0.9999847481040492,
+      "ride": 0.11317581039229235,
+      "riding": 0.297334033739776,
+      "shirt": 0.1079234030935162,
+      "shirtles": 0.12382870815151739,
+      "skate": 0.9999997783992962,
+      "skate park": 0.2516249620824246,
+      "stunt": 0.12311895631941254,
+      "top": 0.11958063775794951,
+      "trick": 0.16010225025667427
+    }
+  },
+  "COCO_val2014_000000438535.jpg": {
+    "o_pos": [
+      "car",
+      "clock",
+      "bell tower",
+      "building",
+      "city",
+      "pole",
+      "post",
+      "urban"
+    ],
+    "o_neg": [
+      "person",
+      "black",
+      "stand",
+      "white"
+    ],
+    "responsibilities": {
+      "car": 0.9999999999999989,
+      "clock": 0.9999951786283517,
+      "person": 0.2878571022717322,
+      "bell tower": 0.3393609801768056,
+      "black": 0.11289601172514374,
+      "building": 0.9999995762180905,
+      "city": 0.999700455496596,
+      "pole": 0.9164821250423357,
+      "post": 0.47864826042338793,
+      "stand": 0.08716402754153932,
+      "urban": 0.9922291171964117,
+      "white": 0.08772806482637309
+    }
+  },
+  "COCO_val2014_000000490711.jpg": {
+    "o_pos": [
+      "refrigerator",
+      "sink",
+      "appliance",
+      "bureau",
+      "cabinet",
+      "counter top",
+      "dish washer",
+      "drawer",
+      "exhaust hood",
+      "floor",
+      "kitchen",
+      "kitchen counter"
+    ],
+    "o_neg": [
+      "oven",
+      "closet",
+      "sitting",
+      "white"
+    ],
+    "responsibilities": {
+      "oven": 0.1787748095385922,
+      "refrigerator": 1.0,
+      "sink": 0.9719392380641174,
+      "appliance": 1.0,
+      "bureau": 0.6515485922258124,
+      "cabinet": 0.9999967501839451,
+      "closet": 0.10104405313062274,
+      "counter top": 0.9997999133543134,
+      "dish washer": 0.9999877045527729,
+      "drawer": 1.0,
+      "exhaust hood": 0.6181739066519586,
+      "floor": 0.99570436674046,
+      "kitchen": 1.0,
+      "kitchen counter": 0.9985055013775943,
+      "sitting": 0.11093621554622611,
+      "white": 0.07967931075755448
+    }
+  },
+  "COCO_val2014_000000456756.jpg": {
+    "o_pos": [
+      "giraffe",
+      "zebra",
+      "zoo"
+    ],
+    "o_neg": [
+      "animal",
+      "camera",
+      "enclosure",
+      "head",
+      "lay",
+      "looking",
+      "pen",
+      "stand",
+      "tree"
+    ],
+    "responsibilities": {
+      "giraffe": 0.9958102209370574,
+      "zebra": 0.9699381267546344,
+      "animal": 0.08985400036753681,
+      "camera": 0.10652595459176588,
+      "enclosure": 0.23300783680481968,
+      "head": 0.09974705111177369,
+      "lay": 0.09179702449172733,
+      "looking": 0.09593761232632204,
+      "pen": 0.11627419225932716,
+      "stand": 0.10456587448926993,
+      "tree": 0.09674696368655805,
+      "zoo": 0.3905626374600934
+    }
+  },
+  "COCO_val2014_000000281028.jpg": {
+    "o_pos": [
+      "bus",
+      "chair",
+      "train",
+      "subway",
+      "window"
+    ],
+    "o_neg": [
+      "car",
+      "laptop",
+      "blue",
+      "city bu",
+      "coach",
+      "parked",
+      "station",
+      "white"
+    ],
+    "responsibilities": {
+      "bus": 0.5587158560009026,
+      "car": 0.18056057339546264,
+      "chair": 0.9986476708726072,
+      "laptop": 0.08356946937648074,
+      "train": 0.38285379367171796,
+      "blue": 0.0805798089989819,
+      "city bu": 0.10344006831292106,
+      "coach": 0.11001596324776029,
+      "parked": 0.20543410459257944,
+      "station": 0.10124100561270807,
+      "subway": 0.8816073368034824,
+      "white": 0.09388092781291704,
+      "window": 0.9243863825902305
+    }
+  },
+  "COCO_val2014_000000145666.jpg": {
+    "o_pos": [
+      "broccoli"
+    ],
+    "o_neg": [
+      "bowl",
+      "carrot",
+      "broth",
+      "celery",
+      "chicken",
+      "cook",
+      "food",
+      "kitchenware",
+      "mixture",
+      "onion",
+      "pan",
+      "pot",
+      "soup",
+      "steam",
+      "stew",
+      "vegetable"
+    ],
+    "responsibilities": {
+      "bowl": 0.17134145272599954,
+      "broccoli": 1.0,
+      "carrot": 0.08427739724262547,
+      "broth": 0.15868876076145205,
+      "celery": 0.07871586756701139,
+      "chicken": 0.12060461843393697,
+      "cook": 0.20674722209628973,
+      "food": 0.11564109938802718,
+      "kitchenware": 0.0931131141848197,
+      "mixture": 0.11661123234062852,
+      "onion": 0.09545646254153278,
+      "pan": 0.20187971996199755,
+      "pot": 0.20537433415524778,
+      "soup": 0.1216545733762784,
+      "steam": 0.12158671132743422,
+      "stew": 0.11502878507256191,
+      "vegetable": 0.11200772671257847
+    }
+  },
+  "COCO_val2014_000000018150.jpg": {
+    "o_pos": [
+      "bottle",
+      "person",
+      "pizza",
+      "box",
+      "eat",
+      "floor",
+      "toy",
+      "young"
+    ],
+    "o_neg": [
+      "bite",
+      "holding",
+      "lap",
+      "share",
+      "sit",
+      "sleepwear",
+      "slouse"
+    ],
+    "responsibilities": {
+      "bottle": 0.8820716214405196,
+      "person": 0.974583539209543,
+      "pizza": 1.0,
+      "bite": 0.10262995251719302,
+      "box": 0.5184468145386529,
+      "eat": 0.9996572907601927,
+      "floor": 0.37899987637406746,
+      "holding": 0.13283707291998595,
+      "lap": 0.2576681980282155,
+      "share": 0.17397375540014384,
+      "sit": 0.10557585867522198,
+      "sleepwear": 0.11570482871555518,
+      "slouse": 0.0998433255430177,
+      "toy": 0.9999265222220176,
+      "young": 0.9999992710883593
+    }
+  },
+  "COCO_val2014_000000418711.jpg": {
+    "o_pos": [
+      "banana",
+      "bicycle",
+      "car",
+      "person",
+      "truck",
+      "road"
+    ],
+    "o_neg": [
+      "back",
+      "basket",
+      "bundle",
+      "carry",
+      "cart",
+      "coach",
+      "full",
+      "green",
+      "load",
+      "push",
+      "ride",
+      "riding"
+    ],
+    "responsibilities": {
+      "banana": 0.540424922100167,
+      "bicycle": 1.0,
+      "car": 0.9921796509740652,
+      "person": 0.999886315772474,
+      "truck": 0.9999999780194753,
+      "back": 0.15137326965305292,
+      "basket": 0.08241746732743807,
+      "bundle": 0.08638326356926114,
+      "carry": 0.08316556502004507,
+      "cart": 0.2801834362374729,
+      "coach": 0.08258898116468269,
+      "full": 0.11019126950282614,
+      "green": 0.07850915338812861,
+      "load": 0.17376583668273352,
+      "push": 0.0797753232918451,
+      "ride": 0.25742343930997863,
+      "riding": 0.0871310215313595,
+      "road": 0.7108539550421447
+    }
+  },
+  "COCO_val2014_000000401163.jpg": {
+    "o_pos": [
+      "bench",
+      "dog",
+      "person",
+      "tree"
+    ],
+    "o_neg": [
+      "ground",
+      "lay",
+      "lying",
+      "nearby",
+      "park",
+      "relax",
+      "shadow",
+      "sit",
+      "stand"
+    ],
+    "responsibilities": {
+      "bench": 1.0,
+      "dog": 0.7729335626635085,
+      "person": 0.9999999901816756,
+      "ground": 0.19559027127977932,
+      "lay": 0.10102206439615856,
+      "lying": 0.08048288396521652,
+      "nearby": 0.08655948199672354,
+      "park": 0.21253439223113701,
+      "relax": 0.1356835236999532,
+      "shadow": 0.07845073230271062,
+      "sit": 0.08986118937352194,
+      "stand": 0.07905618720093716,
+      "tree": 0.9996268224277254
+    }
+  },
+  "COCO_val2014_000000268293.jpg": {
+    "o_pos": [
+      "person",
+      "sports ball",
+      "tennis racket",
+      "bat"
+    ],
+    "o_neg": [
+      "beat",
+      "blue",
+      "catch",
+      "court",
+      "play",
+      "shirt",
+      "swing",
+      "swinge",
+      "tenni"
+    ],
+    "responsibilities": {
+      "person": 0.8800551711536223,
+      "sports ball": 0.9999999997701403,
+      "tennis racket": 1.0,
+      "bat": 0.9648633296480925,
+      "beat": 0.10408310760828492,
+      "blue": 0.1275302097871075,
+      "catch": 0.1623488200214648,
+      "court": 0.08192746619076256,
+      "play": 0.08284311034621479,
+      "shirt": 0.14579077703841525,
+      "swing": 0.1667390735460757,
+      "swinge": 0.0945449566092669,
+      "tenni": 0.08939026107351186
+    }
+  },
+  "COCO_val2014_000000239445.jpg": {
+    "o_pos": [
+      "frisbee",
+      "person",
+      "hand"
+    ],
+    "o_neg": [
+      "bench",
+      "dining table",
+      "catch",
+      "cd",
+      "holding",
+      "park",
+      "shirt",
+      "smile",
+      "stand",
+      "wear",
+      "white",
+      "word"
+    ],
+    "responsibilities": {
+      "bench": 0.14486487963271472,
+      "dining table": 0.0790687443204132,
+      "frisbee": 1.0,
+      "person": 0.9939386251388664,
+      "catch": 0.08312830660650077,
+      "cd": 0.12924479061107305,
+      "hand": 0.9966545806630095,
+      "holding": 0.08624193559214154,
+      "park": 0.08330397409467087,
+      "shirt": 0.10849218979382225,
+      "smile": 0.086589501493352,
+      "stand": 0.09876268406305368,
+      "wear": 0.08035325486899242,
+      "white": 0.08377001571829815,
+      "word": 0.07916972224558595
+    }
+  },
+  "COCO_val2014_000000487990.jpg": {
+    "o_pos": [
+      "bowl",
+      "cup",
+      "knife",
+      "person",
+      "food",
+      "gathering",
+      "guitar",
+      "party",
+      "platter",
+      "tablecloth"
+    ],
+    "o_neg": [
+      "cake",
+      "dining table",
+      "donut",
+      "box",
+      "holding",
+      "pastry",
+      "pink",
+      "sitting",
+      "ukulele"
+    ],
+    "responsibilities": {
+      "bowl": 0.9692322463889652,
+      "cake": 0.08641205423148836,
+      "cup": 0.3061925711770604,
+      "dining table": 0.13676126120044738,
+      "donut": 0.11304864102559983,
+      "knife": 0.9826027667069372,
+      "person": 0.5828308487640604,
+      "box": 0.22909324158583172,
+      "food": 0.9999982964448602,
+      "gathering": 0.3604933136872846,
+      "guitar": 0.995575131985822,
+      "holding": 0.08861714824860423,
+      "party": 0.9989829940694593,
+      "pastry": 0.08082985561392617,
+      "pink": 0.09387355851487086,
+      "platter": 0.9998841428684435,
+      "sitting": 0.08302473273618224,
+      "tablecloth": 0.9438749881994266,
+      "ukulele": 0.08783515544418828
+    }
+  },
+  "COCO_val2014_000000111409.jpg": {
+    "o_pos": [
+      "motorcycle",
+      "person",
+      "goggle",
+      "helmet",
+      "motorcyclist",
+      "sunglass"
+    ],
+    "o_neg": [
+      "blue",
+      "curb",
+      "ride",
+      "riding",
+      "shirt",
+      "wear"
+    ],
+    "responsibilities": {
+      "motorcycle": 1.0,
+      "person": 1.0,
+      "blue": 0.1015920665282365,
+      "curb": 0.09509107455506445,
+      "goggle": 0.9746239490165632,
+      "helmet": 1.0,
+      "motorcyclist": 0.9847702667295292,
+      "ride": 0.10886935123040441,
+      "riding": 0.08852085066916643,
+      "shirt": 0.10051189852527048,
+      "sunglass": 0.999486022021468,
+      "wear": 0.10197413975324669
+    }
+  },
+  "COCO_val2014_000000451391.jpg": {
+    "o_pos": [
+      "cauliflower",
+      "kale"
+    ],
+    "o_neg": [
+      "broccoli",
+      "person",
+      "artichoke",
+      "bunch",
+      "bundle",
+      "catch",
+      "display",
+      "fruit",
+      "green",
+      "hand",
+      "holding",
+      "market",
+      "produce",
+      "stem",
+      "vegetable"
+    ],
+    "responsibilities": {
+      "broccoli": 0.19734986915307062,
+      "person": 0.11044670908700341,
+      "artichoke": 0.0916782360611934,
+      "bunch": 0.12798864925507372,
+      "bundle": 0.0792399290605542,
+      "catch": 0.1182944361843057,
+      "cauliflower": 0.6690028468565566,
+      "display": 0.07970516002094284,
+      "fruit": 0.11104724931307533,
+      "green": 0.1453089277820059,
+      "hand": 0.09340163464768456,
+      "holding": 0.11969261911375811,
+      "kale": 0.30703677427207404,
+      "market": 0.10187964844272884,
+      "produce": 0.10813084323754772,
+      "stem": 0.1252491053651419,
+      "vegetable": 0.10076820779536416
+    }
+  },
+  "COCO_val2014_000000092462.jpg": {
+    "o_pos": [
+      "car",
+      "cow",
+      "person",
+      "group",
+      "herd"
+    ],
+    "o_neg": [
+      "animal",
+      "curb",
+      "dirt",
+      "following",
+      "line",
+      "road",
+      "rural",
+      "trumpet",
+      "walk"
+    ],
+    "responsibilities": {
+      "car": 0.9814044335260862,
+      "cow": 0.999999999999964,
+      "person": 0.9961106623264379,
+      "animal": 0.13605469596515532,
+      "curb": 0.09539543794651807,
+      "dirt": 0.15695679590952333,
+      "following": 0.11384056410234047,
+      "group": 0.3206368255290145,
+      "herd": 0.9999475896710174,
+      "line": 0.08698287372650144,
+      "road": 0.14907588203049713,
+      "rural": 0.10201510909762436,
+      "trumpet": 0.1424730820165198,
+      "walk": 0.08467376875188184
+    }
+  },
+  "COCO_val2014_000000127659.jpg": {
+    "o_pos": [
+      "train",
+      "platform",
+      "station",
+      "track"
+    ],
+    "o_neg": [
+      "bench",
+      "dog",
+      "person",
+      "cart",
+      "pull",
+      "railroad",
+      "sitting",
+      "stand",
+      "walk",
+      "yellow"
+    ],
+    "responsibilities": {
+      "bench": 0.07952467452115183,
+      "dog": 0.08279236423399552,
+      "person": 0.13172925592836152,
+      "train": 1.0,
+      "cart": 0.08841513014458531,
+      "platform": 0.6369891771874208,
+      "pull": 0.1442495944796286,
+      "railroad": 0.11911693165936267,
+      "sitting": 0.11868830995031637,
+      "stand": 0.11668319270644431,
+      "station": 0.5699594409971702,
+      "track": 0.8770392902792284,
+      "walk": 0.07948045614319156,
+      "yellow": 0.09399281858006474
+    }
+  },
+  "COCO_val2014_000000251857.jpg": {
+    "o_pos": [
+      "person",
+      "skateboard",
+      "palm tree",
+      "skate",
+      "skateboarding"
+    ],
+    "o_neg": [
+      "car",
+      "another",
+      "curb",
+      "park",
+      "pavement",
+      "ride",
+      "stand",
+      "trick",
+      "watch"
+    ],
+    "responsibilities": {
+      "car": 0.27866426706657726,
+      "person": 0.999856129778526,
+      "skateboard": 1.0,
+      "another": 0.1126981590785873,
+      "curb": 0.16690118337380747,
+      "palm tree": 0.4455517538433432,
+      "park": 0.18811037368795985,
+      "pavement": 0.11399531753856758,
+      "ride": 0.08142738885228894,
+      "skate": 0.9999868639225893,
+      "skateboarding": 0.922143506190923,
+      "stand": 0.09367634164662123,
+      "trick": 0.08896764195859372,
+      "watch": 0.10745923486581987
+    }
+  },
+  "COCO_val2014_000000243212.jpg": {
+    "o_pos": [
+      "frisbee",
+      "gras"
+    ],
+    "o_neg": [
+      "car",
+      "person",
+      "truck",
+      "blue",
+      "catch",
+      "cd",
+      "field",
+      "hand",
+      "holding",
+      "jean",
+      "lush",
+      "park",
+      "shirt",
+      "stand",
+      "toddler",
+      "toy",
+      "wearing",
+      "young"
+    ],
+    "responsibilities": {
+      "car": 0.08101315087170949,
+      "frisbee": 0.9999999998761269,
+      "person": 0.1062003653681976,
+      "truck": 0.07894403975979654,
+      "blue": 0.10128173901548804,
+      "catch": 0.18808152064272504,
+      "cd": 0.1648852057051266,
+      "field": 0.12051562068772176,
+      "gras": 0.5697460370559323,
+      "hand": 0.079295465345379,
+      "holding": 0.1709241870025876,
+      "jean": 0.08718398434344098,
+      "lush": 0.09295352596633182,
+      "park": 0.14821173067606008,
+      "shirt": 0.10004022835995914,
+      "stand": 0.12603482361577226,
+      "toddler": 0.13419681543658418,
+      "toy": 0.10013405369946447,
+      "wearing": 0.10298929016707131,
+      "young": 0.14548740105075
+    }
+  },
+  "COCO_val2014_000000444304.jpg": {
+    "o_pos": [
+      "person",
+      "remote",
+      "tv",
+      "baseball hat",
+      "carpet",
+      "floor",
+      "game controller",
+      "radiator",
+      "video game"
+    ],
+    "o_neg": [
+      "bed",
+      "bend",
+      "sitting",
+      "watching",
+      "wius"
+    ],
+    "responsibilities": {
+      "bed": 0.0823065648215884,
+      "person": 0.9998188704138733,
+      "remote": 0.9645774276084856,
+      "tv": 1.0,
+      "baseball hat": 0.9999943730607369,
+      "bend": 0.10349488583907246,
+      "carpet": 0.9958617130607093,
+      "floor": 0.5032305151761717,
+      "game controller": 0.9999875883383365,
+      "radiator": 0.999947232427488,
+      "sitting": 0.07924606736625392,
+      "video game": 0.898069595940262,
+      "watching": 0.2538194078407132,
+      "wius": 0.09115225246650933
+    }
+  },
+  "COCO_val2014_000000305000.jpg": {
+    "o_pos": [
+      "banana"
+    ],
+    "o_neg": [
+      "broccoli",
+      "dining table",
+      "person",
+      "buy",
+      "canopy",
+      "crate",
+      "food",
+      "fruit",
+      "full",
+      "including",
+      "lime",
+      "market",
+      "outdoor",
+      "produce",
+      "sell",
+      "stall",
+      "standing",
+      "vegetable",
+      "vendor"
+    ],
+    "responsibilities": {
+      "banana": 0.5785531790870729,
+      "broccoli": 0.09021984891913534,
+      "dining table": 0.11188319442909264,
+      "person": 0.0784288055285196,
+      "buy": 0.1357864542737983,
+      "canopy": 0.08808067262774251,
+      "crate": 0.13314312591310545,
+      "food": 0.09201491646642773,
+      "fruit": 0.07848150611279675,
+      "full": 0.11285936648939346,
+      "including": 0.08137707607457056,
+      "lime": 0.15677558091628865,
+      "market": 0.10339771858279939,
+      "outdoor": 0.08017637152384374,
+      "produce": 0.09544279229256793,
+      "sell": 0.11632435195147121,
+      "stall": 0.11866807751486162,
+      "standing": 0.11005090725170388,
+      "vegetable": 0.08105989085114183,
+      "vendor": 0.22620095088881376
+    }
+  },
+  "COCO_val2014_000000044136.jpg": {
+    "o_pos": [
+      "bottle",
+      "tie",
+      "wine glass",
+      "alcohol",
+      "beer",
+      "drink",
+      "food",
+      "suit"
+    ],
+    "o_neg": [
+      "dining table",
+      "person",
+      "banquet hall",
+      "catch",
+      "cocktail dres",
+      "dinner",
+      "holding",
+      "one",
+      "sit",
+      "sitting",
+      "two"
+    ],
+    "responsibilities": {
+      "bottle": 0.999999997099446,
+      "dining table": 0.21260122900296277,
+      "person": 0.08704802556008827,
+      "tie": 0.9999970144340299,
+      "wine glass": 0.9873405337993435,
+      "alcohol": 0.9998105624363143,
+      "banquet hall": 0.16899070886694856,
+      "beer": 0.9999999544523811,
+      "catch": 0.09201468309225636,
+      "cocktail dres": 0.08125664216011141,
+      "dinner": 0.1804899312523937,
+      "drink": 0.9999999546085859,
+      "food": 0.9962582183763388,
+      "holding": 0.0822973190383452,
+      "one": 0.08091096626757625,
+      "sit": 0.08242706321763599,
+      "sitting": 0.0816991060058377,
+      "suit": 1.0,
+      "two": 0.08214618123222159
+    }
+  },
+  "COCO_val2014_000000567254.jpg": {
+    "o_pos": [
+      "person",
+      "toothbrush",
+      "tv",
+      "entertainment center",
+      "hair",
+      "mouth",
+      "toddler",
+      "toy",
+      "young"
+    ],
+    "o_neg": [
+      "vase",
+      "brush",
+      "catch",
+      "comb",
+      "hairbrush",
+      "pink",
+      "play",
+      "playing",
+      "selfie"
+    ],
+    "responsibilities": {
+      "person": 0.8252041109348681,
+      "toothbrush": 0.9996713796090789,
+      "tv": 0.9999999999999967,
+      "vase": 0.10707598920304491,
+      "brush": 0.2378185540422349,
+      "catch": 0.10626574084083346,
+      "comb": 0.10716933311908312,
+      "entertainment center": 0.9900993613415553,
+      "hair": 0.7071655895942233,
+      "hairbrush": 0.256228668086436,
+      "mouth": 0.9969646395389503,
+      "pink": 0.07985965017647226,
+      "play": 0.08319020324865536,
+      "playing": 0.09590406720492081,
+      "selfie": 0.08273517861760404,
+      "toddler": 0.7721193816550662,
+      "toy": 0.5255737714323842,
+      "young": 0.33558130202041586
+    }
+  },
+  "COCO_val2014_000000301402.jpg": {
+    "o_pos": [
+      "chair",
+      "dining table",
+      "laptop",
+      "person",
+      "potted plant",
+      "beret",
+      "hat",
+      "scarf"
+    ],
+    "o_neg": [
+      "bottle",
+      "black",
+      "hoodie",
+      "job",
+      "lap",
+      "sit",
+      "sitting",
+      "using",
+      "wear"
+    ],
+    "responsibilities": {
+      "bottle": 0.11676238244268444,
+      "chair": 0.9999998190896634,
+      "dining table": 0.999792572953934,
+      "laptop": 0.9999999999999944,
+      "person": 0.988535483199868,
+      "potted plant": 0.9974733890785146,
+      "beret": 0.5466500357228253,
+      "black": 0.08639096569182428,
+      "hat": 0.9999999937948347,
+      "hoodie": 0.16241448663974437,
+      "job": 0.0864737761967957,
+      "lap": 0.143855715709996,
+      "scarf": 1.0,
+      "sit": 0.12726967647957274,
+      "sitting": 0.09985297683207921,
+      "using": 0.1950656877505649,
+      "wear": 0.1150370092656864
+    }
+  },
+  "COCO_val2014_000000523175.jpg": {
+    "o_pos": [
+      "spoon",
+      "food",
+      "scoop",
+      "soup",
+      "soupspoon"
+    ],
+    "o_neg": [
+      "bowl",
+      "carrot",
+      "bean",
+      "broth",
+      "celery",
+      "kitchenware",
+      "ladle",
+      "plate",
+      "stew",
+      "white"
+    ],
+    "responsibilities": {
+      "bowl": 0.12265917390852332,
+      "carrot": 0.0929412506342295,
+      "spoon": 1.0,
+      "bean": 0.09291621476071713,
+      "broth": 0.19632075739373295,
+      "celery": 0.10923986641029798,
+      "food": 1.0,
+      "kitchenware": 0.14802550472938505,
+      "ladle": 0.10989481341453182,
+      "plate": 0.09211865352712356,
+      "scoop": 0.6105819873021792,
+      "soup": 0.8351667928308133,
+      "soupspoon": 0.999999999838493,
+      "stew": 0.2546806270415136,
+      "white": 0.14539581633355003
+    }
+  },
+  "COCO_val2014_000000223019.jpg": {
+    "o_pos": [
+      "person",
+      "train",
+      "commuter",
+      "station"
+    ],
+    "o_neg": [
+      "car",
+      "orange",
+      "blue",
+      "night",
+      "platform",
+      "pull",
+      "restaurant",
+      "stand",
+      "subway",
+      "track",
+      "word"
+    ],
+    "responsibilities": {
+      "car": 0.08861240770155075,
+      "orange": 0.13081717210038463,
+      "person": 0.9999999827461662,
+      "train": 1.0,
+      "blue": 0.08912334092135453,
+      "commuter": 0.6636452872047895,
+      "night": 0.0904340321196082,
+      "platform": 0.2390528899719605,
+      "pull": 0.09143277308789961,
+      "restaurant": 0.0981285555971763,
+      "stand": 0.09394468194160807,
+      "station": 0.9992105259054078,
+      "subway": 0.27776354050810137,
+      "track": 0.08346372283491128,
+      "word": 0.09175237764668721
+    }
+  },
+  "COCO_val2014_000000042889.jpg": {
+    "o_pos": [
+      "cell phone",
+      "keyboard",
+      "laptop",
+      "teddy bear",
+      "animal",
+      "desktop",
+      "electronic",
+      "ipod",
+      "teddy"
+    ],
+    "o_neg": [
+      "cup",
+      "dining table",
+      "person",
+      "brown",
+      "glas",
+      "holding",
+      "sit",
+      "stuff",
+      "wearing"
+    ],
+    "responsibilities": {
+      "cell phone": 0.9703924608427243,
+      "cup": 0.10430760089781109,
+      "dining table": 0.0946197255761391,
+      "keyboard": 0.9999999999999998,
+      "laptop": 0.3072231157708364,
+      "person": 0.08097787738656642,
+      "teddy bear": 0.9999999999999998,
+      "animal": 0.8707207874056418,
+      "brown": 0.07868474333848126,
+      "desktop": 0.4967562053668027,
+      "electronic": 0.42449665622352234,
+      "glas": 0.09901851799698982,
+      "holding": 0.09664650320318713,
+      "ipod": 0.9999988453704662,
+      "sit": 0.07976787860025218,
+      "stuff": 0.07953503322899114,
+      "teddy": 0.9999998254262302,
+      "wearing": 0.08138986807717165
+    }
+  },
+  "COCO_val2014_000000247587.jpg": {
+    "o_pos": [
+      "surfboard"
+    ],
+    "o_neg": [
+      "car",
+      "person",
+      "balance",
+      "beach",
+      "board",
+      "palm tree",
+      "ride",
+      "sand",
+      "stand",
+      "standing"
+    ],
+    "responsibilities": {
+      "car": 0.12312290325257913,
+      "person": 0.08003927061565805,
+      "surfboard": 0.9472996223657218,
+      "balance": 0.09672459626659323,
+      "beach": 0.15236078562721855,
+      "board": 0.09800002794157156,
+      "palm tree": 0.21508729543892133,
+      "ride": 0.08848972404410728,
+      "sand": 0.24790230630588533,
+      "stand": 0.10279916861691678,
+      "standing": 0.09226385396244063
+    }
+  },
+  "COCO_val2014_000000171962.jpg": {
+    "o_pos": [
+      "bicycle",
+      "bus",
+      "car",
+      "person",
+      "bridge",
+      "city street",
+      "curb",
+      "license plate",
+      "road"
+    ],
+    "o_neg": [
+      "attach",
+      "bu",
+      "drive",
+      "lock",
+      "overpas",
+      "park",
+      "ramp"
+    ],
+    "responsibilities": {
+      "bicycle": 1.0,
+      "bus": 1.0,
+      "car": 0.9992054436443245,
+      "person": 0.9999711129964147,
+      "attach": 0.08765317031498278,
+      "bridge": 0.9906989499962588,
+      "bu": 0.07900053210196684,
+      "city street": 0.37430147370032324,
+      "curb": 0.7310950457013629,
+      "drive": 0.09956507990963669,
+      "license plate": 0.41874097017811623,
+      "lock": 0.10844214525512796,
+      "overpas": 0.0950087692521164,
+      "park": 0.09044018950792218,
+      "ramp": 0.08283255609805636,
+      "road": 0.9924209557659992
+    }
+  },
+  "COCO_val2014_000000124601.jpg": {
+    "o_pos": [
+      "bottle",
+      "microwave",
+      "sink",
+      "appliance",
+      "blender",
+      "bureau",
+      "cabinet",
+      "coffee",
+      "coffee machine",
+      "counter",
+      "counter top",
+      "dish washer",
+      "drawer",
+      "kitchen"
+    ],
+    "o_neg": [
+      "cup",
+      "laptop",
+      "toaster",
+      "wine glass",
+      "closet",
+      "maker",
+      "white"
+    ],
+    "responsibilities": {
+      "bottle": 0.5927742634202835,
+      "cup": 0.10741308919808393,
+      "laptop": 0.19086086000238084,
+      "microwave": 0.999999999599029,
+      "sink": 0.9999999999463327,
+      "toaster": 0.20432749712082532,
+      "wine glass": 0.09235633178843143,
+      "appliance": 0.9999999999961666,
+      "blender": 0.9979551995913075,
+      "bureau": 0.8307219512435449,
+      "cabinet": 0.9998871123536249,
+      "closet": 0.07839244483710468,
+      "coffee": 0.9969994131274217,
+      "coffee machine": 0.9999999999943254,
+      "counter": 0.7866747012492639,
+      "counter top": 0.9999831016349735,
+      "dish washer": 0.9989166765475063,
+      "drawer": 1.0,
+      "kitchen": 0.9999999999999911,
+      "maker": 0.09193151999195794,
+      "white": 0.07843161434616451
+    }
+  },
+  "COCO_val2014_000000227960.jpg": {
+    "o_pos": [
+      "bowl",
+      "carrot",
+      "spoon",
+      "wine glass",
+      "food",
+      "plate",
+      "platter",
+      "potato",
+      "side dish",
+      "silverware",
+      "soup",
+      "tray",
+      "utensil",
+      "vegetable"
+    ],
+    "o_neg": [
+      "broccoli",
+      "dining table",
+      "brussel",
+      "casserole",
+      "celery",
+      "fill",
+      "gravy",
+      "sprout"
+    ],
+    "responsibilities": {
+      "bowl": 0.9541441866136539,
+      "broccoli": 0.16470986302745722,
+      "carrot": 0.9999999999999951,
+      "dining table": 0.13472564587654795,
+      "spoon": 1.0,
+      "wine glass": 0.7931909855909256,
+      "brussel": 0.23124955410950765,
+      "casserole": 0.13598395183037792,
+      "celery": 0.08372349839897392,
+      "fill": 0.0858059349100036,
+      "food": 0.9999819148050119,
+      "gravy": 0.12472595936814862,
+      "plate": 0.9999999996006137,
+      "platter": 0.9999999985060917,
+      "potato": 0.42911374866817364,
+      "side dish": 0.9017582165927471,
+      "silverware": 0.9999999976771037,
+      "soup": 0.7203084305776322,
+      "sprout": 0.096946383553753,
+      "tray": 0.5447749467375359,
+      "utensil": 0.9999999997706657,
+      "vegetable": 0.8713579979584936
+    }
+  },
+  "COCO_val2014_000000286503.jpg": {
+    "o_pos": [
+      "elephant",
+      "person",
+      "cage",
+      "enclosure",
+      "zoo"
+    ],
+    "o_neg": [
+      "bowl",
+      "umbrella",
+      "basket",
+      "canopy",
+      "eating",
+      "fence",
+      "food",
+      "hanging",
+      "hay",
+      "log",
+      "pen",
+      "pillar",
+      "pole",
+      "stand"
+    ],
+    "responsibilities": {
+      "bowl": 0.11152173875232833,
+      "elephant": 1.0,
+      "person": 0.9172348790754487,
+      "umbrella": 0.08939039541458435,
+      "basket": 0.08721712653342842,
+      "cage": 0.467725654373063,
+      "canopy": 0.11087528535098982,
+      "eating": 0.10687822142533916,
+      "enclosure": 0.8902003529800486,
+      "fence": 0.18958905730888592,
+      "food": 0.09782835614841798,
+      "hanging": 0.07834983422626228,
+      "hay": 0.27295751179478744,
+      "log": 0.15957007553975075,
+      "pen": 0.12041931798089991,
+      "pillar": 0.14640624864598134,
+      "pole": 0.0884154717551335,
+      "stand": 0.07968975579551218,
+      "zoo": 0.7338228584071848
+    }
+  },
+  "COCO_val2014_000000315740.jpg": {
+    "o_pos": [
+      "chair",
+      "couch",
+      "microwave",
+      "oven",
+      "potted plant",
+      "sink",
+      "tv",
+      "appliance",
+      "armchair",
+      "cabinet",
+      "counter top",
+      "dish washer",
+      "exhaust hood",
+      "kitchen",
+      "kitchen counter",
+      "kitchen island",
+      "living room"
+    ],
+    "o_neg": [
+      "bowl"
+    ],
+    "responsibilities": {
+      "bowl": 0.12150963150525161,
+      "chair": 0.9999996164855072,
+      "couch": 0.9999999981421521,
+      "microwave": 1.0,
+      "oven": 0.99999999999938,
+      "potted plant": 0.9994520556219257,
+      "sink": 1.0,
+      "tv": 0.9026715442277499,
+      "appliance": 1.0,
+      "armchair": 1.0,
+      "cabinet": 0.9999980481094732,
+      "counter top": 0.9700756095413214,
+      "dish washer": 0.9999999999855103,
+      "exhaust hood": 0.9999999527647196,
+      "kitchen": 0.999595517045293,
+      "kitchen counter": 0.9365978150979983,
+      "kitchen island": 0.9229593442283862,
+      "living room": 0.4300050217127242
+    }
+  },
+  "COCO_val2014_000000542933.jpg": {
+    "o_pos": [
+      "baseball bat",
+      "baseball glove",
+      "bat",
+      "batter",
+      "bleacher",
+      "catcher",
+      "crowd",
+      "referee"
+    ],
+    "o_neg": [
+      "person",
+      "sports ball",
+      "game",
+      "holding",
+      "pitch",
+      "play",
+      "stand",
+      "swing",
+      "swinge",
+      "waiting"
+    ],
+    "responsibilities": {
+      "baseball bat": 1.0,
+      "baseball glove": 0.9999999999999998,
+      "person": 0.11995032366741751,
+      "sports ball": 0.10238816709030671,
+      "bat": 1.0,
+      "batter": 1.0,
+      "bleacher": 0.330101916165069,
+      "catcher": 1.0,
+      "crowd": 0.983502931289136,
+      "game": 0.18230785669078153,
+      "holding": 0.08777314520194973,
+      "pitch": 0.25725408171946484,
+      "play": 0.09160042330092996,
+      "referee": 0.998274991873074,
+      "stand": 0.09082810108161002,
+      "swing": 0.07979688530008945,
+      "swinge": 0.08553309693398845,
+      "waiting": 0.09756491083671938
+    }
+  },
+  "COCO_val2014_000000456784.jpg": {
+    "o_pos": [
+      "cake",
+      "knife",
+      "person",
+      "frost",
+      "hand",
+      "platter"
+    ],
+    "o_neg": [
+      "catch",
+      "cut",
+      "footstall",
+      "white"
+    ],
+    "responsibilities": {
+      "cake": 1.0,
+      "knife": 0.9999757063069504,
+      "person": 0.9939021329060803,
+      "catch": 0.08719030308296512,
+      "cut": 0.07841085760594545,
+      "footstall": 0.10645490588070411,
+      "frost": 0.7830612987914605,
+      "hand": 0.9999974752907129,
+      "platter": 0.4327309789731832,
+      "white": 0.0822512673294185
+    }
+  },
+  "COCO_val2014_000000448694.jpg": {
+    "o_pos": [
+      "frisbee",
+      "person",
+      "crowd",
+      "field"
+    ],
+    "o_neg": [
+      "catch",
+      "cd",
+      "game",
+      "jump",
+      "park",
+      "play",
+      "red",
+      "shirt",
+      "trying"
+    ],
+    "responsibilities": {
+      "frisbee": 1.0,
+      "person": 0.4614656097158726,
+      "catch": 0.17926560914082507,
+      "cd": 0.11405132157786292,
+      "crowd": 0.4249238539753495,
+      "field": 0.9972780266846616,
+      "game": 0.1378217245035217,
+      "jump": 0.08611908154754877,
+      "park": 0.09961700201995877,
+      "play": 0.13245730556386123,
+      "red": 0.08198859294253827,
+      "shirt": 0.10445356366198952,
+      "trying": 0.07890972006263668
+    }
+  },
+  "COCO_val2014_000000099053.jpg": {
+    "o_pos": [
+      "bowl",
+      "broccoli",
+      "fork",
+      "spoon",
+      "chopstick",
+      "food",
+      "noodle",
+      "stew"
+    ],
+    "o_neg": [
+      "carrot",
+      "dining table",
+      "beef",
+      "blue",
+      "broth",
+      "cloth",
+      "fill",
+      "including",
+      "meat",
+      "pastum",
+      "plate",
+      "tablecloth",
+      "vegetable"
+    ],
+    "responsibilities": {
+      "bowl": 0.9883124763666474,
+      "broccoli": 0.5624457359518312,
+      "carrot": 0.1616543098987817,
+      "dining table": 0.1278353653699861,
+      "fork": 0.9994498217221821,
+      "spoon": 0.9999999999973403,
+      "beef": 0.10233612607989132,
+      "blue": 0.10918351923509981,
+      "broth": 0.08352518400610157,
+      "chopstick": 0.9999999999822604,
+      "cloth": 0.10361589349513074,
+      "fill": 0.10452669873049733,
+      "food": 0.9999999999616223,
+      "including": 0.11264162953836732,
+      "meat": 0.07931267117877137,
+      "noodle": 0.7070454617867465,
+      "pastum": 0.12657771072087873,
+      "plate": 0.0920392905832585,
+      "stew": 0.9726510362142419,
+      "tablecloth": 0.0957524593285506,
+      "vegetable": 0.168122174782383
+    }
+  },
+  "COCO_val2014_000000142257.jpg": {
+    "o_pos": [
+      "car",
+      "person",
+      "traffic light",
+      "busy",
+      "license plate",
+      "pole",
+      "road",
+      "signal",
+      "traffic"
+    ],
+    "o_neg": [
+      "drive",
+      "fill",
+      "intersection",
+      "street",
+      "traffic jam",
+      "vehicle"
+    ],
+    "responsibilities": {
+      "car": 0.9999850735965637,
+      "person": 0.5491651635746432,
+      "traffic light": 1.0,
+      "busy": 0.9329103184476744,
+      "drive": 0.08187958744123142,
+      "fill": 0.09594167656978118,
+      "intersection": 0.14095445872191129,
+      "license plate": 0.9903404987205492,
+      "pole": 0.3358610688041215,
+      "road": 0.3882419458537517,
+      "signal": 0.9982343653674051,
+      "street": 0.12359504692050537,
+      "traffic": 0.632545714419867,
+      "traffic jam": 0.1500017856800605,
+      "vehicle": 0.07906708134469922
+    }
+  }
+}

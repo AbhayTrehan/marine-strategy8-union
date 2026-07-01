@@ -1,0 +1,10 @@
+{
+  "CHAIRs": 0.06333333333333334,
+  "CHAIRi": 0.03327495621716287,
+  "Recall": 0.4110854503464203,
+  "num_hallucinated_caps": 19.0,
+  "num_caps": 300.0,
+  "hallucinated_word_count": 19.0,
+  "coco_word_count": 571.0,
+  "length_response": 13.633333333333333
+}
