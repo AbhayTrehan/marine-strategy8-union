@@ -8,6 +8,7 @@ import numpy as np
 
 from gmm import GlobalGMM
 from gmm_selection import GMMSelectionResult, compute_gmm_quality, select_best_gmm_preset
+from fit_gmm import FeatureScaler, pool_raw_features
 from hyperparam_grid import DEFAULT_GMM_PRESETS
 
 
@@ -48,12 +49,12 @@ def test_well_separated_data_scores_higher_silhouette_than_overlapping():
 
     cache_sep = _fake_cache_well_separated()
     from fit_gmm import fit_global_gmm, pool_features
-    gmm_sep = fit_global_gmm(cache_sep, images, DEFAULT_GMM_PRESETS[0])
-    q_sep = compute_gmm_quality(gmm_sep, pool_features(cache_sep, images))
+    gmm_sep, sc_sep = fit_global_gmm(cache_sep, images, DEFAULT_GMM_PRESETS[0])
+    q_sep = compute_gmm_quality(gmm_sep, sc_sep.transform(pool_raw_features(cache_sep, images)))
 
     cache_overlap = _fake_cache_overlapping()
-    gmm_overlap = fit_global_gmm(cache_overlap, images, DEFAULT_GMM_PRESETS[0])
-    q_overlap = compute_gmm_quality(gmm_overlap, pool_features(cache_overlap, images))
+    gmm_overlap, sc_ov = fit_global_gmm(cache_overlap, images, DEFAULT_GMM_PRESETS[0])
+    q_overlap = compute_gmm_quality(gmm_overlap, sc_ov.transform(pool_raw_features(cache_overlap, images)))
 
     assert q_sep["silhouette"] > q_overlap["silhouette"], (q_sep, q_overlap)
     assert q_sep["mean_separation"] > q_overlap["mean_separation"]
@@ -91,10 +92,12 @@ def test_selection_result_serialization_roundtrip(tmp_path="/tmp/_test_gmm_selec
     loaded = GMMSelectionResult.load(tmp_path)
     assert loaded.chosen_preset_name == result.chosen_preset_name
     assert loaded.quality_by_preset.keys() == result.quality_by_preset.keys()
+    assert isinstance(loaded.chosen_scaler, FeatureScaler)
 
     gmm = GlobalGMM.from_params(loaded.chosen_gmm_params)
-    X = np.array([[0.7, 0.3]])   # 2D [s_det, s_clip] matching default use_area=False
-    g1 = gmm.responsibility_positive(X)
+    X_raw = np.array([[0.7, 0.3, 0.1]])   # 3D [s_det, s_clip, s_area] matching default use_area=True
+    X_norm = loaded.chosen_scaler.transform(X_raw)
+    g1 = gmm.responsibility_positive(X_norm)
     assert g1.shape == (1,)
     os.remove(tmp_path)
     print("test_selection_result_serialization_roundtrip OK")
@@ -112,8 +115,11 @@ def test_degenerate_collapsed_fit_does_not_crash_silhouette():
     }
     images = ["img0.jpg"]
     from fit_gmm import fit_global_gmm, pool_features
-    gmm = fit_global_gmm(cache, images, DEFAULT_GMM_PRESETS[0])
-    q = compute_gmm_quality(gmm, pool_features(cache, images))
+    from fit_gmm import pool_raw_features, FeatureScaler
+    gmm, sc = fit_global_gmm(cache, images, DEFAULT_GMM_PRESETS[0])
+    X_raw = pool_raw_features(cache, images)
+    X_norm = sc.transform(X_raw)
+    q = compute_gmm_quality(gmm, X_norm)
     assert q["silhouette"] == -1.0 or -1.0 <= q["silhouette"] <= 1.0
     print("test_degenerate_collapsed_fit_does_not_crash_silhouette OK")
 

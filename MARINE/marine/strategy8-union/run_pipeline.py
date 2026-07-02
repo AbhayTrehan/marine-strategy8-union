@@ -69,6 +69,7 @@ from hyperparam_grid import (  # noqa: E402
     BASE_GMM_PRESETS, DAMPED_GMM_PRESETS,
 )
 from gmm import GlobalGMM, GMMParams  # noqa: E402
+from fit_gmm import FeatureScaler  # noqa: E402
 from gmm_selection import GMMSelectionResult, select_best_gmm_preset  # noqa: E402
 from fit_gmm import fit_global_gmm  # noqa: E402
 from build_question_file import build_question_file  # noqa: E402
@@ -129,16 +130,20 @@ def run_one_chair_trial(
     work_dir: str,
     gen_args_template,
     prefit_gmm: Optional[GlobalGMM] = None,
-    use_area: bool = False,
+    prefit_scaler: Optional[FeatureScaler] = None,
 ):
     os.makedirs(work_dir, exist_ok=True)
 
-    gmm = prefit_gmm if prefit_gmm is not None else fit_global_gmm(cache, images, trial.gmm_preset, use_area=use_area)
+    use_area = prefit_scaler.use_area if prefit_scaler is not None else True
+    if prefit_gmm is not None and prefit_scaler is not None:
+        gmm, scaler = prefit_gmm, prefit_scaler
+    else:
+        gmm, scaler = fit_global_gmm(cache, images, trial.gmm_preset, use_area=use_area)
     gmm_params_path = os.path.join(work_dir, "gmm_params.json")
     gmm.params.save(gmm_params_path)
 
     questions, _ = build_question_file(
-        chair_question_file, cache, gmm, trial.tau, image_filter=images, use_area=use_area,
+        chair_question_file, cache, gmm, scaler, trial.tau, image_filter=images,
     )
     qfile_path = os.path.join(work_dir, "question_file.json")
     with open(qfile_path, "w") as f:
@@ -165,7 +170,7 @@ def run_one_chair_trial(
         n_images=int(metrics["num_caps"]),
         extra={"answers_path": answers_path, "gmm_params_path": gmm_params_path},
     )
-    return trial_result, gmm.params
+    return trial_result, gmm.params, scaler
 
 
 class _Args:
@@ -209,7 +214,7 @@ def run_hyperparameter_search(
 
     # ---- Phase B': GMM preset selection -- intrinsic quality, NO generation ----
     gmm_selection_path = os.path.join(tune_root, "gmm_selection.json")
-    candidate_presets = select_gmm_presets(args.tune_learning_rate, use_area=args.use_area_feature)
+    candidate_presets = select_gmm_presets(args.tune_learning_rate, use_area=(not args.no_area_feature))
     if os.path.exists(gmm_selection_path) and not args.force_recompute_trials:
         selection = GMMSelectionResult.load(gmm_selection_path)
         print(f"[Strategy8-U][Tune] Reusing cached GMM preset selection: '{selection.chosen_preset_name}' "
@@ -218,7 +223,7 @@ def run_hyperparameter_search(
         print(f"[Strategy8-U][Tune] Selecting GMM preset among {[p['name'] for p in candidate_presets]} "
               f"via intrinsic fit quality (silhouette score) on {len(split.tune_images)} tuning images "
               f"-- no LVLM generation involved in this step.")
-        selection = select_best_gmm_preset(cache, split.tune_images, candidate_presets, use_area=args.use_area_feature)
+        selection = select_best_gmm_preset(cache, split.tune_images, candidate_presets, use_area=(not args.no_area_feature))
         selection.save(gmm_selection_path)
         for name, q in selection.quality_by_preset.items():
             marker = " <= CHOSEN" if name == selection.chosen_preset_name else ""
@@ -227,6 +232,7 @@ def run_hyperparameter_search(
 
     chosen_preset = selection.chosen_preset
     chosen_gmm = GlobalGMM.from_params(selection.chosen_gmm_params)
+    chosen_scaler = selection.chosen_scaler
 
     # ---- Phase C+D: (tau, alpha) grid against the FIXED chosen GMM ----
     preferred_first = None
@@ -256,10 +262,10 @@ def run_hyperparameter_search(
                   f"-- REUSING cached result (F1={result.f1:.4f}); pass --force_recompute_trials to redo.")
         else:
             print(f"[Strategy8-U][Tune] Trial {i + 1}/{len(trials)}: {trial.trial_id}")
-            result, _ = run_one_chair_trial(
+            result, _, _ = run_one_chair_trial(
                 trial, cache, split.tune_images, args.chair_question_file,
                 model, tokenizer, processor, model_name, chair_evaluator,
-                work_dir, gen_args_template, prefit_gmm=chosen_gmm, use_area=args.use_area_feature,
+                work_dir, gen_args_template, prefit_gmm=chosen_gmm, prefit_scaler=chosen_scaler,
             )
             with open(cached_result_path, "w") as f:
                 json.dump(result.to_dict(), f, indent=2)
@@ -276,6 +282,7 @@ def run_hyperparameter_search(
     best_hyperparams = {
         "trial": best.trial.to_dict(),
         "gmm_params": selection.chosen_gmm_params.to_dict(),
+        "feature_scaler": selection.chosen_scaler.to_dict(),
         "tuning_result": best.to_dict(),
         "gmm_selection_quality": selection.quality_by_preset,
     }
@@ -297,14 +304,14 @@ def load_best_hyperparams(path: str) -> dict:
 # ---------------------------------------------------------------------------
 def run_final_chair_eval(
     args, cache, images: List[str], tag: str,
-    gmm: GlobalGMM, tau: float, alpha: float,
+    gmm: GlobalGMM, scaler: FeatureScaler, tau: float, alpha: float,
     model, tokenizer, processor, model_name, chair_evaluator,
 ) -> dict:
     out_dir = os.path.join(args.output_dir, "final")
     os.makedirs(out_dir, exist_ok=True)
 
     questions, per_image = build_question_file(
-        args.chair_question_file, cache, gmm, tau, image_filter=images, use_area=args.use_area_feature,
+        args.chair_question_file, cache, gmm, scaler, tau, image_filter=images,
     )
     qfile_path = os.path.join(out_dir, f"chair_question_file_{tag}.json")
     with open(qfile_path, "w") as f:
@@ -337,7 +344,7 @@ def run_final_chair_eval(
 
 def run_final_pope_eval(
     args, cache, images: List[str], tag: str,
-    gmm: GlobalGMM, tau: float, alpha: float,
+    gmm: GlobalGMM, scaler: FeatureScaler, tau: float, alpha: float,
     model, tokenizer, processor, model_name,
 ) -> dict:
     from eval_pope import load_labels, load_predictions, compute_metrics  # original codebase, unmodified
@@ -346,7 +353,7 @@ def run_final_pope_eval(
     os.makedirs(out_dir, exist_ok=True)
 
     questions, per_image = build_question_file(
-        args.pope_question_file, cache, gmm, tau, image_filter=images, use_area=args.use_area_feature,
+        args.pope_question_file, cache, gmm, scaler, tau, image_filter=images,
     )
     qfile_path = os.path.join(out_dir, f"pope_question_file_{tag}.json")
     with open(qfile_path, "w") as f:
@@ -577,13 +584,11 @@ def build_arg_parser() -> argparse.ArgumentParser:
                     help="Also consider damped (lr<1.0) GMM M-step variants during GMM preset "
                          "selection. Off by default: only standard, undamped EM (lr=1.0) presets "
                          "are considered.")
-    p.add_argument("--use_area_feature", action="store_true",
-                    help="Include s_area (normalised bounding-box area) as a third GMM feature "
-                         "dimension, restoring the original [s_det, s_clip, s_area] 3D feature "
-                         "vector. OFF by default: only [s_det, s_clip] are used, which avoids "
-                         "penalising small-but-genuinely-present objects whose bounding box area "
-                         "happens to be low. Must be the same value during --tune and all "
-                         "subsequent --stage runs against the same output directory.")
+    p.add_argument("--no_area_feature", action="store_true",
+                    help="Exclude s_area from GMM features, using only [s_det, s_clip] (2D). "
+                         "Default (flag absent): use all 3 features [s_det, s_clip, sqrt(s_area)], "
+                         "all z-score normalized, which gives the best cluster quality. "
+                         "Must be consistent across --tune and all --stage runs in the same output_dir.")
     p.add_argument("--force_recompute_trials", action="store_true",
                     help="Re-run GMM preset selection and every (tau, alpha) trial even if a "
                          "cached result already exists on disk. Off by default: any trial (or "
@@ -685,17 +690,18 @@ def main():
 
     gmm_params = GMMParams.from_dict(best_hyperparams["gmm_params"])
     gmm = GlobalGMM.from_params(gmm_params)
+    scaler = FeatureScaler.from_dict(best_hyperparams["feature_scaler"])
     tau = best_hyperparams["trial"]["tau"]
     alpha = best_hyperparams["trial"]["alpha"]
 
     # ---- final evaluation: held-out 200 + full 500 ----
     if args.stage in ("chair", "all"):
         chair_test = run_final_chair_eval(
-            args, cache, split.test_images, "test200", gmm, tau, alpha,
+            args, cache, split.test_images, "test200", gmm, scaler, tau, alpha,
             model, tokenizer, processor, model_name, chair_evaluator,
         )
         chair_full = run_final_chair_eval(
-            args, cache, split.all_images, "full500", gmm, tau, alpha,
+            args, cache, split.all_images, "full500", gmm, scaler, tau, alpha,
             model, tokenizer, processor, model_name, chair_evaluator,
         )
         update_summary(
@@ -708,11 +714,11 @@ def main():
 
     if args.stage in ("pope", "all"):
         pope_test = run_final_pope_eval(
-            args, cache, split.test_images, "test200", gmm, tau, alpha,
+            args, cache, split.test_images, "test200", gmm, scaler, tau, alpha,
             model, tokenizer, processor, model_name,
         )
         pope_full = run_final_pope_eval(
-            args, cache, split.all_images, "full500", gmm, tau, alpha,
+            args, cache, split.all_images, "full500", gmm, scaler, tau, alpha,
             model, tokenizer, processor, model_name,
         )
         update_summary(

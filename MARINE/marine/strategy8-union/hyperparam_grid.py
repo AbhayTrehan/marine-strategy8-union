@@ -72,22 +72,29 @@ from typing import Dict, List, Optional, Sequence
 # point*; the user-facing means/covariances are exactly what gets searched
 # under 'fixed_prior' below.
 # ---------------------------------------------------------------------------
-def _make_base_presets(use_area: bool = False) -> List[Dict]:
+def _make_base_presets(use_area: bool = True) -> List[Dict]:
     """Returns the base (lr=1.0) GMM presets, with fixed_prior means/
-    covariances sized appropriately for the chosen feature dimensionality:
-    2D [s_det, s_clip] (default) or 3D [s_det, s_clip, s_area]."""
+    covariances in NORMALIZED space (after sqrt(area) + z-score), sized
+    for the chosen feature dimensionality:
+    use_area=True  (default): 3D [s_det, s_clip, sqrt(s_area)], all z-scored
+    use_area=False:            2D [s_det, s_clip], z-scored
+
+    In normalized space (roughly N(0,1) per dimension), the positive cluster
+    (real objects) tends to lie above the mean (high detection confidence,
+    reasonable clip similarity, some bounding-box area), and the negative
+    cluster below it. The initializations below reflect this structure and
+    serve as sensible starting points for the EM."""
     if use_area:
-        fp_means = [[0.6, 0.28, 0.08], [0.05, 0.12, 0.02]]
+        fp_means = [[1.0, 0.8, 0.5], [-1.0, -0.8, -0.5]]
         fp_covs = [
-            [[0.05, 0.0, 0.0], [0.0, 0.04, 0.0], [0.0, 0.0, 0.02]],
-            [[0.02, 0.0, 0.0], [0.0, 0.02, 0.0], [0.0, 0.0, 0.01]],
+            [[0.5, 0.0, 0.0], [0.0, 0.5, 0.0], [0.0, 0.0, 0.5]],
+            [[0.5, 0.0, 0.0], [0.0, 0.5, 0.0], [0.0, 0.0, 0.5]],
         ]
     else:
-        # 2D: only [s_det, s_clip] -- area dimension dropped
-        fp_means = [[0.6, 0.28], [0.05, 0.12]]
+        fp_means = [[1.0, 0.8], [-1.0, -0.8]]
         fp_covs = [
-            [[0.05, 0.0], [0.0, 0.04]],
-            [[0.02, 0.0], [0.0, 0.02]],
+            [[0.5, 0.0], [0.0, 0.5]],
+            [[0.5, 0.0], [0.0, 0.5]],
         ]
     return [
         {
@@ -116,7 +123,7 @@ def _make_base_presets(use_area: bool = False) -> List[Dict]:
     ]
 
 
-BASE_GMM_PRESETS: List[Dict] = _make_base_presets(use_area=False)
+BASE_GMM_PRESETS: List[Dict] = _make_base_presets(use_area=True)
 
 DAMPED_GMM_PRESETS: List[Dict] = [
     {
@@ -136,7 +143,7 @@ DAMPED_GMM_PRESETS: List[Dict] = [
 ]
 
 
-def select_gmm_presets(tune_learning_rate: bool = False, use_area: bool = False) -> List[Dict]:
+def select_gmm_presets(tune_learning_rate: bool = False, use_area: bool = True) -> List[Dict]:
     """tune_learning_rate=False (default): only lr=1.0 presets (standard,
     undamped EM) are searched -- the M-step damping dimension is fixed off.
     tune_learning_rate=True: the damped variants are ADDED to the grid too.

@@ -279,6 +279,7 @@ def test_tune_selects_highest_alpha_and_gmm_selection_uses_no_generation():
     with open(os.path.join(output_dir, "best_hyperparams.json")) as f:
         best = json.load(f)
     assert best["trial"]["alpha"] == 0.8  # highest alpha in the (uncapped) grid wins
+    assert "feature_scaler" in best  # scaler must be stored
     print("test_tune_selects_highest_alpha_and_gmm_selection_uses_no_generation OK")
 
 
